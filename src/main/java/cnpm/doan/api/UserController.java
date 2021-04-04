@@ -43,7 +43,6 @@ public class UserController {
         newUser.setName(account.getName());
         newUser.setEmail(account.getEmail());
         newUser.setPassword(new BCryptPasswordEncoder().encode(account.getPassword()));
-        newUser.setRoles(roleService.findRoleByRoleName("ROLE_USER"));
         userService.createUser(newUser);
         return ResponseEntity.ok(new ResponeDomain(account.getEmail(), Message.SUCCESSFUlLY.getDetail(), true));
     }
