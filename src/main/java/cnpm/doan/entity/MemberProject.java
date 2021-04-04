@@ -7,7 +7,8 @@ import javax.persistence.*;
 public class MemberProject {
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @SequenceGenerator(name = "memberpro_seq", sequenceName = "memberpro_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "memberpro_seq")
     private int id;
     @ManyToOne
     @JoinColumn(name = "user_id")

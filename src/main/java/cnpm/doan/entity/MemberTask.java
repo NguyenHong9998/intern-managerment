@@ -7,7 +7,8 @@ import javax.persistence.*;
 public class MemberTask {
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @SequenceGenerator(name = "membertask_seq", sequenceName = "membertask_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "membertask_seq")
     private int id;
     @ManyToOne
     @JoinColumn(name = "user_id")

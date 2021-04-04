@@ -3,11 +3,12 @@ package cnpm.doan.entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "diffficulty")
+@Table(name = "difficulty")
 public class Difficulty {
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @SequenceGenerator(name = "diff_seq", sequenceName = "diff_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "diff_seq")
     private int id;
     @Column(name = "name")
     private String name;

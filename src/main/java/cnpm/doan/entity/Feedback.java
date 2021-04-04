@@ -7,7 +7,8 @@ import javax.persistence.*;
 public class Feedback {
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @SequenceGenerator(name = "feedback_seq", sequenceName = "feedback_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "feedback_seq")
     private int id;
     @Column(name = "message")
     private String message;

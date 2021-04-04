@@ -7,7 +7,8 @@ import javax.persistence.*;
 public class Task {
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @SequenceGenerator(name = "task_seq", sequenceName = "task_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "task_seq")
     private int id;
     @Column(name = "title")
     private String title;

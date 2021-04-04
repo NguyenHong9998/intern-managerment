@@ -8,7 +8,8 @@ import java.util.Date;
 public class Project {
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @SequenceGenerator(name = "project_seq", sequenceName = "project_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "project_seq")
     private int id;
     @Column(name = "title")
     private String title;
