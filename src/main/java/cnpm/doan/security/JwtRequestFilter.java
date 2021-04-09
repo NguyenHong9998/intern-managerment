@@ -34,11 +34,6 @@ public class JwtRequestFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
         final String authorizationHeader = request.getHeader("Authorization");
-        if (authorizationHeader == null) {
-            ServletOutputStream out = response.getOutputStream();
-            new ObjectMapper().writeValue(out, new ResponeDomain(Message.INVALID_TOKEN_ACCESS.getDetail(), HTTPStatus.fail));
-            out.flush();
-        }
         String token = null;
         UserPrincipal user = null;
         if (StringUtils.hasText(authorizationHeader)) {
