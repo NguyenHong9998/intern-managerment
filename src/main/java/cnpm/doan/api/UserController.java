@@ -55,4 +55,9 @@ public class UserController {
         }
         return ResponseEntity.ok(new ResponeDomain(user, Message.SUCCESSFUlLY.getDetail(), true));
     }
+//    @GetMapping("/")
+//    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
+//    public ResponseEntity<?> getAccountWaiting(){
+//        List<User> getUserWaitting = userService.find
+//    }
 }

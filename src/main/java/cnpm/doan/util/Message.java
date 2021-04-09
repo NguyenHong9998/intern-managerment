@@ -12,7 +12,8 @@ public enum Message {
     DATA_NOT_EXIST("Data not exist"),
     INVALID_DATE("Invalid date. Please choose another date"),
     SUCCESSFUlLY("Successfully"),
-    INVALID_MANGER("Invalid manager's username");
+    INVALID_MANGER("Invalid manager's username"),
+    INVALID_TOKEN_ACCESS("Invalid Token");
     private String detail;
 
     Message(String detail) {

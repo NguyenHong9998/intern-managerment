@@ -28,11 +28,11 @@ public class ProjectController {
     @GetMapping("/projects")
     public ResponseEntity<?> getAllProject() {
         List<Project> projects = projectService.getAllProject();
-        if (projects.size() == 0) {
-            return ResponseEntity.ok(new ResponeDomain(Message.EMPTY_RESULT.getDetail(), true));
-        }
         if (projects == null) {
             return ResponseEntity.ok(new ResponeDomain(Message.DATA_NOT_EXIST.getDetail(), true));
+        }
+        if (projects.size() == 0) {
+            return ResponseEntity.ok(new ResponeDomain(Message.EMPTY_RESULT.getDetail(), true));
         }
         return ResponseEntity.ok(projects);
     }

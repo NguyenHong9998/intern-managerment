@@ -1,6 +1,10 @@
 package cnpm.doan.security;
 
 
+import cnpm.doan.domain.ResponeDomain;
+import cnpm.doan.util.HTTPStatus;
+import cnpm.doan.util.Message;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
@@ -13,6 +17,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -29,6 +34,11 @@ public class JwtRequestFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
         final String authorizationHeader = request.getHeader("Authorization");
+        if (authorizationHeader == null) {
+            ServletOutputStream out = response.getOutputStream();
+            new ObjectMapper().writeValue(out, new ResponeDomain(Message.INVALID_TOKEN_ACCESS.getDetail(), HTTPStatus.fail));
+            out.flush();
+        }
         String token = null;
         UserPrincipal user = null;
         if (StringUtils.hasText(authorizationHeader)) {
