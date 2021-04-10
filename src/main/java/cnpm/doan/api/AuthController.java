@@ -27,7 +27,10 @@ public class AuthController {
 
     @PostMapping(value = "/login")
     public ResponseEntity<?> login(@ModelAttribute Account account) {
-        System.out.println(account.getEmail() + "," + account.getPassword());
+        User checkUser = userService.findUserByEmail(account.getEmail());
+        if (checkUser.getRoles() == null) {
+            return ResponseEntity.ok(new ResponeDomain(Message.WAITING_ACCOUNT.getDetail(), HTTPStatus.fail));
+        }
         UserPrincipal userPrincipal = userService.findByUsername(account.getEmail());
         if (account == null || !new BCryptPasswordEncoder().matches(account.getPassword(), userPrincipal.getPassword())) {
             return ResponseEntity.ok(new ResponeDomain(Message.USER_NOT_FOUND.getDetail(), HTTPStatus.fail));

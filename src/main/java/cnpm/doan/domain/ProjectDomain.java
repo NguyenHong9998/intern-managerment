@@ -1,18 +1,16 @@
 package cnpm.doan.domain;
 
-import java.util.Date;
-
 public class ProjectDomain {
     private String title;
     private String description;
     private String dueDate;
-    private String usernameOfAdmin;
+    private int idOfAdmin;
 
-    public ProjectDomain(String title, String description, String dueDate, String usernameOfAdmin) {
+    public ProjectDomain(String title, String description, String dueDate, int idOfAdmin) {
         this.title = title;
         this.description = description;
         this.dueDate = dueDate;
-        this.usernameOfAdmin = usernameOfAdmin;
+        this.idOfAdmin = idOfAdmin;
     }
 
     public String getTitle() {
@@ -39,12 +37,12 @@ public class ProjectDomain {
         this.dueDate = dueDate;
     }
 
-    public String getUsernameOfAdmin() {
-        return usernameOfAdmin;
+    public int getIdOfAdmin() {
+        return idOfAdmin;
     }
 
-    public void setUsernameOfAdmin(String usernameOfAdmin) {
-        this.usernameOfAdmin = usernameOfAdmin;
+    public void setIdOfAdmin(int idOfAdmin) {
+        this.idOfAdmin = idOfAdmin;
     }
 
     @Override
@@ -53,7 +51,7 @@ public class ProjectDomain {
                 "title='" + title + '\'' +
                 ", description='" + description + '\'' +
                 ", dueDate='" + dueDate + '\'' +
-                ", usernameOfAdmin='" + usernameOfAdmin + '\'' +
+                ", usernameOfAdmin='" + idOfAdmin + '\'' +
                 '}';
     }
 }

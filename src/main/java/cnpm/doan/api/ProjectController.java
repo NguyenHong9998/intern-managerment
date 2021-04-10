@@ -4,6 +4,7 @@ import cnpm.doan.domain.ManagerInforDomain;
 import cnpm.doan.domain.ProjectDomain;
 import cnpm.doan.domain.ResponeDomain;
 import cnpm.doan.entity.Project;
+import cnpm.doan.entity.User;
 import cnpm.doan.service.ProjectService;
 import cnpm.doan.service.UserService;
 import cnpm.doan.util.CustormException;
@@ -29,12 +30,12 @@ public class ProjectController {
     public ResponseEntity<?> getAllProject() {
         List<Project> projects = projectService.getAllProject();
         if (projects == null) {
-            return ResponseEntity.ok(new ResponeDomain(Message.DATA_NOT_EXIST.getDetail(), true));
+            return ResponseEntity.ok(new ResponeDomain(Message.DATA_NOT_EXIST.getDetail(), false));
         }
         if (projects.size() == 0) {
             return ResponseEntity.ok(new ResponeDomain(Message.EMPTY_RESULT.getDetail(), true));
         }
-        return ResponseEntity.ok(projects);
+        return ResponseEntity.ok(new ResponeDomain(projects, Message.SUCCESSFUlLY.getDetail(), true));
     }
 
     @PostMapping("/project")
@@ -52,8 +53,11 @@ public class ProjectController {
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
     @PostMapping("/project/create")
     public ResponseEntity<?> createProject(@ModelAttribute ProjectDomain request) {
-        System.out.println(request.toString());
-        if (request.getUsernameOfAdmin().isEmpty() || request.getDescription().isEmpty() || request.getDueDate().isEmpty() || request.getTitle().isEmpty()) {
+        User manager = userService.findById(request.getIdOfAdmin());
+        if (manager == null || !manager.getRoles().getRoleName().equals("ROLE_MANAGER")) {
+            return ResponseEntity.ok(new ResponeDomain(Message.NOT_EXIST_MANAGER.getDetail(), false));
+        }
+        if (request.getDescription().isEmpty() || request.getDueDate().isEmpty() || request.getTitle().isEmpty()) {
             return ResponseEntity.ok(new ResponeDomain(Message.DATA_NOT_EXIST.getDetail(), false));
         }
         try {
@@ -67,10 +71,11 @@ public class ProjectController {
     @GetMapping("/project/create")
     public ResponseEntity<?> getAllManagerForCreateProject() {
         List<ManagerInforDomain> managers = userService.findUserByRoleName("ROLE_MANAGER")
-                .stream().map(u -> new ManagerInforDomain(u.getName(), u.getEmail())).collect(Collectors.toList());
+                .stream().map(u -> new ManagerInforDomain(u.getId(), u.getName(), u.getEmail())).collect(Collectors.toList());
         return ResponseEntity.ok(new ResponeDomain(managers, Message.SUCCESSFUlLY.getDetail(), true));
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
     @PostMapping(value = "/project/delete")
     public ResponseEntity<?> deleteProject(@RequestParam("id_project") int idProject) {
         Project project = projectService.findProjectById(idProject);

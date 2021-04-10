@@ -74,4 +74,14 @@ public class UserServiceImpl implements UserService {
     public List<User> findUserByRoleName(String roleName) {
         return userRepository.findUserByRoleName(roleName);
     }
+
+    @Override
+    public List<User> findWaittingUser() {
+        return userRepository.findWaitingUser();
+    }
+
+    @Override
+    public User findById(long id) {
+        return userRepository.findById(id).orElse(null);
+    }
 }

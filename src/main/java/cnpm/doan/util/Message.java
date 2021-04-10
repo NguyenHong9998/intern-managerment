@@ -13,7 +13,9 @@ public enum Message {
     INVALID_DATE("Invalid date. Please choose another date"),
     SUCCESSFUlLY("Successfully"),
     INVALID_MANGER("Invalid manager's username"),
-    INVALID_TOKEN_ACCESS("Invalid Token");
+    INVALID_TOKEN_ACCESS("Invalid Token"),
+    NOT_EXIST_MANAGER("Manager with request id is not exist"),
+    WAITING_ACCOUNT("Your Account registered successfully, wait for your admin check it or contact to Shappee's admin");
     private String detail;
 
     Message(String detail) {

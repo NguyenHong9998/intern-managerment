@@ -21,4 +21,8 @@ public interface UserService {
     void updatePassword(User user, String newPassword);
 
     void updateResetPasswordToken(String token, String email) throws CustormException;
+
+    List<User> findWaittingUser();
+
+    User findById(long id);
 }

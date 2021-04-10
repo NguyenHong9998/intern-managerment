@@ -43,12 +43,7 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public void saveProject(ProjectDomain domain) throws CustormException {
-        User admin = userRepository.findByEmail(domain.getUsernameOfAdmin());
-        if (admin != null) {
-            if (!admin.getRoles().equals("ROLE_MANAGER")) {
-                throw new CustormException(Message.INVALID_MANGER);
-            }
-        }
+        User admin = userRepository.findById(Long.valueOf(domain.getIdOfAdmin())).orElse(null);
         Project project = new Project();
         project.setManager(admin);
         project.setDescription(domain.getDescription());
@@ -68,7 +63,6 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public void deleteProject(int idProject) {
-
         projectRepository.deleteProject(idProject);
     }
 }

@@ -21,8 +21,6 @@ import java.util.stream.Collectors;
 public class UserController {
     @Autowired
     private UserService userService;
-    @Autowired
-    private RoleService roleService;
 
     @GetMapping("/users")
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER')")
@@ -55,9 +53,11 @@ public class UserController {
         }
         return ResponseEntity.ok(new ResponeDomain(user, Message.SUCCESSFUlLY.getDetail(), true));
     }
-//    @GetMapping("/")
-//    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
-//    public ResponseEntity<?> getAccountWaiting(){
-//        List<User> getUserWaitting = userService.find
-//    }
+
+    @GetMapping("/user/waiting_user")
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
+    public ResponseEntity<?> getAccountWaiting() {
+        List<User> getUserWaitting = userService.findWaittingUser();
+        return ResponseEntity.ok(getUserWaitting);
+    }
 }
