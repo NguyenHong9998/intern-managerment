@@ -4,9 +4,78 @@ public class TaskDomain {
     private long taskId;
     private String description;
     private String title;
-    private long difficultyId;
-    private int isDone;
-    private float point;
+    private String difficulty;
+    private boolean isDone;
+    private String point;
+    private String projectName;
 
+    public TaskDomain() {
 
+    }
+
+    public TaskDomain(long taskId, String description, String title, String difficulty, boolean isDone, String point, String projectName) {
+        this.taskId = taskId;
+        this.description = description;
+        this.title = title;
+        this.difficulty = difficulty;
+        this.isDone = isDone;
+        this.point = point;
+        this.projectName = projectName;
+    }
+
+    public long getTaskId() {
+        return taskId;
+    }
+
+    public void setTaskId(long taskId) {
+        this.taskId = taskId;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getDifficulty() {
+        return difficulty;
+    }
+
+    public void setDifficulty(String difficulty) {
+        this.difficulty = difficulty;
+    }
+
+    public boolean getIsDone() {
+        return isDone;
+    }
+
+    public void setIsDone(boolean isDone) {
+        this.isDone = isDone;
+    }
+
+    public String getPoint() {
+        return point;
+    }
+
+    public void setPoint(String point) {
+        this.point = point;
+    }
+
+    public String getProjectName() {
+        return projectName;
+    }
+
+    public void setProjectName(String projectName) {
+        this.projectName = projectName;
+    }
 }

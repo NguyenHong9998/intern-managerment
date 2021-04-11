@@ -38,9 +38,9 @@ public class ProjectController {
         return ResponseEntity.ok(new ResponeDomain(projects, Message.SUCCESSFUlLY.getDetail(), true));
     }
 
-    @PostMapping("/project")
-    public ResponseEntity<?> getProjectByUsername(@RequestParam("username") String username) {
-        List<Project> projects = projectService.getProjectByUsername(username);
+    @GetMapping("/project")
+    public ResponseEntity<?> getProjectByUsername(@RequestParam("user_id") long userId) {
+        List<Project> projects = projectService.getProjectByUserId(userId);
         if (projects.size() == 0) {
             return ResponseEntity.ok(new ResponeDomain(Message.EMPTY_RESULT.getDetail(), true));
         }

@@ -1,6 +1,7 @@
 package cnpm.doan.entity;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "task")
@@ -16,6 +17,9 @@ public class Task {
     private String description;
     @Column(name = "is_done")
     private boolean isDone;
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "due_date")
+    private Date dueDate;
     @ManyToOne
     @JoinColumn(name = "difficulty_id")
     private Difficulty difficulty;
@@ -79,5 +83,13 @@ public class Task {
 
     public void setDifficulty(Difficulty difficulty) {
         this.difficulty = difficulty;
+    }
+
+    public Date getDueDate() {
+        return dueDate;
+    }
+
+    public void setDueDate(Date dueDate) {
+        this.dueDate = dueDate;
     }
 }

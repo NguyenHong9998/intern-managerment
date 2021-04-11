@@ -3,6 +3,7 @@ package cnpm.doan.repository;
 
 import cnpm.doan.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
@@ -17,5 +18,4 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     @Query(value = "select * from users u where u.role_id is null", nativeQuery = true)
     List<User> findWaitingUser();
-
 }

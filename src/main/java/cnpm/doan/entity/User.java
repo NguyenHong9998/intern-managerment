@@ -1,10 +1,13 @@
 package cnpm.doan.entity;
 
 
+import org.hibernate.annotations.Where;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "users")
+@Where(clause = "is_deleted = 0")
 public class User {
     @Id
     @Column(name = "id")
@@ -30,9 +33,10 @@ public class User {
     @Column(name = "reset_password_token")
     private String resetPasswordToken;
 
+    @Column(name = "is_deleted", nullable = false, columnDefinition = "int default 0")
+    private int isDeleted = 0;
 
     public User() {
-
     }
 
     public User(long id, String email, String password) {
@@ -123,4 +127,13 @@ public class User {
     public void setRoles(Role roles) {
         this.roles = roles;
     }
+
+    public int getIsDeleted() {
+        return isDeleted;
+    }
+
+    public void setIsDeleted(int isDeleted) {
+        this.isDeleted = isDeleted;
+    }
+
 }

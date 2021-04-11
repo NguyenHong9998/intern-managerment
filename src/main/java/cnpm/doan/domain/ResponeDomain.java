@@ -2,17 +2,17 @@ package cnpm.doan.domain;
 
 public class ResponeDomain {
     private Object data;
-    private String messsage;
+    private String message;
     private boolean success;
 
     public ResponeDomain(String messsage, boolean status) {
-        this.messsage = messsage;
+        this.message = messsage;
         this.success = status;
     }
 
     public ResponeDomain(Object object, String messsage, boolean success) {
         this.data = object;
-        this.messsage = messsage;
+        this.message = messsage;
         this.success = success;
     }
 
@@ -24,12 +24,12 @@ public class ResponeDomain {
         this.data = data;
     }
 
-    public String getMesssage() {
-        return messsage;
+    public String getMessage() {
+        return message;
     }
 
-    public void setMesssage(String messsage) {
-        this.messsage = messsage;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     public boolean getSuccess() {

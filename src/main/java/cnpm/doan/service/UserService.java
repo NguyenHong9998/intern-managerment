@@ -25,4 +25,6 @@ public interface UserService {
     List<User> findWaittingUser();
 
     User findById(long id);
+
+    void deleteUser(long idUser);
 }

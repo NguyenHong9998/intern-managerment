@@ -6,6 +6,7 @@ import cnpm.doan.domain.UserDomain;
 import cnpm.doan.entity.User;
 import cnpm.doan.service.RoleService;
 import cnpm.doan.service.UserService;
+import cnpm.doan.util.HTTPStatus;
 import cnpm.doan.util.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -59,5 +60,12 @@ public class UserController {
     public ResponseEntity<?> getAccountWaiting() {
         List<User> getUserWaitting = userService.findWaittingUser();
         return ResponseEntity.ok(getUserWaitting);
+    }
+
+    @PutMapping("user/delete")
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
+    public ResponseEntity<?> deleteUser(@RequestParam("id_user") long idUser) {
+        userService.deleteUser(idUser);
+        return ResponseEntity.ok(new ResponeDomain(Message.SUCCESSFUlLY.getDetail(), HTTPStatus.success));
     }
 }

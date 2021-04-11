@@ -9,7 +9,7 @@ import java.util.List;
 public interface ProjectService {
     List<Project> getAllProject();
 
-    List<Project> getProjectByUsername(String username);
+    List<Project> getProjectByUserId(long userId);
 
     void saveProject(ProjectDomain domain) throws CustormException;
 

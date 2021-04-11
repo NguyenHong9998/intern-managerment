@@ -34,10 +34,10 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public List<Project> getProjectByUsername(String username) {
+    public List<Project> getProjectByUserId(long userId) {
         List<MemberProject> memberProjects = memProRepository.findAll();
         return memberProjects.stream()
-                .filter(t -> t.getUser().getEmail().equals(username)).map(t -> t.getProject())
+                .filter(t -> t.getUser().getId() == userId).map(t -> t.getProject())
                 .collect(Collectors.toList());
     }
 
