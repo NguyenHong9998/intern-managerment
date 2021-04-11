@@ -24,7 +24,7 @@ public interface UserService {
 
     List<User> findWaittingUser();
 
-    User findById(long id);
+    User findById(int id);
 
-    void deleteUser(long idUser);
+    void deleteUser(int idUser);
 }

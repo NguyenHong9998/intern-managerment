@@ -64,7 +64,7 @@ public class UserController {
 
     @PutMapping("user/delete")
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
-    public ResponseEntity<?> deleteUser(@RequestParam("id_user") long idUser) {
+    public ResponseEntity<?> deleteUser(@RequestParam("id_user") int idUser) {
         userService.deleteUser(idUser);
         return ResponseEntity.ok(new ResponeDomain(Message.SUCCESSFUlLY.getDetail(), HTTPStatus.success));
     }

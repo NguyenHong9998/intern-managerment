@@ -13,7 +13,7 @@ public class User {
     @Column(name = "id")
     @SequenceGenerator(name = "user_seq", sequenceName = "user_seq", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "user_seq")
-    private long id;
+    private int id;
     @Column(name = "name")
     private String name;
     @Column(name = "password")
@@ -39,13 +39,13 @@ public class User {
     public User() {
     }
 
-    public User(long id, String email, String password) {
+    public User(int id, String email, String password) {
         this.id = id;
         this.email = email;
         this.password = password;
     }
 
-    public User(long id, String name, String password, String email, String address, String gender, Role roles, Department department) {
+    public User(int id, String name, String password, String email, String address, String gender, Role roles, Department department) {
         this.id = id;
         this.gender = gender;
         this.name = name;
@@ -104,11 +104,11 @@ public class User {
         this.department = department;
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

@@ -43,7 +43,7 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public void saveProject(ProjectDomain domain) throws CustormException {
-        User admin = userRepository.findById(Long.valueOf(domain.getIdOfAdmin())).orElse(null);
+        User admin = userRepository.findById(domain.getIdOfAdmin()).orElse(null);
         Project project = new Project();
         project.setManager(admin);
         project.setDescription(domain.getDescription());

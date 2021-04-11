@@ -3,17 +3,21 @@ package cnpm.doan.api;
 import cnpm.doan.domain.ManagerInforDomain;
 import cnpm.doan.domain.ProjectDomain;
 import cnpm.doan.domain.ResponeDomain;
+import cnpm.doan.entity.MemberProject;
 import cnpm.doan.entity.Project;
 import cnpm.doan.entity.User;
+import cnpm.doan.repository.MemberProjectRepository;
 import cnpm.doan.service.ProjectService;
 import cnpm.doan.service.UserService;
 import cnpm.doan.util.CustormException;
+import cnpm.doan.util.HTTPStatus;
 import cnpm.doan.util.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,6 +28,8 @@ public class ProjectController {
     private ProjectService projectService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private MemberProjectRepository memberProjectRepository;
 
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
     @GetMapping("/projects")
@@ -84,5 +90,26 @@ public class ProjectController {
         }
         projectService.deleteProject(idProject);
         return ResponseEntity.ok(new ResponeDomain(Message.SUCCESSFUlLY.getDetail(), true));
+    }
+
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN','ROLE_MANAGER')")
+    @PutMapping("/project/assign_user")
+    public ResponseEntity<?> assignUserToProject(@RequestParam("id_project") int idProject, @RequestParam("id_user") String userIds) {
+        List<User> users = Arrays.stream(userIds.split(",")).map(id -> userService.findById(Integer.valueOf(id))).collect(Collectors.toList());
+        Project project = projectService.findProjectById(idProject);
+        for (User user : users) {
+            if (user.getRoles().getRoleName().equals("ROLE_MANAGER") || user.getRoles().getRoleName().equals("ROLE_ADMIN")) {
+                return ResponseEntity.ok(new ResponeDomain(Message.INVALID_USER.getDetail(), HTTPStatus.fail));
+            }
+            MemberProject existedUser = memberProjectRepository.findMemberProjectByUserIdAndProjectId(user.getId(), project.getId());
+            if (existedUser != null) {
+                continue;
+            }
+            MemberProject memberProject = new MemberProject();
+            memberProject.setProject(project);
+            memberProject.setUser(user);
+            memberProjectRepository.save(memberProject);
+        }
+        return ResponseEntity.ok(new ResponeDomain(Message.SUCCESSFUlLY.getDetail(), HTTPStatus.success));
     }
 }

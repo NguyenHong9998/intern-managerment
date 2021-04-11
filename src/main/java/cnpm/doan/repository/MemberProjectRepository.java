@@ -7,4 +7,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface MemberProjectRepository extends JpaRepository<MemberProject, Integer> {
+    MemberProject findMemberProjectByUserIdAndProjectId(int userId, int projectId);
 }
