@@ -11,7 +11,8 @@ public class UserDomain {
     private String gender;
     private String role;
 
-    public UserDomain(String name, String email, String department, String address, String gender, String role) {
+    public UserDomain(long id, String name, String email, String department, String address, String gender, String role) {
+        this.id = id;
         this.name = name;
         this.email = email;
         this.department = department;
@@ -21,6 +22,7 @@ public class UserDomain {
     }
 
     public UserDomain(User user) {
+        this.id = user.getId();
         this.name = user.getName();
         this.email = user.getEmail();
         this.department = user.getDepartment().getName();
@@ -77,4 +79,24 @@ public class UserDomain {
         this.department = department;
     }
 
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    @Override
+    public String toString() {
+        return "UserDomain{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", department='" + department + '\'' +
+                ", address='" + address + '\'' +
+                ", gender='" + gender + '\'' +
+                ", role='" + role + '\'' +
+                '}';
+    }
 }

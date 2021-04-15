@@ -136,4 +136,19 @@ public class User {
         this.isDeleted = isDeleted;
     }
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", address='" + address + '\'' +
+                ", gender='" + gender + '\'' +
+                ", roles=" + roles +
+                ", department=" + department +
+                ", resetPasswordToken='" + resetPasswordToken + '\'' +
+                ", isDeleted=" + isDeleted +
+                '}';
+    }
 }

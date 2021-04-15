@@ -21,10 +21,13 @@ public class ManagerController {
     @PostMapping("/manager_profile")
     public ResponseEntity<?> getManagerProfile(@RequestParam("email") String email) {
         User manager = userService.findUserByEmail(email);
+        System.out.println(manager);
         if (manager == null) {
             return ResponseEntity.ok(new ResponeDomain(Message.USER_NOT_FOUND.getDetail(), false));
         }
-        return ResponseEntity.ok(new ResponeDomain(new UserDomain(manager), Message.SUCCESSFUlLY.getDetail(), true));
+        UserDomain userDomain = new UserDomain(manager);
+        System.out.println("userDomain: " + userDomain);
+        return ResponseEntity.ok(new ResponeDomain(userDomain, Message.SUCCESSFUlLY.getDetail(), true));
     }
 
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
