@@ -5,8 +5,10 @@ import cnpm.doan.domain.ProjectDomain;
 import cnpm.doan.domain.ResponeDomain;
 import cnpm.doan.entity.MemberProject;
 import cnpm.doan.entity.Project;
+import cnpm.doan.entity.Task;
 import cnpm.doan.entity.User;
 import cnpm.doan.repository.MemberProjectRepository;
+import cnpm.doan.repository.TaskRepository;
 import cnpm.doan.service.ProjectService;
 import cnpm.doan.service.UserService;
 import cnpm.doan.util.CustormException;
@@ -30,6 +32,8 @@ public class ProjectController {
     private UserService userService;
     @Autowired
     private MemberProjectRepository memberProjectRepository;
+    @Autowired
+    private TaskRepository taskRepository;
 
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
     @GetMapping("/projects")
@@ -87,6 +91,11 @@ public class ProjectController {
         Project project = projectService.findProjectById(idProject);
         if (project == null) {
             return ResponseEntity.ok(new ResponeDomain(Message.DATA_NOT_EXIST.getDetail(), false));
+        }
+        List<Task> tasks = taskRepository.findAllByProjectId(idProject);
+        Task task = tasks.stream().filter(t -> t.isDone() == false).findFirst().orElse(null);
+        if (task != null) {
+            return ResponseEntity.ok(new ResponeDomain(Message.PROJECT_NOT_DONE.getDetail(), false));
         }
         projectService.deleteProject(idProject);
         return ResponseEntity.ok(new ResponeDomain(Message.SUCCESSFUlLY.getDetail(), true));
