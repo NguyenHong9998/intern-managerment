@@ -7,7 +7,6 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "users")
-@Where(clause = "is_deleted = 0")
 public class User {
     @Id
     @Column(name = "id")

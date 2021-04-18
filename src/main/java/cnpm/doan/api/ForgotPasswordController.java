@@ -1,5 +1,6 @@
 package cnpm.doan.api;
 
+import cnpm.doan.domain.ResetPassDomain;
 import cnpm.doan.domain.ResponeDomain;
 import cnpm.doan.domain.UserDomain;
 import cnpm.doan.entity.User;
@@ -31,18 +32,17 @@ public class ForgotPasswordController {
     @Value("${spring.mail.username}")
     private String from;
 
-    @PostMapping("/forgot_password")
+    @GetMapping("/forgot_password")
     public ResponseEntity processForgotPassword(@RequestParam("email") String email, HttpServletRequest request) {
         String token = RandomString.make(7);
         try {
             userService.updateResetPasswordToken(token, email);
             String siteURL = request.getRequestURL().toString();
             String resetPasswordLink = siteURL.replace(request.getServletPath(), "") + "/reset_password?token=" + token;
-            System.out.println(resetPasswordLink);
             sendEmail(email, resetPasswordLink);
             return ResponseEntity.ok(new ResponeDomain(Message.CONTENT_EMAIL.getDetail(), HTTPStatus.success));
         } catch (CustormException ex) {
-            return ResponseEntity.ok(ex.getErrorType().getDetail());
+            return ResponseEntity.ok(new ResponeDomain(ex.getErrorType().getDetail(), false));
         } catch (UnsupportedEncodingException | MessagingException e) {
             return ResponseEntity.ok(new ResponeDomain(Message.ERROR_SENDING_EMAIL.getDetail(), HTTPStatus.fail));
         }
@@ -54,16 +54,16 @@ public class ForgotPasswordController {
         if (user == null) {
             return ResponseEntity.ok(new ResponeDomain(Message.INVALID_TOKEN.getDetail(), HTTPStatus.fail));
         }
-        return ResponseEntity.ok("oke");
+        return ResponseEntity.ok(new ResponeDomain(Message.SUCCESSFUlLY.getDetail(), true));
     }
 
     @PostMapping("/reset_password")
-    public ResponseEntity processResetPassword(@RequestParam("token") String token, @RequestParam("password") String password) {
-        User user = userService.findUserByResetPasswordToken(token);
+    public ResponseEntity processResetPassword(@ModelAttribute ResetPassDomain resetPassDomain) {
+        User user = userService.findUserByResetPasswordToken(resetPassDomain.getToken());
         if (user == null) {
             return ResponseEntity.ok(new ResponeDomain(Message.INVALID_TOKEN.getDetail(), HTTPStatus.success));
         } else {
-            userService.updatePassword(user, password);
+            userService.updatePassword(user, resetPassDomain.getPassword());
             UserDomain userDomain = new UserDomain(user);
             return ResponseEntity.ok(userDomain);
         }

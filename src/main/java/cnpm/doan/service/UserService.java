@@ -1,6 +1,8 @@
 package cnpm.doan.service;
 
 
+import cnpm.doan.domain.UserDomain;
+import cnpm.doan.domain.WaitingUser;
 import cnpm.doan.entity.User;
 import cnpm.doan.security.UserPrincipal;
 import cnpm.doan.util.CustormException;
@@ -22,7 +24,7 @@ public interface UserService {
 
     void updateResetPasswordToken(String token, String email) throws CustormException;
 
-    List<User> findWaittingUser();
+    List<WaitingUser> findWaittingUser();
 
     User findById(int id);
 

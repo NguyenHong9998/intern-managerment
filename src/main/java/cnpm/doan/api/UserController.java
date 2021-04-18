@@ -3,6 +3,7 @@ package cnpm.doan.api;
 import cnpm.doan.domain.RegisterAccount;
 import cnpm.doan.domain.ResponeDomain;
 import cnpm.doan.domain.UserDomain;
+import cnpm.doan.domain.WaitingUser;
 import cnpm.doan.entity.User;
 import cnpm.doan.service.RoleService;
 import cnpm.doan.service.UserService;
@@ -58,8 +59,8 @@ public class UserController {
     @GetMapping("/user/waiting_user")
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
     public ResponseEntity<?> getAccountWaiting() {
-        List<User> getUserWaitting = userService.findWaittingUser();
-        return ResponseEntity.ok(getUserWaitting);
+        List<WaitingUser> getUserWaiting = userService.findWaittingUser();
+        return ResponseEntity.ok(getUserWaiting);
     }
 
     @PutMapping("user/delete")

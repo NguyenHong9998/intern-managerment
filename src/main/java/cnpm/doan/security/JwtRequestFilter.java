@@ -2,10 +2,12 @@ package cnpm.doan.security;
 
 
 import cnpm.doan.domain.ResponeDomain;
+import cnpm.doan.util.CustormException;
 import cnpm.doan.util.HTTPStatus;
 import cnpm.doan.util.Message;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
@@ -35,6 +37,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
         String authorizationHeader = request.getHeader("Authorization");
+
         String token = null;
         UserPrincipal user = null;
         if (StringUtils.hasText(authorizationHeader)) {
@@ -48,8 +51,8 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                     new UsernamePasswordAuthenticationToken(user, null, authorities);
             authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
             SecurityContextHolder.getContext().setAuthentication(authentication);
-        }
 
+        }
         filterChain.doFilter(request, response);
     }
 

@@ -1,5 +1,7 @@
 package cnpm.doan.service;
 
+import cnpm.doan.domain.UserDomain;
+import cnpm.doan.domain.WaitingUser;
 import cnpm.doan.entity.User;
 import cnpm.doan.repository.UserRepository;
 import cnpm.doan.security.UserPrincipal;
@@ -12,6 +14,7 @@ import org.springframework.stereotype.Service;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -76,8 +79,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> findWaittingUser() {
-        return userRepository.findWaitingUser();
+    public List<WaitingUser> findWaittingUser() {
+        List<User> waitingUsers = userRepository.findWaitingUser();
+        List<WaitingUser> result = waitingUsers.stream().map(user -> new WaitingUser(user)).collect(Collectors.toList());
+        return result;
     }
 
     @Override

@@ -1,17 +1,17 @@
 package cnpm.doan.security;
 
 import java.io.IOException;
-import javax.servlet.Filter;
-import javax.servlet.FilterChain;
-import javax.servlet.FilterConfig;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
+import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import cnpm.doan.domain.ResponeDomain;
+import cnpm.doan.util.HTTPStatus;
+import cnpm.doan.util.Message;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -34,7 +34,16 @@ public class SimpleCORSFilter implements Filter {
         response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
         response.setHeader("Access-Control-Max-Age", "3600");
         response.setHeader("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With, remember-me");
-        chain.doFilter(req, res);
+        try {
+            chain.doFilter(req, res);
+        } catch (Exception e) {
+            response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+            response.setContentType(MediaType.APPLICATION_JSON_VALUE);
+            ServletOutputStream out = response.getOutputStream();
+            new ObjectMapper().writeValue(out, new ResponeDomain(Message.MISSING_ACCESS_TOKEN.getDetail(), HTTPStatus.fail));
+            out.flush();
+
+        }
     }
 
     @Override

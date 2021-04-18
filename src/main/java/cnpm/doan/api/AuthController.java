@@ -28,7 +28,6 @@ public class AuthController {
     @PostMapping(value = "/login")
     public ResponseEntity<?> login(@ModelAttribute Account account) {
         User checkUser = userService.findUserByEmail(account.getEmail());
-        System.out.println(checkUser);
         if (checkUser != null && checkUser.getRoles() == null) {
             return ResponseEntity.ok(new ResponeDomain(Message.WAITING_ACCOUNT.getDetail(), HTTPStatus.fail));
         }

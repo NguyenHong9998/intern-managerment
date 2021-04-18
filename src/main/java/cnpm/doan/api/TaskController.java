@@ -36,7 +36,7 @@ public class TaskController {
         try {
             taskService.save(taskRequest);
         } catch (CustormException e) {
-            return ResponseEntity.ok(new ResponeDomain(null, e.getMessage(), false));
+            return ResponseEntity.ok(new ResponeDomain(null, e.getErrorType().getDetail(), false));
         }
         return ResponseEntity.ok(new ResponeDomain(null, Message.SUCCESSFUlLY.getDetail(), true));
     }

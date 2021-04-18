@@ -8,6 +8,7 @@ public enum Message {
     CONTENT_EMAIL("Please check in your email"),
     USER_NOT_FOUND("Your password or email is incorrect!"),
     MISSING_UNAUTHORIZED("missing authorized to access this URL"),
+    MISSING_ACCESS_TOKEN("Invalid Token"),
     EMPTY_RESULT("Empty result"),
     DATA_NOT_EXIST("Data not exist"),
     INVALID_DATE("Invalid date. Please choose another date"),
