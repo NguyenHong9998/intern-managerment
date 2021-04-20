@@ -3,9 +3,9 @@ package cnpm.doan.domain;
 import cnpm.doan.entity.User;
 
 public class WaitingUser {
+    private int id;
     private String name;
     private String email;
-    private int id;
 
     public WaitingUser(String name, String email, int id) {
         this.name = name;

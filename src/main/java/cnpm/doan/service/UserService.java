@@ -29,4 +29,8 @@ public interface UserService {
     User findById(int id);
 
     void deleteUser(int idUser);
+
+    void denyUser(int[] userIds) throws CustormException;
+
+    void acceptUsers(int[] userIds) throws CustormException;
 }

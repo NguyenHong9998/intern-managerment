@@ -7,12 +7,14 @@ import cnpm.doan.domain.WaitingUser;
 import cnpm.doan.entity.User;
 import cnpm.doan.service.RoleService;
 import cnpm.doan.service.UserService;
+import cnpm.doan.util.CustormException;
 import cnpm.doan.util.HTTPStatus;
 import cnpm.doan.util.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -60,7 +62,10 @@ public class UserController {
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
     public ResponseEntity<?> getAccountWaiting() {
         List<WaitingUser> getUserWaiting = userService.findWaittingUser();
-        return ResponseEntity.ok(getUserWaiting);
+        if (getUserWaiting.isEmpty()) {
+            return ResponseEntity.ok(new ResponeDomain(Message.EMPTY_RESULT.getDetail(), true));
+        }
+        return ResponseEntity.ok(new ResponeDomain(getUserWaiting, Message.SUCCESSFUlLY.getDetail(), true));
     }
 
     @PutMapping("user/delete")
@@ -68,5 +73,29 @@ public class UserController {
     public ResponseEntity<?> deleteUser(@RequestParam("id_user") int idUser) {
         userService.deleteUser(idUser);
         return ResponseEntity.ok(new ResponeDomain(Message.SUCCESSFUlLY.getDetail(), HTTPStatus.success));
+    }
+
+    @PutMapping("user/deny")
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
+    public ResponseEntity<?> denyUsers(@RequestBody @Validated int[] userIds) {
+        try {
+            userService.denyUser(userIds);
+        } catch (CustormException e) {
+            return ResponseEntity.ok(new ResponeDomain(Message.INVALID_USER.getDetail(), false));
+        }
+        return ResponseEntity.ok(new ResponeDomain(Message.SUCCESSFUlLY.getDetail(), true));
+
+    }
+
+    @PutMapping("user/accept")
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
+    public ResponseEntity<?> acceptUsers(@RequestBody @Validated int[] userIds) {
+        try {
+            userService.denyUser(userIds);
+        } catch (CustormException e) {
+            return ResponseEntity.ok(new ResponeDomain(Message.INVALID_USER.getDetail(), false));
+        }
+        return ResponseEntity.ok(new ResponeDomain(Message.SUCCESSFUlLY.getDetail(), true));
+
     }
 }

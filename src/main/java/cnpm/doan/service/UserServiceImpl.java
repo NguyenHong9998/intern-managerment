@@ -1,8 +1,9 @@
 package cnpm.doan.service;
 
-import cnpm.doan.domain.UserDomain;
 import cnpm.doan.domain.WaitingUser;
+import cnpm.doan.entity.Role;
 import cnpm.doan.entity.User;
+import cnpm.doan.repository.RoleRepository;
 import cnpm.doan.repository.UserRepository;
 import cnpm.doan.security.UserPrincipal;
 import cnpm.doan.util.CustormException;
@@ -18,7 +19,8 @@ import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService {
-
+    @Autowired
+    private RoleRepository roleRepository;
     @Autowired
     private UserRepository userRepository;
 
@@ -97,5 +99,35 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findById(int id) {
         return userRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public void denyUser(int[] userIds) throws CustormException {
+        for (int id : userIds) {
+            User user = userRepository.findById(id).orElse(null);
+            if (user == null || user.getRoles() != null) {
+                throw new CustormException(Message.INVALID_USER);
+            }
+        }
+        for (int id : userIds) {
+            User user = userRepository.findById(id).orElse(null);
+            userRepository.delete(user);
+        }
+    }
+
+    @Override
+    public void acceptUsers(int[] userIds) throws CustormException {
+        for (int id : userIds) {
+            User user = userRepository.findById(id).orElse(null);
+            if (user == null || user.getRoles() != null) {
+                throw new CustormException(Message.INVALID_USER);
+            }
+        }
+        for (int id : userIds) {
+            User user = userRepository.findById(id).orElse(null);
+            Role role = roleRepository.findRoleByRoleName("ROLE_USER");
+            user.setRoles(role);
+            userRepository.save(user);
+        }
     }
 }
