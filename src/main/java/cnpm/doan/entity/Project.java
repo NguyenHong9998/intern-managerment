@@ -61,4 +61,15 @@ public class Project {
     public void setManager(User admin) {
         this.manager = admin;
     }
+
+    @Override
+    public String toString() {
+        return "Project{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", dueDate=" + dueDate +
+                ", manager=" + manager +
+                '}';
+    }
 }

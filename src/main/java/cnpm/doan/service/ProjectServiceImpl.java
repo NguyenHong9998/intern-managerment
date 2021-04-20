@@ -1,5 +1,6 @@
 package cnpm.doan.service;
 
+import cnpm.doan.domain.ProjectByUserIdDomain;
 import cnpm.doan.domain.ProjectDomain;
 import cnpm.doan.entity.MemberProject;
 import cnpm.doan.entity.Project;
@@ -34,11 +35,21 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public List<Project> getProjectByUserId(long userId) {
+    public List<ProjectByUserIdDomain> getProjectByUserId(long userId) {
         List<MemberProject> memberProjects = memProRepository.findAll();
-        return memberProjects.stream()
-                .filter(t -> t.getUser().getId() == userId).map(t -> t.getProject())
-                .collect(Collectors.toList());
+
+        List<ProjectByUserIdDomain> result = memberProjects.stream().filter(t -> t.getUser().getId() == userId)
+                .map(t -> {
+                    Project project = t.getProject();
+                    ProjectByUserIdDomain domain = new ProjectByUserIdDomain();
+                    domain.setDescription(t.getProject().getDescription());
+                    domain.setUserId(String.valueOf(userId));
+                    domain.setDueDate(t.getProject().getDueDate().toString());
+                    domain.setTitle(t.getProject().getTitle());
+                    domain.setManagerName(t.getProject().getManager().getName());
+                    return domain;
+                }).collect(Collectors.toList());
+        return result;
     }
 
     @Override

@@ -1,6 +1,7 @@
 package cnpm.doan.api;
 
 import cnpm.doan.domain.ManagerInforDomain;
+import cnpm.doan.domain.ProjectByUserIdDomain;
 import cnpm.doan.domain.ProjectDomain;
 import cnpm.doan.domain.ResponeDomain;
 import cnpm.doan.entity.MemberProject;
@@ -49,15 +50,19 @@ public class ProjectController {
     }
 
     @GetMapping("/project")
-    public ResponseEntity<?> getProjectByUsername(@RequestParam("user_id") long userId) {
-        List<Project> projects = projectService.getProjectByUserId(userId);
+    public ResponseEntity<?> getProjectByUsername(@RequestParam("user_id") int userId) {
+        User user = userService.findById(userId);
+        if (user == null) {
+            return ResponseEntity.ok(new ResponeDomain(Message.INVALID_USER.getDetail(), false));
+        }
+        List<ProjectByUserIdDomain> projects = projectService.getProjectByUserId(userId);
         if (projects.size() == 0) {
             return ResponseEntity.ok(new ResponeDomain(Message.EMPTY_RESULT.getDetail(), true));
         }
         if (projects == null) {
             return ResponseEntity.ok(new ResponeDomain(Message.DATA_NOT_EXIST.getDetail(), true));
         }
-        return ResponseEntity.ok(projects);
+        return ResponseEntity.ok(new ResponeDomain(projects, Message.SUCCESSFUlLY.getDetail(), true));
     }
 
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
@@ -92,6 +97,7 @@ public class ProjectController {
         if (project == null) {
             return ResponseEntity.ok(new ResponeDomain(Message.DATA_NOT_EXIST.getDetail(), false));
         }
+
         List<Task> tasks = taskRepository.findAllByProjectId(idProject);
         Task task = tasks.stream().filter(t -> t.isDone() == false).findFirst().orElse(null);
         if (task != null) {
