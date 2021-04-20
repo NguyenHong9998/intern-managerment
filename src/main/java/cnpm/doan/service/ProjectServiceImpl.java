@@ -1,5 +1,6 @@
 package cnpm.doan.service;
 
+import cnpm.doan.domain.GetAllProjectDomain;
 import cnpm.doan.domain.ProjectByUserIdDomain;
 import cnpm.doan.domain.ProjectDomain;
 import cnpm.doan.entity.MemberProject;
@@ -30,8 +31,20 @@ public class ProjectServiceImpl implements ProjectService {
     private UserRepository userRepository;
 
     @Override
-    public List<Project> getAllProject() {
-        return projectRepository.findAll();
+    public List<GetAllProjectDomain> getAllProject() {
+        List<Project> projects = projectRepository.findAll();
+        List<GetAllProjectDomain> result = projects.stream().map(
+                t -> {
+                    GetAllProjectDomain domain = new GetAllProjectDomain();
+                    domain.setProjectId(String.valueOf(t.getId()));
+                    domain.setDescription(t.getDescription());
+                    domain.setDueDate(t.getDueDate().toString());
+                    domain.setTitle(t.getTitle());
+                    domain.setManagerName(t.getManager().getName());
+                    return domain;
+                }
+        ).collect(Collectors.toList());
+        return result;
     }
 
     @Override
@@ -40,8 +53,8 @@ public class ProjectServiceImpl implements ProjectService {
 
         List<ProjectByUserIdDomain> result = memberProjects.stream().filter(t -> t.getUser().getId() == userId)
                 .map(t -> {
-                    Project project = t.getProject();
                     ProjectByUserIdDomain domain = new ProjectByUserIdDomain();
+                    domain.setProjectId(String.valueOf(t.getProject().getId()));
                     domain.setDescription(t.getProject().getDescription());
                     domain.setUserId(String.valueOf(userId));
                     domain.setDueDate(t.getProject().getDueDate().toString());

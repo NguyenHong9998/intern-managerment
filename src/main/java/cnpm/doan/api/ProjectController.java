@@ -1,9 +1,6 @@
 package cnpm.doan.api;
 
-import cnpm.doan.domain.ManagerInforDomain;
-import cnpm.doan.domain.ProjectByUserIdDomain;
-import cnpm.doan.domain.ProjectDomain;
-import cnpm.doan.domain.ResponeDomain;
+import cnpm.doan.domain.*;
 import cnpm.doan.entity.MemberProject;
 import cnpm.doan.entity.Project;
 import cnpm.doan.entity.Task;
@@ -39,7 +36,7 @@ public class ProjectController {
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
     @GetMapping("/projects")
     public ResponseEntity<?> getAllProject() {
-        List<Project> projects = projectService.getAllProject();
+        List<GetAllProjectDomain> projects = projectService.getAllProject();
         if (projects == null) {
             return ResponseEntity.ok(new ResponeDomain(Message.DATA_NOT_EXIST.getDetail(), false));
         }
