@@ -50,6 +50,9 @@ public class TaskServiceImpl implements TaskService {
         task.setPoint(0f);
         task.setDone(false);
         Date date = DatetimeUtils.convertStringToDateOrNull(taskRequest.getDueDate(), DatetimeUtils.YYYYMMDD);
+        if(date ==null){
+            throw new CustormException(Message.INVALID_DATE);
+        }
         if (DatetimeUtils.getDayBetweenTwoDiffDate(date, new Date()) <= 1) {
             throw new CustormException(Message.INVALID_DATE);
         }
