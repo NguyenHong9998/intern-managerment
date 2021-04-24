@@ -13,4 +13,6 @@ public interface TaskService {
     List<TaskDomain> getAllTask(int projectId);
 
     void save(TaskRequest task) throws CustormException;
+
+    void deleteTask(int taskId) throws CustormException;
 }

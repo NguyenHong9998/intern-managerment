@@ -3,9 +3,11 @@ package cnpm.doan.service;
 import cnpm.doan.domain.TaskDomain;
 import cnpm.doan.domain.TaskRequest;
 import cnpm.doan.entity.Difficulty;
+import cnpm.doan.entity.MemberTask;
 import cnpm.doan.entity.Project;
 import cnpm.doan.entity.Task;
 import cnpm.doan.repository.DifficultyRepository;
+import cnpm.doan.repository.MemberTaskRepository;
 import cnpm.doan.repository.ProjectRepository;
 import cnpm.doan.repository.TaskRepository;
 import cnpm.doan.util.CustormException;
@@ -29,6 +31,9 @@ public class TaskServiceImpl implements TaskService {
     @Autowired
     ProjectRepository projectRepository;
 
+    @Autowired
+    MemberTaskRepository memberTaskRepository;
+
     @Override
     public List<Task> findAllTaskByProjectId(int projectId) {
         return taskRepository.findAllByProjectId(projectId);
@@ -50,7 +55,7 @@ public class TaskServiceImpl implements TaskService {
         task.setPoint(0f);
         task.setDone(false);
         Date date = DatetimeUtils.convertStringToDateOrNull(taskRequest.getDueDate(), DatetimeUtils.YYYYMMDD);
-        if(date ==null){
+        if (date == null) {
             throw new CustormException(Message.INVALID_DATE);
         }
         if (DatetimeUtils.getDayBetweenTwoDiffDate(date, new Date()) <= 1) {
@@ -75,5 +80,19 @@ public class TaskServiceImpl implements TaskService {
             return taskDomain;
         }).collect(Collectors.toList());
         return result;
+    }
+
+    @Override
+    public void deleteTask(int taskId) throws CustormException {
+        Task task = taskRepository.findById(taskId).orElse(null);
+        if (task == null) {
+            throw new CustormException(Message.INVALID_TASK);
+        }
+        if (!task.isDone()) {
+            throw new CustormException(Message.TASK_NOT_DONE);
+        }
+        List<MemberTask> memberTasks = memberTaskRepository.findAllByTaskId(taskId);
+        memberTasks.forEach(t -> memberTaskRepository.deleteByTaskId(t.getTask().getId()));
+        taskRepository.deleteById(taskId);
     }
 }

@@ -104,6 +104,9 @@ public class ProjectController {
         List<User> users = Arrays.stream(userIds.split(",")).map(id -> userService.findById(Integer.valueOf(id))).collect(Collectors.toList());
         Project project = projectService.findProjectById(idProject);
         for (User user : users) {
+            if (user == null) {
+                return ResponseEntity.ok(new ResponeDomain(Message.INVALID_USER.getDetail(), HTTPStatus.fail));
+            }
             if (user.getRoles().getRoleName().equals("ROLE_MANAGER") || user.getRoles().getRoleName().equals("ROLE_ADMIN")) {
                 return ResponseEntity.ok(new ResponeDomain(Message.INVALID_USER.getDetail(), HTTPStatus.fail));
             }
