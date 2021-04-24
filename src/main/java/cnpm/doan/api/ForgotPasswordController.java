@@ -19,7 +19,6 @@ import cnpm.doan.util.Message;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
-import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
 
 @CrossOrigin
@@ -32,15 +31,14 @@ public class ForgotPasswordController {
     @Value("${spring.mail.username}")
     private String from;
 
-    @GetMapping("/forgot_password")
-    public ResponseEntity processForgotPassword(@RequestParam("email") String email, HttpServletRequest request) {
+    @PostMapping("/forgot_password")
+    public ResponseEntity processForgotPassword(@RequestParam  String email) {
         String token = RandomString.make(7);
         try {
             userService.updateResetPasswordToken(token, email);
-            String siteURL = request.getRequestURL().toString();
-            String resetPasswordLink = siteURL.replace(request.getServletPath(), "") + "/reset_password?token=" + token;
-            sendEmail(email, resetPasswordLink);
-            return ResponseEntity.ok(new ResponeDomain(Message.CONTENT_EMAIL.getDetail(), HTTPStatus.success));
+//            String siteURL = request.getRequestURL().toString();
+            sendEmail(email, token);
+            return ResponseEntity.ok(new ResponeDomain(Message.CONTENT_EMAIL.getDetail(),Message.SUCCESSFUlLY.getDetail(), HTTPStatus.success));
         } catch (CustormException ex) {
             return ResponseEntity.ok(new ResponeDomain(ex.getErrorType().getDetail(), false));
         } catch (UnsupportedEncodingException | MessagingException e) {
@@ -81,8 +79,8 @@ public class ForgotPasswordController {
                 + "<p>Dear user.</p>"
                 + "<br>"
                 + "<p>We have received your reset password request</p>"
-                + "<p>Please click below button to reset your password.</p>"
-                + "<p><a href='" + link + "' style='padding:10px 20px;background-color:#337ab7;text-decoration:none;color:#fffffe;border-radius:5px;display:inline-block;max-width:70%;font-size:16px;margin:10px 0' >Thay đổi mật khẩu</a></p>"
+                + "<p>Please type below token to reset your password.</p>"
+                + "<h5>" + link + "</h5>"
                 + "<p>Ignore this email if you have remembered your password."
                 + "<br>"
                 + "Have a nice day.</p>";

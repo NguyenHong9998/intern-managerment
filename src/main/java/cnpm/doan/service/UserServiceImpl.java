@@ -108,9 +108,6 @@ public class UserServiceImpl implements UserService {
             if (user == null || user.getRoles() != null) {
                 throw new CustormException(Message.INVALID_USER);
             }
-        }
-        for (int id : userIds) {
-            User user = userRepository.findById(id).orElse(null);
             userRepository.delete(user);
         }
     }
