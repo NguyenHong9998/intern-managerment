@@ -5,7 +5,6 @@ import cnpm.doan.domain.ResponeDomain;
 import cnpm.doan.domain.UserDomain;
 import cnpm.doan.domain.WaitingUser;
 import cnpm.doan.entity.User;
-import cnpm.doan.service.RoleService;
 import cnpm.doan.service.UserService;
 import cnpm.doan.util.CustormException;
 import cnpm.doan.util.HTTPStatus;
@@ -50,10 +49,10 @@ public class UserController {
     }
 
     @GetMapping("/user_profile")
-    public ResponseEntity<?> getUserProfile(@RequestParam("email") String email) {
-        User user = userService.findUserByEmail(email);
+    public ResponseEntity<?> getUserProfile(@RequestParam("id_user") int userId) {
+        User user = userService.findById(userId);
         if (user == null) {
-            return ResponseEntity.ok(new ResponeDomain(Message.USER_NOT_FOUND.getDetail(), false));
+            return ResponseEntity.ok(new ResponeDomain(Message.INVALID_USER.getDetail(), false));
         }
         UserDomain userDomain = new UserDomain(user);
         return ResponseEntity.ok(new ResponeDomain(userDomain, Message.SUCCESSFUlLY.getDetail(), true));

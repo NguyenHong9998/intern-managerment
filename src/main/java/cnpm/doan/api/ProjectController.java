@@ -90,17 +90,11 @@ public class ProjectController {
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
     @PostMapping(value = "/project/delete")
     public ResponseEntity<?> deleteProject(@RequestParam("id_project") int idProject) {
-        Project project = projectService.findProjectById(idProject);
-        if (project == null) {
-            return ResponseEntity.ok(new ResponeDomain(Message.DATA_NOT_EXIST.getDetail(), false));
+        try {
+            projectService.deleteProject(idProject);
+        } catch (CustormException e) {
+            return ResponseEntity.ok(new ResponeDomain(e.getErrorType().getDetail(), false));
         }
-
-        List<Task> tasks = taskRepository.findAllByProjectId(idProject);
-        Task task = tasks.stream().filter(t -> t.isDone() == false).findFirst().orElse(null);
-        if (task != null) {
-            return ResponseEntity.ok(new ResponeDomain(Message.PROJECT_NOT_DONE.getDetail(), false));
-        }
-        projectService.deleteProject(idProject);
         return ResponseEntity.ok(new ResponeDomain(Message.SUCCESSFUlLY.getDetail(), true));
     }
 

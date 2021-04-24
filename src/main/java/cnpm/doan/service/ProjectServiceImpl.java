@@ -3,16 +3,20 @@ package cnpm.doan.service;
 import cnpm.doan.domain.GetAllProjectDomain;
 import cnpm.doan.domain.ProjectByUserIdDomain;
 import cnpm.doan.domain.ProjectDomain;
+import cnpm.doan.domain.ResponeDomain;
 import cnpm.doan.entity.MemberProject;
 import cnpm.doan.entity.Project;
+import cnpm.doan.entity.Task;
 import cnpm.doan.entity.User;
 import cnpm.doan.repository.MemberProjectRepository;
 import cnpm.doan.repository.ProjectRepository;
+import cnpm.doan.repository.TaskRepository;
 import cnpm.doan.repository.UserRepository;
 import cnpm.doan.util.CustormException;
 import cnpm.doan.util.DatetimeUtils;
 import cnpm.doan.util.Message;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -29,6 +33,9 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private TaskRepository taskRepository;
 
     @Override
     public List<GetAllProjectDomain> getAllProject() {
@@ -86,7 +93,18 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public void deleteProject(int idProject) {
-        projectRepository.deleteProject(idProject);
+    public void deleteProject(int idProject) throws CustormException {
+        Project project = projectRepository.findById(idProject).orElse(null);
+        if (project == null) {
+            throw new CustormException(Message.DATA_NOT_EXIST);
+        }
+
+        List<Task> tasks = taskRepository.findAllByProjectId(idProject);
+        Task task = tasks.stream().filter(t -> t.isDone() == false).findFirst().orElse(null);
+        if (task != null) {
+            throw new CustormException(Message.PROJECT_NOT_DONE);
+        }
+        project.setIsDeleted(1);
+        projectRepository.save(project);
     }
 }

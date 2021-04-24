@@ -17,5 +17,5 @@ public interface ProjectService {
 
     Project findProjectById(int id);
 
-    void deleteProject(int idProject);
+    void deleteProject(int idProject) throws CustormException;
 }
