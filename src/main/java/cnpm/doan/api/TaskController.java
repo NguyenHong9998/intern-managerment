@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(maxAge = 3600)
 @RestController
 public class TaskController {
     @Autowired
@@ -26,7 +27,7 @@ public class TaskController {
     public ResponseEntity<?> getAllTaskByProjectId(@RequestParam("project_id") int projectId) {
         List<TaskDomain> domain = taskService.getAllTask(projectId);
         if (domain.size() == 0) {
-            return ResponseEntity.ok(new ResponeDomain(Message.SUCCESSFUlLY.getDetail(), HTTPStatus.success));
+            return ResponseEntity.ok(new ResponeDomain(Message.EMPTY_RESULT.getDetail(), HTTPStatus.success));
         }
         return ResponseEntity.ok(new ResponeDomain(domain, Message.SUCCESSFUlLY.getDetail(), HTTPStatus.success));
     }
@@ -44,5 +45,6 @@ public class TaskController {
     public ResponseEntity<?> deleteTask() {
         return null;
     }
+
 
 }

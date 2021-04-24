@@ -49,13 +49,14 @@ public class UserController {
         return ResponseEntity.ok(new ResponeDomain(account.getEmail(), Message.SUCCESSFUlLY.getDetail(), true));
     }
 
-    @PostMapping("/user_profile")
+    @GetMapping("/user_profile")
     public ResponseEntity<?> getUserProfile(@RequestParam("email") String email) {
         User user = userService.findUserByEmail(email);
         if (user == null) {
             return ResponseEntity.ok(new ResponeDomain(Message.USER_NOT_FOUND.getDetail(), false));
         }
-        return ResponseEntity.ok(new ResponeDomain(user, Message.SUCCESSFUlLY.getDetail(), true));
+        UserDomain userDomain = new UserDomain(user);
+        return ResponseEntity.ok(new ResponeDomain(userDomain, Message.SUCCESSFUlLY.getDetail(), true));
     }
 
     @GetMapping("/user/waiting_user")
