@@ -48,6 +48,7 @@ public class UserController {
         return ResponseEntity.ok(new ResponeDomain(account.getEmail(), Message.SUCCESSFUlLY.getDetail(), true));
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN','ROLE_MANAGER','ROLE_USER')")
     @GetMapping("/user_profile")
     public ResponseEntity<?> getUserProfile(@RequestParam("id_user") int userId) {
         User user = userService.findById(userId);

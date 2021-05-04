@@ -33,6 +33,7 @@ public class ForgotPasswordController {
 
     @PostMapping("/forgot_password")
     public ResponseEntity processForgotPassword(@RequestParam  String email) {
+        System.out.println(email);
         String token = RandomString.make(7);
         try {
             userService.updateResetPasswordToken(token, email);

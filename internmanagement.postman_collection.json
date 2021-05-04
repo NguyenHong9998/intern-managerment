@@ -6,338 +6,741 @@
 	},
 	"item": [
 		{
-			"name": "login",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "formdata",
-					"formdata": [
-						{
-							"key": "username",
-							"value": "htkien2511@gmail.com",
-							"type": "text",
-							"disabled": true
+			"name": "AuthController",
+			"item": [
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "username",
+									"value": "htkien2511@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "nguyenhong19999@gmail.com",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "password",
+									"value": "2",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "username",
+									"value": "nguyenhong19989@gmail.com",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "password",
+									"value": "2",
+									"type": "text",
+									"disabled": true
+								}
+							]
 						},
-						{
-							"key": "password",
-							"value": "1",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "username",
-							"value": "nguyenhong19999@gmail.com",
-							"type": "text"
-						},
-						{
-							"key": "password",
-							"value": "2",
-							"type": "text"
+						"url": {
+							"raw": "http://localhost:8088/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8088",
+							"path": [
+								"login"
+							]
 						}
-					]
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "http://localhost:8080/login",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"login"
-					]
+				{
+					"name": "forgot password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "nguyenhong19999@gmail.com",
+									"type": "text"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8088/forgot_password",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8088",
+							"path": [
+								"forgot_password"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Reset password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "token",
+									"value": "229pOzW",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "2",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8088/reset_password",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8088",
+							"path": [
+								"reset_password"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
 		},
 		{
-			"name": "get manager profile",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTc3ODc0NzYsInVzZXIiOnsicGFzc3dvcmQiOiIkMmEkMTAkQ0xIS1hxVDBpRmRhaVp5UXhwWElKdXRNNFFnUkRacGxnczVrWllPdXhOeFlELmFaYkFZaUMiLCJ1c2VySWQiOjIsImF1dGhvcml0aWVzIjpbIlJPTEVfQURNSU4iXSwidXNlcm5hbWUiOiJodGtpZW4yNTExQGdtYWlsLmNvbSJ9fQ.nJhR3YvzAmkqNw-hBjbqAeHmLUjPG0bKtL3cEoV87lk",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "formdata",
-					"formdata": [
-						{
-							"key": "email",
-							"value": "phuongnguyen@gmail.com",
-							"type": "text"
-						}
-					]
-				},
-				"url": {
-					"raw": "http://localhost:8080/manager_profile",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"manager_profile"
-					],
-					"query": [
-						{
-							"key": "email",
-							"value": "phuongnguyen@gmail.com",
-							"disabled": true
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "get all intern",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTc4MDMyNzgsInVzZXIiOnsicGFzc3dvcmQiOiIkMmEkMTAkajE5YlJHc1dreHhGbThKVlh5XC9WMnVCSmlVdWFFcXdZUnVuTEhJd2IwOWNXOE9vc3NGbGdxIiwidXNlcklkIjoxLCJhdXRob3JpdGllcyI6WyJST0xFX1VTRVIiXSwidXNlcm5hbWUiOiJuZ3V5ZW5ob25nMTk5OTlAZ21haWwuY29tIn19.r70_Iki772mSu_Kr8ye03YZ5LxXRk8qj6gWh4CPm03c",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "formdata",
-					"formdata": []
-				},
-				"url": {
-					"raw": "http://localhost:8080/users",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"users"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "get all manager",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTc3ODYxMDksInVzZXIiOnsicGFzc3dvcmQiOiIkMmEkMTAkQ0xIS1hxVDBpRmRhaVp5UXhwWElKdXRNNFFnUkRacGxnczVrWllPdXhOeFlELmFaYkFZaUMiLCJ1c2VySWQiOjIsImF1dGhvcml0aWVzIjpbIlJPTEVfQURNSU4iXSwidXNlcm5hbWUiOiJodGtpZW4yNTExQGdtYWlsLmNvbSJ9fQ.ZWFa1ZMOuzVLXxP7IqSBngRBeFRbj415mTfHKLXShHI",
-							"type": "string"
-						}
-					]
-				},
-				"method": "GET",
-				"header": [
-					{
-						"warning": "This is a duplicate header and will be overridden by the Authorization header generated by Postman.",
-						"key": "Authorization",
-						"value": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTc3ODc3ODEsInVzZXIiOnsicGFzc3dvcmQiOiIkMmEkMTAkajE5YlJHc1dreHhGbThKVlh5XC9WMnVCSmlVdWFFcXdZUnVuTEhJd2IwOWNXOE9vc3NGbGdxIiwidXNlcklkIjoxLCJhdXRob3JpdGllcyI6WyJST0xFX1VTRVIiXSwidXNlcm5hbWUiOiJuZ3V5ZW5ob25nMTk5OTlAZ21haWwuY29tIn19.6F7cRiu6i9cURfDsFMWkUyOur3KLXGuDsc4-9ln60ro",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "formdata",
-					"formdata": []
-				},
-				"url": {
-					"raw": "http://localhost:8080/managers",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"managers"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Get project by username",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTc3ODk5ODcsInVzZXIiOnsicGFzc3dvcmQiOiIkMmEkMTAkajE5YlJHc1dreHhGbThKVlh5XC9WMnVCSmlVdWFFcXdZUnVuTEhJd2IwOWNXOE9vc3NGbGdxIiwidXNlcklkIjoxLCJhdXRob3JpdGllcyI6WyJST0xFX1VTRVIiXSwidXNlcm5hbWUiOiJuZ3V5ZW5ob25nMTk5OTlAZ21haWwuY29tIn19.GonC6u3QRJrvnTW9a7dTbEZlV6VOBnmHqfNsBUQMdTE",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "formdata",
-					"formdata": [
-						{
-							"key": "username",
-							"value": "nguyenhong19999@gmail.com",
-							"type": "text"
-						}
-					]
-				},
-				"url": {
-					"raw": "http://localhost:8080/project",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"project"
-					],
-					"query": [
-						{
-							"key": "username",
-							"value": "nguyenhong19999@gmail.com",
-							"disabled": true
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "register",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "urlencoded",
-					"urlencoded": [
-						{
-							"key": "username",
-							"value": "nguyenhong19999@gmail.com",
-							"type": "text"
+			"name": "UserController",
+			"item": [
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "username",
+									"value": "nguyenhong19989@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "Hong xinh dep",
+									"type": "text"
+								}
+							]
 						},
-						{
-							"key": "password",
-							"value": "2",
-							"type": "text"
-						},
-						{
-							"key": "name",
-							"value": "Hong xinh dep",
-							"type": "text"
+						"url": {
+							"raw": "http://localhost:8088/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8088",
+							"path": [
+								"register"
+							]
 						}
-					]
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "http://localhost:8080/register",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"register"
-					]
+				{
+					"name": "get waitting account user",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTk4MDA2MTUsInVzZXIiOnsicGFzc3dvcmQiOiIkMmEkMTAkQ0xIS1hxVDBpRmRhaVp5UXhwWElKdXRNNFFnUkRacGxnczVrWllPdXhOeFlELmFaYkFZaUMiLCJ1c2VySWQiOjIsImF1dGhvcml0aWVzIjpbIlJPTEVfQURNSU4iXSwidXNlcm5hbWUiOiJodGtpZW4yNTExQGdtYWlsLmNvbSJ9fQ.ITSyX8GVGFi0UR--tr21dN19oEx2zpoZRsPlSTIUBok",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8088/user/waiting_user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8088",
+							"path": [
+								"user",
+								"waiting_user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get user profile",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "http://localhost:8088/user_profile?id_user=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8088",
+							"path": [
+								"user_profile"
+							],
+							"query": [
+								{
+									"key": "id_user",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all intern",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTk3OTkwMDksInVzZXIiOnsicGFzc3dvcmQiOiIkMmEkMTAkQ0xIS1hxVDBpRmRhaVp5UXhwWElKdXRNNFFnUkRacGxnczVrWllPdXhOeFlELmFaYkFZaUMiLCJ1c2VySWQiOjIsImF1dGhvcml0aWVzIjpbIlJPTEVfQURNSU4iXSwidXNlcm5hbWUiOiJodGtpZW4yNTExQGdtYWlsLmNvbSJ9fQ.jxkgvAQx5_FWOBsBHGtoHbebcaQadx34V-cEsNWEmNQ",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "http://localhost:8088/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8088",
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all manager",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTk3OTkwMDksInVzZXIiOnsicGFzc3dvcmQiOiIkMmEkMTAkQ0xIS1hxVDBpRmRhaVp5UXhwWElKdXRNNFFnUkRacGxnczVrWllPdXhOeFlELmFaYkFZaUMiLCJ1c2VySWQiOjIsImF1dGhvcml0aWVzIjpbIlJPTEVfQURNSU4iXSwidXNlcm5hbWUiOiJodGtpZW4yNTExQGdtYWlsLmNvbSJ9fQ.jxkgvAQx5_FWOBsBHGtoHbebcaQadx34V-cEsNWEmNQ",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "http://localhost:8088/managers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8088",
+							"path": [
+								"managers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteUser",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MjAxMDYxMTEsInVzZXIiOnsicGFzc3dvcmQiOiIkMmEkMTAkQ0xIS1hxVDBpRmRhaVp5UXhwWElKdXRNNFFnUkRacGxnczVrWllPdXhOeFlELmFaYkFZaUMiLCJ1c2VySWQiOjIsImF1dGhvcml0aWVzIjpbIlJPTEVfQURNSU4iXSwidXNlcm5hbWUiOiJodGtpZW4yNTExQGdtYWlsLmNvbSJ9fQ.tKkwjUY6vs2HoVJKBXvzO_8h1LiOPFOolKVbpVhiZrc",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "id_user",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8088/user/delete",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8088",
+							"path": [
+								"user",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deny user",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTk3OTI2MTUsInVzZXIiOnsicGFzc3dvcmQiOiIkMmEkMTAkQ0xIS1hxVDBpRmRhaVp5UXhwWElKdXRNNFFnUkRacGxnczVrWllPdXhOeFlELmFaYkFZaUMiLCJ1c2VySWQiOjIsImF1dGhvcml0aWVzIjpbIlJPTEVfQURNSU4iXSwidXNlcm5hbWUiOiJodGtpZW4yNTExQGdtYWlsLmNvbSJ9fQ.qFL1A26Bmem_VR7zBs0cgqpy-QYrZKKY7D_eRfdSchQ",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n    12,\r\n    13\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8088/user/deny",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8088",
+							"path": [
+								"user",
+								"deny"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "acept user",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTk3OTI2MTUsInVzZXIiOnsicGFzc3dvcmQiOiIkMmEkMTAkQ0xIS1hxVDBpRmRhaVp5UXhwWElKdXRNNFFnUkRacGxnczVrWllPdXhOeFlELmFaYkFZaUMiLCJ1c2VySWQiOjIsImF1dGhvcml0aWVzIjpbIlJPTEVfQURNSU4iXSwidXNlcm5hbWUiOiJodGtpZW4yNTExQGdtYWlsLmNvbSJ9fQ.qFL1A26Bmem_VR7zBs0cgqpy-QYrZKKY7D_eRfdSchQ",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n    14\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8088/user/accept",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8088",
+							"path": [
+								"user",
+								"accept"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
 		},
 		{
-			"name": "create project",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "formdata",
-					"formdata": [
-						{
-							"key": "title",
-							"value": "Intern manager",
-							"type": "text"
+			"name": "ProjectController",
+			"item": [
+				{
+					"name": "Get project by userId",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTc3ODk5ODcsInVzZXIiOnsicGFzc3dvcmQiOiIkMmEkMTAkajE5YlJHc1dreHhGbThKVlh5XC9WMnVCSmlVdWFFcXdZUnVuTEhJd2IwOWNXOE9vc3NGbGdxIiwidXNlcklkIjoxLCJhdXRob3JpdGllcyI6WyJST0xFX1VTRVIiXSwidXNlcm5hbWUiOiJuZ3V5ZW5ob25nMTk5OTlAZ21haWwuY29tIn19.GonC6u3QRJrvnTW9a7dTbEZlV6VOBnmHqfNsBUQMdTE"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "username",
+									"value": "nguyenhong19999@gmail.com",
+									"type": "text",
+									"disabled": true
+								}
+							]
 						},
-						{
-							"key": "description",
-							"value": "hihihiihihi",
-							"type": "text"
-						},
-						{
-							"key": "dueDate",
-							"value": "2021/04/03",
-							"type": "text"
-						},
-						{
-							"key": "usernameOfAdmin",
-							"value": "nguyenhong19999@gmail.com",
-							"type": "text"
+						"url": {
+							"raw": "http://localhost:8088/project?user_id=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8088",
+							"path": [
+								"project"
+							],
+							"query": [
+								{
+									"key": "user_id",
+									"value": "1"
+								}
+							]
 						}
-					]
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "http://localhost:8080/project/create",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"project",
-						"create"
-					]
+				{
+					"name": "create project",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTg5MTE1MjUsInVzZXIiOnsicGFzc3dvcmQiOiIkMmEkMTAkQ0xIS1hxVDBpRmRhaVp5UXhwWElKdXRNNFFnUkRacGxnczVrWllPdXhOeFlELmFaYkFZaUMiLCJ1c2VySWQiOjIsImF1dGhvcml0aWVzIjpbIlJPTEVfQURNSU4iXSwidXNlcm5hbWUiOiJodGtpZW4yNTExQGdtYWlsLmNvbSJ9fQ.Krc_6TDCe7HnFQ1vXYf8X4fhf7c-UPhFS-dM8BKbNUk",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "Intern manager",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "hihihiihihi",
+									"type": "text"
+								},
+								{
+									"key": "dueDate",
+									"value": "2021/04/08",
+									"type": "text"
+								},
+								{
+									"key": "idOfAdmin",
+									"value": "10",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8088/project/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8088",
+							"path": [
+								"project",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete project",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTg5MTE1MjUsInVzZXIiOnsicGFzc3dvcmQiOiIkMmEkMTAkQ0xIS1hxVDBpRmRhaVp5UXhwWElKdXRNNFFnUkRacGxnczVrWllPdXhOeFlELmFaYkFZaUMiLCJ1c2VySWQiOjIsImF1dGhvcml0aWVzIjpbIlJPTEVfQURNSU4iXSwidXNlcm5hbWUiOiJodGtpZW4yNTExQGdtYWlsLmNvbSJ9fQ.Krc_6TDCe7HnFQ1vXYf8X4fhf7c-UPhFS-dM8BKbNUk",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8088/project/delete?id_project=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8088",
+							"path": [
+								"project",
+								"delete"
+							],
+							"query": [
+								{
+									"key": "id_project",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "assign users to project",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MjAxMDk2MzEsInVzZXIiOnsicGFzc3dvcmQiOiIkMmEkMTAkQ0xIS1hxVDBpRmRhaVp5UXhwWElKdXRNNFFnUkRacGxnczVrWllPdXhOeFlELmFaYkFZaUMiLCJ1c2VySWQiOjIsImF1dGhvcml0aWVzIjpbIlJPTEVfQURNSU4iXSwidXNlcm5hbWUiOiJodGtpZW4yNTExQGdtYWlsLmNvbSJ9fQ.4hTmMRDD-kD2N5IA0qXm45w7eguQKjrhYeUUj3gaBH8",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "id_project",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "id_user",
+									"value": "11,3",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8088/project/assign_user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8088",
+							"path": [
+								"project",
+								"assign_user"
+							],
+							"query": [
+								{
+									"key": "id_user",
+									"value": "1,3",
+									"disabled": true
+								},
+								{
+									"key": "id_project",
+									"value": "1",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all Project",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTk3OTI2MTUsInVzZXIiOnsicGFzc3dvcmQiOiIkMmEkMTAkQ0xIS1hxVDBpRmRhaVp5UXhwWElKdXRNNFFnUkRacGxnczVrWllPdXhOeFlELmFaYkFZaUMiLCJ1c2VySWQiOjIsImF1dGhvcml0aWVzIjpbIlJPTEVfQURNSU4iXSwidXNlcm5hbWUiOiJodGtpZW4yNTExQGdtYWlsLmNvbSJ9fQ.qFL1A26Bmem_VR7zBs0cgqpy-QYrZKKY7D_eRfdSchQ",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8088/projects",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8088",
+							"path": [
+								"projects"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
 		},
 		{
-			"name": "create project in get method",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "formdata",
-					"formdata": []
+			"name": "TaskController",
+			"item": [
+				{
+					"name": "get task of project",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8088/task/project?project_id=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8088",
+							"path": [
+								"task",
+								"project"
+							],
+							"query": [
+								{
+									"key": "project_id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "http://localhost:8080/project/create",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"project",
-						"create"
-					]
+				{
+					"name": "create task",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "description",
+									"value": "hihi",
+									"type": "text"
+								},
+								{
+									"key": "title",
+									"value": "huhu",
+									"type": "text"
+								},
+								{
+									"key": "difficultId",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "idProject",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "dueDate",
+									"value": "2021/12/12",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8088/task/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8088",
+							"path": [
+								"task",
+								"create"
+							]
+						}
+					},
+					"response": []
 				},
-				"description": "return list username of manager to select in create project"
-			},
-			"response": []
+				{
+					"name": "Assign User to task",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete task",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	],
-	"auth": {
-		"type": "basic",
-		"basic": [
-			{
-				"key": "password",
-				"value": "1",
-				"type": "string"
-			},
-			{
-				"key": "username",
-				"value": "htkien2511@gmail.com",
-				"type": "string"
-			}
-		]
-	},
 	"event": [
 		{
 			"listen": "prerequest",
