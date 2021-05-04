@@ -48,6 +48,7 @@ public class ProjectController {
 
     @GetMapping("/project")
     public ResponseEntity<?> getProjectByUsername(@RequestParam("user_id") int userId) {
+        System.out.println(userId);
         User user = userService.findById(userId);
         if (user == null) {
             return ResponseEntity.ok(new ResponeDomain(Message.INVALID_USER.getDetail(), false));
