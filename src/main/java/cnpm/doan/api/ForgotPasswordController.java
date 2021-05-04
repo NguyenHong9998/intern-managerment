@@ -18,7 +18,9 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import cnpm.doan.util.Message;
 
 import javax.mail.MessagingException;
+import javax.mail.Transport;
 import javax.mail.internet.MimeMessage;
+import javax.transaction.Transactional;
 import java.io.UnsupportedEncodingException;
 
 @CrossOrigin
@@ -32,14 +34,14 @@ public class ForgotPasswordController {
     private String from;
 
     @PostMapping("/forgot_password")
-    public ResponseEntity processForgotPassword(@RequestParam  String email) {
+    public ResponseEntity processForgotPassword(@RequestParam String email) {
         System.out.println(email);
         String token = RandomString.make(7);
         try {
             userService.updateResetPasswordToken(token, email);
 //            String siteURL = request.getRequestURL().toString();
             sendEmail(email, token);
-            return ResponseEntity.ok(new ResponeDomain(Message.CONTENT_EMAIL.getDetail(),Message.SUCCESSFUlLY.getDetail(), HTTPStatus.success));
+            return ResponseEntity.ok(new ResponeDomain(Message.CONTENT_EMAIL.getDetail(), Message.SUCCESSFUlLY.getDetail(), HTTPStatus.success));
         } catch (CustormException ex) {
             return ResponseEntity.ok(new ResponeDomain(ex.getErrorType().getDetail(), false));
         } catch (UnsupportedEncodingException | MessagingException e) {
@@ -75,7 +77,7 @@ public class ForgotPasswordController {
         helper.setFrom(from);
         helper.setTo(recipientEmail);
         helper.setSubject(cnpm.doan.util.Message.SUBJECT_EMAIL_FORGOT_PASS.getDetail());
-        String content = "<img src='https://scontent.fdad3-2.fna.fbcdn.net/v/t1.0-9/48384579_317001252241916_6859686426733182976_n.png?_nc_cat=101&ccb=1-3&_nc_sid=09cbfe&_nc_ohc=BuiQGHLlFAMAX-VNYVr&_nc_ht=scontent.fdad3-2.fna&oh=7e28303c598f2cc682e25c3ed10e1cd1&oe=606A0F6A'> "
+        String content = "<img src='https://res-1.cloudinary.com/crunchbase-production/image/upload/c_lpad,f_auto,q_auto:eco/yrunsh3clxeoqgfblejv'> "
                 + "<br>"
                 + "<p>Dear user.</p>"
                 + "<br>"
