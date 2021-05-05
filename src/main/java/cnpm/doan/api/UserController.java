@@ -77,7 +77,7 @@ public class UserController {
 //    @GetMapping("/user_profile/edit")
 //    public ResponseEntity<?> updateUserProfile(@ModelAttribute UserDomain userDomain) {
 //        User user = userService.findById(userDomain.getId());
-//        if (!user.getEmail().equals())
+//        if (!user.getEmail().equals(jwtUtil.))
 //            if (user == null) {
 //                return ResponseEntity.ok(new ResponeDomain(Message.INVALID_USER.getDetail(), false));
 //            }

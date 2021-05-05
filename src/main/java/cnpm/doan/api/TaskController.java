@@ -38,7 +38,9 @@ public class TaskController {
     @PreAuthorize("hasAnyAuthority('ROLE_MANAGER','ROLE_ADMIN')")
     @GetMapping("/task/project")
     public ResponseEntity<?> getAllTaskByProjectId(@RequestParam("project_id") int projectId) {
+        System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx1");
         List<TaskDomain> domain = taskService.getAllTask(projectId);
+        domain.forEach(System.out::println);
         if (domain.size() == 0) {
             return ResponseEntity.ok(new ResponeDomain(Message.EMPTY_RESULT.getDetail(), HTTPStatus.success));
         }
