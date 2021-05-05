@@ -86,15 +86,15 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public void deleteTask(int taskId) throws CustormException {
-//        Task task = taskRepository.findById(taskId).orElse(null);
-//        if (task == null) {
-//            throw new CustormException(Message.INVALID_TASK);
-//        }
-//        if (!task.isDone()) {
-//            throw new CustormException(Message.TASK_NOT_DONE);
-//        }
-//        List<MemberTask> memberTasks = memberTaskRepository.findAllByTaskId(taskId);
-//        memberTasks.forEach(t -> memberTaskRepository.deleteByTaskId(t.getTask().getId()));
+        Task task = taskRepository.findById(taskId).orElse(null);
+        if (task == null) {
+            throw new CustormException(Message.INVALID_TASK);
+        }
+        if (!task.isDone()) {
+            throw new CustormException(Message.TASK_NOT_DONE);
+        }
+        List<MemberTask> memberTasks = memberTaskRepository.findAllByTaskId(taskId);
+        memberTasks.forEach(t -> memberTaskRepository.deleteByTaskId(t.getTask().getId()));
         taskRepository.deleteById(taskId);
     }
 }
