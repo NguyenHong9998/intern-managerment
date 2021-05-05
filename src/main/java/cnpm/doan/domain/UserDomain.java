@@ -29,7 +29,9 @@ public class UserDomain {
             this.department = user.getDepartment().getName();
         }
         this.address = user.getAddress();
-        this.role = user.getRoles().getRoleName();
+        if (user.getRoles() != null) {
+            this.role = user.getRoles().getRoleName();
+        }
         this.gender = user.getGender();
     }
 
