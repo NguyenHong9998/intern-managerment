@@ -4,10 +4,7 @@ import cnpm.doan.domain.ResponeDomain;
 import cnpm.doan.domain.TaskDomain;
 import cnpm.doan.domain.TaskRequest;
 import cnpm.doan.entity.User;
-import cnpm.doan.service.MemberProjectService;
-import cnpm.doan.service.ProjectService;
-import cnpm.doan.service.TaskService;
-import cnpm.doan.service.UserService;
+import cnpm.doan.service.*;
 import cnpm.doan.util.CustormException;
 import cnpm.doan.util.HTTPStatus;
 import cnpm.doan.util.Message;
@@ -35,7 +32,10 @@ public class TaskController {
     @Autowired
     private MemberProjectService memberProjectService;
 
+    @Autowired
+    private MemberTaskService memberTaskService;
 
+    @PreAuthorize("hasAnyAuthority('ROLE_MANAGER','ROLE_ADMIN')")
     @GetMapping("/task/project")
     public ResponseEntity<?> getAllTaskByProjectId(@RequestParam("project_id") int projectId) {
         List<TaskDomain> domain = taskService.getAllTask(projectId);
@@ -45,6 +45,7 @@ public class TaskController {
         return ResponseEntity.ok(new ResponeDomain(domain, Message.SUCCESSFUlLY.getDetail(), HTTPStatus.success));
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_MANAGER','ROLE_USER')")
     @PostMapping("/task/create")
     public ResponseEntity<?> createTask(@ModelAttribute TaskRequest taskRequest) {
         try {
@@ -69,10 +70,13 @@ public class TaskController {
     @PreAuthorize("hasAnyAuthority('ROLE_MANAGER')")
     @PostMapping("/task/assign_user")
     public ResponseEntity<?> assignUserToTask(@RequestParam("id_task") int idTask, @RequestParam("id_user") String userIds) {
-//        taskService
         List<User> users = Arrays.stream(userIds.split(",")).map(id -> userService.findById(Integer.valueOf(id))).collect(Collectors.toList());
 
-
+        try {
+            memberTaskService.assignUserToTask(idTask, users);
+        } catch (CustormException e) {
+            return ResponseEntity.ok(new ResponeDomain(null, e.getErrorType().getDetail(), true));
+        }
         return ResponseEntity.ok(new ResponeDomain(null, Message.SUCCESSFUlLY.getDetail(), true));
 
     }

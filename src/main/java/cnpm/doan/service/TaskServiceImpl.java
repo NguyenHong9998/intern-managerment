@@ -39,7 +39,6 @@ public class TaskServiceImpl implements TaskService {
         return taskRepository.findAllByProjectId(projectId);
     }
 
-
     @Override
     public void save(TaskRequest taskRequest) throws CustormException {
         Task task = new Task();
