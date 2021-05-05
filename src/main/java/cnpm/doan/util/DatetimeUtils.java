@@ -1,5 +1,6 @@
 package cnpm.doan.util;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -17,6 +18,11 @@ public class DatetimeUtils {
         } catch (Exception e) {
             return null;
         }
+    }
+
+    public static String convertDateToString(Date date) {
+        DateFormat dateFormat = new SimpleDateFormat(YYYYMMDD);
+        return dateFormat.format(date);
     }
 
     public static long getDayBetweenTwoDiffDate(Date date1, Date date2) {
