@@ -12,6 +12,8 @@ import java.util.List;
 public interface UserService {
     User createUser(User user);
 
+    List<User> findAll();
+
     User findUserByEmail(String email);
 
     UserPrincipal findByUsername(String email);

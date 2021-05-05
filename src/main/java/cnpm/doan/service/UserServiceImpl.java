@@ -81,6 +81,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public List<User> findAll() {
+        return userRepository.findAll();
+    }
+
+    @Override
     public List<WaitingUser> findWaittingUser() {
         List<User> waitingUsers = userRepository.findWaitingUser();
         List<WaitingUser> result = waitingUsers.stream().map(user -> new WaitingUser(user)).collect(Collectors.toList());
@@ -93,7 +98,7 @@ public class UserServiceImpl implements UserService {
         if (user != null) {
             user.setIsDeleted(1);
             userRepository.save(user);
-        }else{
+        } else {
             throw new CustormException(Message.INVALID_USER);
         }
     }

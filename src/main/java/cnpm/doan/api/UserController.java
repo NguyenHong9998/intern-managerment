@@ -31,9 +31,9 @@ public class UserController {
     @GetMapping("/users")
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER')")
     public ResponseEntity getUser() {
-        List<User> users = userService.findUserByRoleName("ROLE_USER");
-        users.forEach(System.out::println);
-        List<UserDomain> result = users.stream().map(t -> new UserDomain(t))
+//        List<User> users = userService.findUserByRoleName("ROLE_USER");
+        List<User> users = userService.findAll();
+        List<UserDomain> result = users.stream().filter(t->t.getRoles().getRoleName().equals("ROLE_USER")).map(t -> new UserDomain(t))
                 .collect(Collectors.toList());
         return ResponseEntity.ok(new ResponeDomain(result, Message.SUCCESSFUlLY.getDetail(), true));
     }
