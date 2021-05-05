@@ -63,18 +63,18 @@ public class UserController {
         UserDomain userDomain = new UserDomain(user);
         return ResponseEntity.ok(new ResponeDomain(userDomain, Message.SUCCESSFUlLY.getDetail(), true));
     }
-
-    @PreAuthorize("hasAnyAuthority('ROLE_MANAGER','ROLE_USER')")
-    @GetMapping("/user_profile")
-    public ResponseEntity<?> updateUserProfile(@ModelAttribute UserDomain userDomain) {
-        User user = userService.findById(userDomain.getId());
-        if (!user.getEmail().equals())
-            if (user == null) {
-                return ResponseEntity.ok(new ResponeDomain(Message.INVALID_USER.getDetail(), false));
-            }
-        UserDomain userDomain = new UserDomain(user);
-        return ResponseEntity.ok(new ResponeDomain(userDomain, Message.SUCCESSFUlLY.getDetail(), true));
-    }
+//
+//    @PreAuthorize("hasAnyAuthority('ROLE_MANAGER','ROLE_USER')")
+//    @GetMapping("/user_profile")
+//    public ResponseEntity<?> updateUserProfile(@ModelAttribute UserDomain userDomain) {
+//        User user = userService.findById(userDomain.getId());
+//        if (!user.getEmail().equals())
+//            if (user == null) {
+//                return ResponseEntity.ok(new ResponeDomain(Message.INVALID_USER.getDetail(), false));
+//            }
+//        UserDomain userDomain = new UserDomain(user);
+//        return ResponseEntity.ok(new ResponeDomain(userDomain, Message.SUCCESSFUlLY.getDetail(), true));
+//    }
 
     @GetMapping("/user/waiting_user")
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
