@@ -32,6 +32,7 @@ public class UserController {
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER')")
     public ResponseEntity getUser() {
         List<User> users = userService.findAll();
+        users.forEach(t-> System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxx:  " +t));
         List<UserDomain> result = users.stream().filter(t -> {
             if (t.getRoles() == null) {
                 return false;
