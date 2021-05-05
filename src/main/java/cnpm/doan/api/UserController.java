@@ -33,7 +33,15 @@ public class UserController {
     public ResponseEntity getUser() {
 //        List<User> users = userService.findUserByRoleName("ROLE_USER");
         List<User> users = userService.findAll();
-        List<UserDomain> result = users.stream().filter(t->t.getRoles().getRoleName().equals("ROLE_USER")).map(t -> new UserDomain(t))
+        List<UserDomain> result = users.stream().filter(t -> {
+            if (t.getRoles() == null) {
+                return false;
+            }
+            if (t.getRoles().getRoleName().equals("ROLE_USER")) {
+                return true;
+            }
+            return false;
+        }).map(t -> new UserDomain(t))
                 .collect(Collectors.toList());
         return ResponseEntity.ok(new ResponeDomain(result, Message.SUCCESSFUlLY.getDetail(), true));
     }
