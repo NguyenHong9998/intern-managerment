@@ -43,6 +43,8 @@ public class UserController {
             return false;
         }).map(t -> new UserDomain(t))
                 .collect(Collectors.toList());
+        result.forEach(t-> System.out.println("kkkkkkkkkkk:"+ t) );
+
         return ResponseEntity.ok(new ResponeDomain(result, Message.SUCCESSFUlLY.getDetail(), true));
     }
 
