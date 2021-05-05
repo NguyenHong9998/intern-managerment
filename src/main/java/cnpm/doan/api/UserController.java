@@ -5,6 +5,8 @@ import cnpm.doan.domain.ResponeDomain;
 import cnpm.doan.domain.UserDomain;
 import cnpm.doan.domain.WaitingUser;
 import cnpm.doan.entity.User;
+import cnpm.doan.security.JwtUtil;
+import cnpm.doan.security.UserPrincipal;
 import cnpm.doan.service.UserService;
 import cnpm.doan.util.CustormException;
 import cnpm.doan.util.HTTPStatus;
@@ -24,6 +26,8 @@ import java.util.stream.Collectors;
 public class UserController {
     @Autowired
     private UserService userService;
+    @Autowired
+    private JwtUtil jwtUtil;
 
     @GetMapping("/users")
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER')")
@@ -59,18 +63,18 @@ public class UserController {
         UserDomain userDomain = new UserDomain(user);
         return ResponseEntity.ok(new ResponeDomain(userDomain, Message.SUCCESSFUlLY.getDetail(), true));
     }
-//
-//    @PreAuthorize("hasAnyAuthority('ROLE_MANAGER','ROLE_USER')")
-//    @GetMapping("/user_profile")
-//    public ResponseEntity<?> updateUserProfile(@ModelAttribute UserDomain userDomain) {
-//        User user = userService.findById(userDomain.getId());
-//        if(user.getEmail().equals())
-//        if (user == null) {
-//            return ResponseEntity.ok(new ResponeDomain(Message.INVALID_USER.getDetail(), false));
-//        }
-//        UserDomain userDomain = new UserDomain(user);
-//        return ResponseEntity.ok(new ResponeDomain(userDomain, Message.SUCCESSFUlLY.getDetail(), true));
-//    }
+
+    @PreAuthorize("hasAnyAuthority('ROLE_MANAGER','ROLE_USER')")
+    @GetMapping("/user_profile")
+    public ResponseEntity<?> updateUserProfile(@ModelAttribute UserDomain userDomain) {
+        User user = userService.findById(userDomain.getId());
+        if (!user.getEmail().equals())
+            if (user == null) {
+                return ResponseEntity.ok(new ResponeDomain(Message.INVALID_USER.getDetail(), false));
+            }
+        UserDomain userDomain = new UserDomain(user);
+        return ResponseEntity.ok(new ResponeDomain(userDomain, Message.SUCCESSFUlLY.getDetail(), true));
+    }
 
     @GetMapping("/user/waiting_user")
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")

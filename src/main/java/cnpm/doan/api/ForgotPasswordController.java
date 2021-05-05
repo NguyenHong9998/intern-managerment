@@ -54,7 +54,7 @@ public class ForgotPasswordController {
     public ResponseEntity processResetPassword(@ModelAttribute ResetPassDomain resetPassDomain) {
         User user = userService.findUserByResetPasswordToken(resetPassDomain.getToken());
         if (user == null) {
-            return ResponseEntity.ok(new ResponeDomain(Message.INVALID_TOKEN.getDetail(), HTTPStatus.success));
+            return ResponseEntity.ok(new ResponeDomain(Message.INVALID_TOKEN.getDetail(), HTTPStatus.fail));
         } else {
             userService.updatePassword(user, resetPassDomain.getPassword());
             UserDomain userDomain = new UserDomain(user);

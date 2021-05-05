@@ -71,7 +71,6 @@ public class TaskController {
     @PostMapping("/task/assign_user")
     public ResponseEntity<?> assignUserToTask(@RequestParam("id_task") int idTask, @RequestParam("id_user") String userIds) {
         List<User> users = Arrays.stream(userIds.split(",")).map(id -> userService.findById(Integer.valueOf(id))).collect(Collectors.toList());
-
         try {
             memberTaskService.assignUserToTask(idTask, users);
         } catch (CustormException e) {
