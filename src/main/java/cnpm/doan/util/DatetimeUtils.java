@@ -9,7 +9,7 @@ import java.util.concurrent.TimeUnit;
 
 public class DatetimeUtils {
     public static String YYYYMMDD = "yyyy/MM/dd";
-    public static String DDMMYYYY = "dd/MM/yyyy";
+    public static String DDMMYYYYHHmmss = "yyyy-MM-dd HH:mm:ss";
 
     public static Date convertStringToDateOrNull(String date, String pattern) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
@@ -22,8 +22,8 @@ public class DatetimeUtils {
     }
 
     public static String convertDateToString(Date date) {
-        DateFormat dateFormat = new SimpleDateFormat(DDMMYYYY);
-        return dateFormat.format(date);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(DDMMYYYYHHmmss);
+        return simpleDateFormat.format(date);
     }
 
     public static long getDayBetweenTwoDiffDate(Date date1, Date date2) {
