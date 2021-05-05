@@ -35,12 +35,9 @@ public class ForgotPasswordController {
 
     @PostMapping("/forgot_password")
     public ResponseEntity processForgotPassword(@RequestParam String email) {
-        System.out.println(email);
         String token = RandomString.make(7);
-        System.out.println("eeeeeeeeeeeeeeeeeeeeeee: "+ email);
         try {
             userService.updateResetPasswordToken(token, email);
-//            String siteURL = request.getRequestURL().toString();
             sendEmail(email, token);
             return ResponseEntity.ok(new ResponeDomain(Message.CONTENT_EMAIL.getDetail(), Message.SUCCESSFUlLY.getDetail(), HTTPStatus.success));
         } catch (CustormException ex) {
@@ -58,7 +55,7 @@ public class ForgotPasswordController {
         } else {
             userService.updatePassword(user, resetPassDomain.getPassword());
             UserDomain userDomain = new UserDomain(user);
-            return ResponseEntity.ok(userDomain);
+            return ResponseEntity.ok(new ResponeDomain(userDomain, Message.SUCCESSFUlLY.getDetail(), true));
         }
     }
 

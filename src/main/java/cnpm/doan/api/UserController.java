@@ -6,7 +6,6 @@ import cnpm.doan.domain.UserDomain;
 import cnpm.doan.domain.WaitingUser;
 import cnpm.doan.entity.User;
 import cnpm.doan.security.JwtUtil;
-import cnpm.doan.security.UserPrincipal;
 import cnpm.doan.service.UserService;
 import cnpm.doan.util.CustormException;
 import cnpm.doan.util.HTTPStatus;
