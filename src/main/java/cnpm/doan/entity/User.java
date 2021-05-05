@@ -24,10 +24,10 @@ public class User {
     private String address;
     @Column(name = "gender")
     private String gender;
-    @ManyToOne()
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "role_id")
     private Role roles;
-    @ManyToOne()
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "department_id")
     private Department department;
     @Column(name = "reset_password_token")
