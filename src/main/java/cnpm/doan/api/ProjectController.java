@@ -46,6 +46,7 @@ public class ProjectController {
         return ResponseEntity.ok(new ResponeDomain(projects, Message.SUCCESSFUlLY.getDetail(), true));
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER', 'ROLE_USER')")
     @GetMapping("/project")
     public ResponseEntity<?> getProjectByUsername(@RequestParam("user_id") int userId) {
         User user = userService.findById(userId);
@@ -62,7 +63,7 @@ public class ProjectController {
         return ResponseEntity.ok(new ResponeDomain(projects, Message.SUCCESSFUlLY.getDetail(), true));
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER')")
     @PostMapping("/project/create")
     public ResponseEntity<?> createProject(@ModelAttribute ProjectDomain request) {
         User manager = userService.findById(request.getIdOfAdmin());
@@ -103,7 +104,11 @@ public class ProjectController {
     public ResponseEntity<?> assignUserToProject(@RequestParam("id_project") int idProject, @RequestParam("id_user") String userIds) {
         List<User> users = Arrays.stream(userIds.split(",")).map(id -> userService.findById(Integer.valueOf(id))).collect(Collectors.toList());
         Project project = projectService.findProjectById(idProject);
+        if(project == null){
+            return ResponseEntity.ok(new ResponeDomain(Message.INVALID_PROJECT_ID.getDetail(), HTTPStatus.fail));
+        }
         for (User user : users) {
+            System.out.println(user);
             if (user == null) {
                 return ResponseEntity.ok(new ResponeDomain(Message.INVALID_USER.getDetail(), HTTPStatus.fail));
             }
@@ -118,6 +123,8 @@ public class ProjectController {
             memberProject.setProject(project);
             memberProject.setUser(user);
             memberProjectRepository.save(memberProject);
+            System.out.println("hihi");
+
         }
         return ResponseEntity.ok(new ResponeDomain(Message.SUCCESSFUlLY.getDetail(), HTTPStatus.success));
     }

@@ -20,7 +20,8 @@ public enum Message {
     NOT_EXIST_MANAGER("Manager with request id is not exist"),
     PROJECT_NOT_DONE("This project has a task not done yet. Please make all tasks already done and delete again "),
     TASK_NOT_DONE("This task is not done yet. Please make it already done and delete again"),
-    WAITING_ACCOUNT("Your Account registered successfully, wait for your admin check it or contact to Shappee's admin");
+    WAITING_ACCOUNT("Your Account registered successfully, wait for your admin check it or contact to Shappee's admin"),
+    INVALID_PROJECT_ID("Invalid Project id in request");
     private String detail;
 
     Message(String detail) {
