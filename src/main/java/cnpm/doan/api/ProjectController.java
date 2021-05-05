@@ -48,18 +48,21 @@ public class ProjectController {
 
     @GetMapping("/project")
     public ResponseEntity<?> getProjectByUsername(@RequestParam("user_id") int userId) {
-        System.out.println(userId);
+        System.out.println("aaaaaaaaaaaaaaaa: "+ userId);
         User user = userService.findById(userId);
         if (user == null) {
             return ResponseEntity.ok(new ResponeDomain(Message.INVALID_USER.getDetail(), false));
         }
+        System.out.println("aaaaaaaaaaaaaaaa1: "+ userId);
         List<ProjectByUserIdDomain> projects = projectService.getProjectByUserId(userId);
+        System.out.println("aaaaaaaaaaaaaaaa2: "+ userId);
         if (projects.size() == 0) {
             return ResponseEntity.ok(new ResponeDomain(Message.EMPTY_RESULT.getDetail(), true));
         }
         if (projects == null) {
             return ResponseEntity.ok(new ResponeDomain(Message.DATA_NOT_EXIST.getDetail(), true));
         }
+        System.out.println("aaaaaaaaaaaaaaaa3: "+ userId);
         return ResponseEntity.ok(new ResponeDomain(projects, Message.SUCCESSFUlLY.getDetail(), true));
     }
 
