@@ -37,6 +37,7 @@ public class ForgotPasswordController {
     public ResponseEntity processForgotPassword(@RequestParam String email) {
         System.out.println(email);
         String token = RandomString.make(7);
+        System.out.println("eeeeeeeeeeeeeeeeeeeeeee: "+ email);
         try {
             userService.updateResetPasswordToken(token, email);
 //            String siteURL = request.getRequestURL().toString();
@@ -47,15 +48,6 @@ public class ForgotPasswordController {
         } catch (UnsupportedEncodingException | MessagingException e) {
             return ResponseEntity.ok(new ResponeDomain(Message.ERROR_SENDING_EMAIL.getDetail(), HTTPStatus.fail));
         }
-    }
-
-    @GetMapping("/reset_password")
-    public ResponseEntity showResetPasswordForm(@RequestParam(value = "token") String token) {
-        User user = userService.findUserByResetPasswordToken(token);
-        if (user == null) {
-            return ResponseEntity.ok(new ResponeDomain(Message.INVALID_TOKEN.getDetail(), HTTPStatus.fail));
-        }
-        return ResponseEntity.ok(new ResponeDomain(Message.SUCCESSFUlLY.getDetail(), true));
     }
 
     @PostMapping("/reset_password")

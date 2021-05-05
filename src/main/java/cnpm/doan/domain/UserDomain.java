@@ -25,7 +25,9 @@ public class UserDomain {
         this.id = user.getId();
         this.name = user.getName();
         this.email = user.getEmail();
-        this.department = user.getDepartment().getName();
+        if (user.getDepartment() != null) {
+            this.department = user.getDepartment().getName();
+        }
         this.address = user.getAddress();
         this.role = user.getRoles().getRoleName();
         this.gender = user.getGender();

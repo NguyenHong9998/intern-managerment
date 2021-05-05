@@ -67,7 +67,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public void updateResetPasswordToken(String token, String email) throws CustormException {
         User user = userRepository.findByEmail(email);
-        System.out.println("User: "+user);
         if (user != null) {
             user.setResetPasswordToken(token);
             userRepository.save(user);
