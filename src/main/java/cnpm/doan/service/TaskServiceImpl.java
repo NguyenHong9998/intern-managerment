@@ -61,6 +61,7 @@ public class TaskServiceImpl implements TaskService {
             throw new CustormException(Message.INVALID_DATE);
         }
         task.setDueDate(DatetimeUtils.convertStringToDateOrNull(taskRequest.getDueDate(), DatetimeUtils.YYYYMMDD));
+        task.setCreateDate(new Date());
         taskRepository.save(task);
     }
 

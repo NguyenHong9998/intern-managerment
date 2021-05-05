@@ -39,7 +39,7 @@ public class UserDomain {
         this.gender = user.getGender();
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 

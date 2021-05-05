@@ -1,10 +1,13 @@
 package cnpm.doan.entity;
 
+import org.hibernate.annotations.Where;
+
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
 @Table(name = "task")
+@Where(clause = "is_deleted = 0")
 public class Task {
     @Id
     @Column(name = "id")
@@ -31,6 +34,8 @@ public class Task {
     private Project project;
     @Column(name = "point")
     private float point;
+    @Column(name = "is_deleted", nullable = false, columnDefinition = "int default 0")
+    private int isDeleted = 0;
 
     public Project getProject() {
         return project;
