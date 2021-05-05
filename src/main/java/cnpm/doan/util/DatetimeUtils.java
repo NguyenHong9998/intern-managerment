@@ -9,6 +9,7 @@ import java.util.concurrent.TimeUnit;
 
 public class DatetimeUtils {
     public static String YYYYMMDD = "yyyy/MM/dd";
+    public static String DDMMYYYY = "dd/MM/yyyy";
 
     public static Date convertStringToDateOrNull(String date, String pattern) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
@@ -21,7 +22,7 @@ public class DatetimeUtils {
     }
 
     public static String convertDateToString(Date date) {
-        DateFormat dateFormat = new SimpleDateFormat(YYYYMMDD);
+        DateFormat dateFormat = new SimpleDateFormat(DDMMYYYY);
         return dateFormat.format(date);
     }
 
