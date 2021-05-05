@@ -3,7 +3,7 @@ package cnpm.doan.domain;
 import cnpm.doan.entity.User;
 
 public class UserDomain {
-    private long id;
+    private int id;
     private String name;
     private String email;
     private String department;
@@ -15,7 +15,7 @@ public class UserDomain {
 
     }
 
-    public UserDomain(long id, String name, String email, String department, String address, String gender, String role) {
+    public UserDomain(int id, String name, String email, String department, String address, String gender, String role) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -43,7 +43,7 @@ public class UserDomain {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

@@ -29,7 +29,7 @@ public class AuthController {
     public ResponseEntity<?> login(@ModelAttribute Account account) {
         User checkUser = userService.findUserByEmail(account.getEmail());
         if (checkUser != null && checkUser.getRoles() == null) {
-            return ResponseEntity.ok(new ResponeDomain(Message.WAITING_ACCOUNT.getDetail(), HTTPStatus.fail));
+            return ResponseEntity.ok(new ResponeDomain(Message.WAITING_ACCOUNT.getDetail(), true));
         }
         UserPrincipal userPrincipal = userService.findByUsername(account.getEmail());
         if (account == null || !new BCryptPasswordEncoder().matches(account.getPassword(), userPrincipal.getPassword())) {

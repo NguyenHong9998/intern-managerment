@@ -40,7 +40,7 @@
 								},
 								{
 									"key": "username",
-									"value": "nguyenhong19989@gmail.com",
+									"value": "nguyenhong19999@gmail.com",
 									"type": "text",
 									"disabled": true
 								},
@@ -53,12 +53,13 @@
 							]
 						},
 						"url": {
-							"raw": "http://localhost:8088/login",
+							"raw": "http://intern-managerment.herokuapp.com/login",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"intern-managerment",
+								"herokuapp",
+								"com"
 							],
-							"port": "8088",
 							"path": [
 								"login"
 							]
@@ -87,21 +88,15 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8088/forgot_password",
+							"raw": "http://intern-managerment.herokuapp.com/forgot_password",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"intern-managerment",
+								"herokuapp",
+								"com"
 							],
-							"port": "8088",
 							"path": [
 								"forgot_password"
-							],
-							"query": [
-								{
-									"key": "email",
-									"value": "",
-									"disabled": true
-								}
 							]
 						}
 					},
@@ -117,7 +112,7 @@
 							"formdata": [
 								{
 									"key": "token",
-									"value": "229pOzW",
+									"value": "PolrNrj",
 									"type": "text"
 								},
 								{
@@ -128,14 +123,22 @@
 							]
 						},
 						"url": {
-							"raw": "http://localhost:8088/reset_password",
+							"raw": "http://intern-managerment.herokuapp.com/reset_password",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"intern-managerment",
+								"herokuapp",
+								"com"
 							],
-							"port": "8088",
 							"path": [
 								"reset_password"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
 							]
 						}
 					},
@@ -156,7 +159,7 @@
 							"formdata": [
 								{
 									"key": "username",
-									"value": "nguyenhong19989@gmail.com",
+									"value": "nguyenhong19999@gmail.com",
 									"type": "text"
 								},
 								{
@@ -166,18 +169,19 @@
 								},
 								{
 									"key": "name",
-									"value": "Hong xinh dep",
+									"value": "OKEOKEOKEOE",
 									"type": "text"
 								}
 							]
 						},
 						"url": {
-							"raw": "http://localhost:8088/register",
+							"raw": "http://intern-managerment.herokuapp.com/register",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"intern-managerment",
+								"herokuapp",
+								"com"
 							],
-							"port": "8088",
 							"path": [
 								"register"
 							]
@@ -192,7 +196,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTk4MDA2MTUsInVzZXIiOnsicGFzc3dvcmQiOiIkMmEkMTAkQ0xIS1hxVDBpRmRhaVp5UXhwWElKdXRNNFFnUkRacGxnczVrWllPdXhOeFlELmFaYkFZaUMiLCJ1c2VySWQiOjIsImF1dGhvcml0aWVzIjpbIlJPTEVfQURNSU4iXSwidXNlcm5hbWUiOiJodGtpZW4yNTExQGdtYWlsLmNvbSJ9fQ.ITSyX8GVGFi0UR--tr21dN19oEx2zpoZRsPlSTIUBok",
+								"value": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MjEwNDEyMjcsInVzZXIiOnsicGFzc3dvcmQiOiIkMmEkMTAkQ0xIS1hxVDBpRmRhaVp5UXhwWElKdXRNNFFnUkRacGxnczVrWllPdXhOeFlELmFaYkFZaUMiLCJ1c2VySWQiOjIsImF1dGhvcml0aWVzIjpbIlJPTEVfQURNSU4iXSwidXNlcm5hbWUiOiJodGtpZW4yNTExQGdtYWlsLmNvbSJ9fQ.pEfwZX-r46BHUHRN3SqNopeKn_RKPNwvJ3g2Cf7dcTI",
 								"type": "text"
 							}
 						],
@@ -218,25 +222,32 @@
 					},
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MjEwNTA4MDIsInVzZXIiOnsicGFzc3dvcmQiOiIkMmEkMTAkQ0xIS1hxVDBpRmRhaVp5UXhwWElKdXRNNFFnUkRacGxnczVrWllPdXhOeFlELmFaYkFZaUMiLCJ1c2VySWQiOjIsImF1dGhvcml0aWVzIjpbIlJPTEVfQURNSU4iXSwidXNlcm5hbWUiOiJodGtpZW4yNTExQGdtYWlsLmNvbSJ9fQ.pqUY794AZ9QsupF9d47PXOqT0QwhX2NyqCd3RAKMjBg",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "formdata",
 							"formdata": []
 						},
 						"url": {
-							"raw": "http://localhost:8088/user_profile?id_user=1",
+							"raw": "http://intern-managerment.herokuapp.com/user_profile?id_user=17",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"intern-managerment",
+								"herokuapp",
+								"com"
 							],
-							"port": "8088",
 							"path": [
 								"user_profile"
 							],
 							"query": [
 								{
 									"key": "id_user",
-									"value": "1"
+									"value": "17"
 								}
 							]
 						}
@@ -253,7 +264,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTk3OTkwMDksInVzZXIiOnsicGFzc3dvcmQiOiIkMmEkMTAkQ0xIS1hxVDBpRmRhaVp5UXhwWElKdXRNNFFnUkRacGxnczVrWllPdXhOeFlELmFaYkFZaUMiLCJ1c2VySWQiOjIsImF1dGhvcml0aWVzIjpbIlJPTEVfQURNSU4iXSwidXNlcm5hbWUiOiJodGtpZW4yNTExQGdtYWlsLmNvbSJ9fQ.jxkgvAQx5_FWOBsBHGtoHbebcaQadx34V-cEsNWEmNQ",
+								"value": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MjEwNzA5NjIsInVzZXIiOnsicGFzc3dvcmQiOiIkMmEkMTAkQ0xIS1hxVDBpRmRhaVp5UXhwWElKdXRNNFFnUkRacGxnczVrWllPdXhOeFlELmFaYkFZaUMiLCJ1c2VySWQiOjIsImF1dGhvcml0aWVzIjpbIlJPTEVfQURNSU4iXSwidXNlcm5hbWUiOiJodGtpZW4yNTExQGdtYWlsLmNvbSJ9fQ.RRvXp7YltDwb9YHCFzaiwGyW8Wx20DfCDH9bWptZdkw",
 								"type": "text"
 							}
 						],
@@ -262,12 +273,13 @@
 							"formdata": []
 						},
 						"url": {
-							"raw": "http://localhost:8088/users",
+							"raw": "http://intern-managerment.herokuapp.com/users",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"intern-managerment",
+								"herokuapp",
+								"com"
 							],
-							"port": "8088",
 							"path": [
 								"users"
 							]
@@ -288,7 +300,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTk3OTkwMDksInVzZXIiOnsicGFzc3dvcmQiOiIkMmEkMTAkQ0xIS1hxVDBpRmRhaVp5UXhwWElKdXRNNFFnUkRacGxnczVrWllPdXhOeFlELmFaYkFZaUMiLCJ1c2VySWQiOjIsImF1dGhvcml0aWVzIjpbIlJPTEVfQURNSU4iXSwidXNlcm5hbWUiOiJodGtpZW4yNTExQGdtYWlsLmNvbSJ9fQ.jxkgvAQx5_FWOBsBHGtoHbebcaQadx34V-cEsNWEmNQ",
+								"value": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MjEwNTA4MDIsInVzZXIiOnsicGFzc3dvcmQiOiIkMmEkMTAkQ0xIS1hxVDBpRmRhaVp5UXhwWElKdXRNNFFnUkRacGxnczVrWllPdXhOeFlELmFaYkFZaUMiLCJ1c2VySWQiOjIsImF1dGhvcml0aWVzIjpbIlJPTEVfQURNSU4iXSwidXNlcm5hbWUiOiJodGtpZW4yNTExQGdtYWlsLmNvbSJ9fQ.pqUY794AZ9QsupF9d47PXOqT0QwhX2NyqCd3RAKMjBg",
 								"type": "text"
 							}
 						],
@@ -297,12 +309,13 @@
 							"formdata": []
 						},
 						"url": {
-							"raw": "http://localhost:8088/managers",
+							"raw": "http://intern-managerment.herokuapp.com/managers",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"intern-managerment",
+								"herokuapp",
+								"com"
 							],
-							"port": "8088",
 							"path": [
 								"managers"
 							]
@@ -317,7 +330,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MjAxMDYxMTEsInVzZXIiOnsicGFzc3dvcmQiOiIkMmEkMTAkQ0xIS1hxVDBpRmRhaVp5UXhwWElKdXRNNFFnUkRacGxnczVrWllPdXhOeFlELmFaYkFZaUMiLCJ1c2VySWQiOjIsImF1dGhvcml0aWVzIjpbIlJPTEVfQURNSU4iXSwidXNlcm5hbWUiOiJodGtpZW4yNTExQGdtYWlsLmNvbSJ9fQ.tKkwjUY6vs2HoVJKBXvzO_8h1LiOPFOolKVbpVhiZrc",
+								"value": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MjEwNTAzMjEsInVzZXIiOnsicGFzc3dvcmQiOiIkMmEkMTAkQ0xIS1hxVDBpRmRhaVp5UXhwWElKdXRNNFFnUkRacGxnczVrWllPdXhOeFlELmFaYkFZaUMiLCJ1c2VySWQiOjIsImF1dGhvcml0aWVzIjpbIlJPTEVfQURNSU4iXSwidXNlcm5hbWUiOiJodGtpZW4yNTExQGdtYWlsLmNvbSJ9fQ.Bs5AJL3MmVJoiaYKicwNLRmqfEbNFqLHtvsrAxFaYP4",
 								"type": "text"
 							}
 						],
@@ -326,18 +339,19 @@
 							"formdata": [
 								{
 									"key": "id_user",
-									"value": "1",
+									"value": "16",
 									"type": "text"
 								}
 							]
 						},
 						"url": {
-							"raw": "http://localhost:8088/user/delete",
+							"raw": "http://intern-managerment.herokuapp.com/user/delete",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"intern-managerment",
+								"herokuapp",
+								"com"
 							],
-							"port": "8088",
 							"path": [
 								"user",
 								"delete"
@@ -359,7 +373,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "[\r\n    12,\r\n    13\r\n]",
+							"raw": "[\r\n   17\r\n]",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -367,12 +381,13 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8088/user/deny",
+							"raw": "http://intern-managerment.herokuapp.com/user/deny",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"intern-managerment",
+								"herokuapp",
+								"com"
 							],
-							"port": "8088",
 							"path": [
 								"user",
 								"deny"
@@ -388,13 +403,13 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTk3OTI2MTUsInVzZXIiOnsicGFzc3dvcmQiOiIkMmEkMTAkQ0xIS1hxVDBpRmRhaVp5UXhwWElKdXRNNFFnUkRacGxnczVrWllPdXhOeFlELmFaYkFZaUMiLCJ1c2VySWQiOjIsImF1dGhvcml0aWVzIjpbIlJPTEVfQURNSU4iXSwidXNlcm5hbWUiOiJodGtpZW4yNTExQGdtYWlsLmNvbSJ9fQ.qFL1A26Bmem_VR7zBs0cgqpy-QYrZKKY7D_eRfdSchQ",
+								"value": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MjEwNDEyMjcsInVzZXIiOnsicGFzc3dvcmQiOiIkMmEkMTAkQ0xIS1hxVDBpRmRhaVp5UXhwWElKdXRNNFFnUkRacGxnczVrWllPdXhOeFlELmFaYkFZaUMiLCJ1c2VySWQiOjIsImF1dGhvcml0aWVzIjpbIlJPTEVfQURNSU4iXSwidXNlcm5hbWUiOiJodGtpZW4yNTExQGdtYWlsLmNvbSJ9fQ.pEfwZX-r46BHUHRN3SqNopeKn_RKPNwvJ3g2Cf7dcTI",
 								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "[\r\n    14\r\n]",
+							"raw": "[\r\n    16\r\n]",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -432,34 +447,28 @@
 							{
 								"key": "Authorization",
 								"type": "text",
-								"value": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTc3ODk5ODcsInVzZXIiOnsicGFzc3dvcmQiOiIkMmEkMTAkajE5YlJHc1dreHhGbThKVlh5XC9WMnVCSmlVdWFFcXdZUnVuTEhJd2IwOWNXOE9vc3NGbGdxIiwidXNlcklkIjoxLCJhdXRob3JpdGllcyI6WyJST0xFX1VTRVIiXSwidXNlcm5hbWUiOiJuZ3V5ZW5ob25nMTk5OTlAZ21haWwuY29tIn19.GonC6u3QRJrvnTW9a7dTbEZlV6VOBnmHqfNsBUQMdTE"
+								"value": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MjEwMzkwMDAsInVzZXIiOnsicGFzc3dvcmQiOiIkMmEkMTAkQ0xIS1hxVDBpRmRhaVp5UXhwWElKdXRNNFFnUkRacGxnczVrWllPdXhOeFlELmFaYkFZaUMiLCJ1c2VySWQiOjIsImF1dGhvcml0aWVzIjpbIlJPTEVfQURNSU4iXSwidXNlcm5hbWUiOiJodGtpZW4yNTExQGdtYWlsLmNvbSJ9fQ.s0Cku0o8PodGNKyxBZDnlz7-Ulm5-2JeWhaffBgWDg8"
 							}
 						],
 						"body": {
 							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "username",
-									"value": "nguyenhong19999@gmail.com",
-									"type": "text",
-									"disabled": true
-								}
-							]
+							"formdata": []
 						},
 						"url": {
-							"raw": "http://localhost:8088/project?user_id=1",
+							"raw": "http://intern-managerment.herokuapp.com/project?user_id=3",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"intern-managerment",
+								"herokuapp",
+								"com"
 							],
-							"port": "8088",
 							"path": [
 								"project"
 							],
 							"query": [
 								{
 									"key": "user_id",
-									"value": "1"
+									"value": "3"
 								}
 							]
 						}
@@ -473,7 +482,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTg5MTE1MjUsInVzZXIiOnsicGFzc3dvcmQiOiIkMmEkMTAkQ0xIS1hxVDBpRmRhaVp5UXhwWElKdXRNNFFnUkRacGxnczVrWllPdXhOeFlELmFaYkFZaUMiLCJ1c2VySWQiOjIsImF1dGhvcml0aWVzIjpbIlJPTEVfQURNSU4iXSwidXNlcm5hbWUiOiJodGtpZW4yNTExQGdtYWlsLmNvbSJ9fQ.Krc_6TDCe7HnFQ1vXYf8X4fhf7c-UPhFS-dM8BKbNUk",
+								"value": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MjEwMzkwMDAsInVzZXIiOnsicGFzc3dvcmQiOiIkMmEkMTAkQ0xIS1hxVDBpRmRhaVp5UXhwWElKdXRNNFFnUkRacGxnczVrWllPdXhOeFlELmFaYkFZaUMiLCJ1c2VySWQiOjIsImF1dGhvcml0aWVzIjpbIlJPTEVfQURNSU4iXSwidXNlcm5hbWUiOiJodGtpZW4yNTExQGdtYWlsLmNvbSJ9fQ.s0Cku0o8PodGNKyxBZDnlz7-Ulm5-2JeWhaffBgWDg8",
 								"type": "text"
 							}
 						],
@@ -487,7 +496,7 @@
 								},
 								{
 									"key": "description",
-									"value": "hihihiihihi",
+									"value": "zzzzzzzzzzzzzzzzzzzzz",
 									"type": "text"
 								},
 								{
@@ -503,12 +512,13 @@
 							]
 						},
 						"url": {
-							"raw": "http://localhost:8088/project/create",
+							"raw": "http://intern-managerment.herokuapp.com/project/create",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"intern-managerment",
+								"herokuapp",
+								"com"
 							],
-							"port": "8088",
 							"path": [
 								"project",
 								"create"
@@ -524,17 +534,18 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTg5MTE1MjUsInVzZXIiOnsicGFzc3dvcmQiOiIkMmEkMTAkQ0xIS1hxVDBpRmRhaVp5UXhwWElKdXRNNFFnUkRacGxnczVrWllPdXhOeFlELmFaYkFZaUMiLCJ1c2VySWQiOjIsImF1dGhvcml0aWVzIjpbIlJPTEVfQURNSU4iXSwidXNlcm5hbWUiOiJodGtpZW4yNTExQGdtYWlsLmNvbSJ9fQ.Krc_6TDCe7HnFQ1vXYf8X4fhf7c-UPhFS-dM8BKbNUk",
+								"value": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MjEwNTA4MDIsInVzZXIiOnsicGFzc3dvcmQiOiIkMmEkMTAkQ0xIS1hxVDBpRmRhaVp5UXhwWElKdXRNNFFnUkRacGxnczVrWllPdXhOeFlELmFaYkFZaUMiLCJ1c2VySWQiOjIsImF1dGhvcml0aWVzIjpbIlJPTEVfQURNSU4iXSwidXNlcm5hbWUiOiJodGtpZW4yNTExQGdtYWlsLmNvbSJ9fQ.pqUY794AZ9QsupF9d47PXOqT0QwhX2NyqCd3RAKMjBg",
 								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "http://localhost:8088/project/delete?id_project=1",
+							"raw": "http://intern-managerment.herokuapp.com/project/delete?id_project=1",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"intern-managerment",
+								"herokuapp",
+								"com"
 							],
-							"port": "8088",
 							"path": [
 								"project",
 								"delete"
@@ -556,7 +567,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MjAxMDk2MzEsInVzZXIiOnsicGFzc3dvcmQiOiIkMmEkMTAkQ0xIS1hxVDBpRmRhaVp5UXhwWElKdXRNNFFnUkRacGxnczVrWllPdXhOeFlELmFaYkFZaUMiLCJ1c2VySWQiOjIsImF1dGhvcml0aWVzIjpbIlJPTEVfQURNSU4iXSwidXNlcm5hbWUiOiJodGtpZW4yNTExQGdtYWlsLmNvbSJ9fQ.4hTmMRDD-kD2N5IA0qXm45w7eguQKjrhYeUUj3gaBH8",
+								"value": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MjEwNTA4MDIsInVzZXIiOnsicGFzc3dvcmQiOiIkMmEkMTAkQ0xIS1hxVDBpRmRhaVp5UXhwWElKdXRNNFFnUkRacGxnczVrWllPdXhOeFlELmFaYkFZaUMiLCJ1c2VySWQiOjIsImF1dGhvcml0aWVzIjpbIlJPTEVfQURNSU4iXSwidXNlcm5hbWUiOiJodGtpZW4yNTExQGdtYWlsLmNvbSJ9fQ.pqUY794AZ9QsupF9d47PXOqT0QwhX2NyqCd3RAKMjBg",
 								"type": "text"
 							}
 						],
@@ -576,27 +587,16 @@
 							]
 						},
 						"url": {
-							"raw": "http://localhost:8088/project/assign_user",
+							"raw": "http://intern-managerment.herokuapp.com/project/assign_user",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"intern-managerment",
+								"herokuapp",
+								"com"
 							],
-							"port": "8088",
 							"path": [
 								"project",
 								"assign_user"
-							],
-							"query": [
-								{
-									"key": "id_user",
-									"value": "1,3",
-									"disabled": true
-								},
-								{
-									"key": "id_project",
-									"value": "1",
-									"disabled": true
-								}
 							]
 						}
 					},
@@ -614,12 +614,13 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:8088/projects",
+							"raw": "http://intern-managerment.herokuapp.com/projects",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"intern-managerment",
+								"herokuapp",
+								"com"
 							],
-							"port": "8088",
 							"path": [
 								"projects"
 							]
@@ -638,12 +639,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8088/task/project?project_id=1",
+							"raw": "http://intern-managerment.herokuapp.com/task/project?project_id=1",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"intern-managerment",
+								"herokuapp",
+								"com"
 							],
-							"port": "8088",
 							"path": [
 								"task",
 								"project"
@@ -673,7 +675,7 @@
 								},
 								{
 									"key": "title",
-									"value": "huhu",
+									"value": "kakakakaka",
 									"type": "text"
 								},
 								{
@@ -694,12 +696,13 @@
 							]
 						},
 						"url": {
-							"raw": "http://localhost:8088/task/create",
+							"raw": "http://intern-managerment.herokuapp.com/task/create",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"intern-managerment",
+								"herokuapp",
+								"com"
 							],
-							"port": "8088",
 							"path": [
 								"task",
 								"create"
@@ -730,10 +733,35 @@
 				{
 					"name": "Delete task",
 					"request": {
-						"method": "GET",
-						"header": [],
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MjAxMTEwNzUsInVzZXIiOnsicGFzc3dvcmQiOiIkMmEkMTAkQ0xIS1hxVDBpRmRhaVp5UXhwWElKdXRNNFFnUkRacGxnczVrWllPdXhOeFlELmFaYkFZaUMiLCJ1c2VySWQiOjIsImF1dGhvcml0aWVzIjpbIlJPTEVfQURNSU4iXSwidXNlcm5hbWUiOiJodGtpZW4yNTExQGdtYWlsLmNvbSJ9fQ.itX9IfMldyR4v9f7AaEysd6jXJjHxvqNLqJhK7dv-fM",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "id_task",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
 						"url": {
-							"raw": ""
+							"raw": "http://localhost:8088/task/delete",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8088",
+							"path": [
+								"task",
+								"delete"
+							]
 						}
 					},
 					"response": []

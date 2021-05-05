@@ -31,7 +31,6 @@ public class UserController {
     @GetMapping("/users")
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER')")
     public ResponseEntity getUser() {
-//        List<User> users = userService.findUserByRoleName("ROLE_USER");
         List<User> users = userService.findAll();
         List<UserDomain> result = users.stream().filter(t -> {
             if (t.getRoles() == null) {
@@ -70,9 +69,9 @@ public class UserController {
         UserDomain userDomain = new UserDomain(user);
         return ResponseEntity.ok(new ResponeDomain(userDomain, Message.SUCCESSFUlLY.getDetail(), true));
     }
-//
+
 //    @PreAuthorize("hasAnyAuthority('ROLE_MANAGER','ROLE_USER')")
-//    @GetMapping("/user_profile")
+//    @GetMapping("/user_profile/edit")
 //    public ResponseEntity<?> updateUserProfile(@ModelAttribute UserDomain userDomain) {
 //        User user = userService.findById(userDomain.getId());
 //        if (!user.getEmail().equals())
