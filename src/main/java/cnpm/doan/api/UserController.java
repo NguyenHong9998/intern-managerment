@@ -96,7 +96,7 @@ public class UserController {
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
     public ResponseEntity<?> acceptUsers(@RequestBody @Validated int[] userIds) {
         try {
-            userService.denyUser(userIds);
+            userService.acceptUsers(userIds);
         } catch (CustormException e) {
             return ResponseEntity.ok(new ResponeDomain(Message.INVALID_USER.getDetail(), false));
         }

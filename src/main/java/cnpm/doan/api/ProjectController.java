@@ -108,7 +108,6 @@ public class ProjectController {
             return ResponseEntity.ok(new ResponeDomain(Message.INVALID_PROJECT_ID.getDetail(), HTTPStatus.fail));
         }
         for (User user : users) {
-            System.out.println(user);
             if (user == null) {
                 return ResponseEntity.ok(new ResponeDomain(Message.INVALID_USER.getDetail(), HTTPStatus.fail));
             }
@@ -123,8 +122,6 @@ public class ProjectController {
             memberProject.setProject(project);
             memberProject.setUser(user);
             memberProjectRepository.save(memberProject);
-            System.out.println("hihi");
-
         }
         return ResponseEntity.ok(new ResponeDomain(Message.SUCCESSFUlLY.getDetail(), HTTPStatus.success));
     }

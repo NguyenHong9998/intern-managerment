@@ -3,8 +3,11 @@ package cnpm.doan.api;
 import cnpm.doan.domain.ResponeDomain;
 import cnpm.doan.domain.TaskDomain;
 import cnpm.doan.domain.TaskRequest;
+import cnpm.doan.entity.User;
+import cnpm.doan.service.MemberProjectService;
 import cnpm.doan.service.ProjectService;
 import cnpm.doan.service.TaskService;
+import cnpm.doan.service.UserService;
 import cnpm.doan.util.CustormException;
 import cnpm.doan.util.HTTPStatus;
 import cnpm.doan.util.Message;
@@ -13,7 +16,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @CrossOrigin(maxAge = 3600)
 @RestController
@@ -22,7 +27,14 @@ public class TaskController {
     private TaskService taskService;
 
     @Autowired
+    private UserService userService;
+
+    @Autowired
     private ProjectService projectService;
+
+    @Autowired
+    private MemberProjectService memberProjectService;
+
 
     @GetMapping("/task/project")
     public ResponseEntity<?> getAllTaskByProjectId(@RequestParam("project_id") int projectId) {
@@ -54,9 +66,16 @@ public class TaskController {
         return ResponseEntity.ok(new ResponeDomain(null, Message.SUCCESSFUlLY.getDetail(), true));
     }
 
-//    public ResponseEntity<?> assignUserToTask(@RequestParam("id_task") int idTask, @RequestParam("id_user") String userIds) {
-//
-//    }
+    @PreAuthorize("hasAnyAuthority('ROLE_MANAGER')")
+    @PostMapping("/task/assign_user")
+    public ResponseEntity<?> assignUserToTask(@RequestParam("id_task") int idTask, @RequestParam("id_user") String userIds) {
+//        taskService
+        List<User> users = Arrays.stream(userIds.split(",")).map(id -> userService.findById(Integer.valueOf(id))).collect(Collectors.toList());
+
+
+        return ResponseEntity.ok(new ResponeDomain(null, Message.SUCCESSFUlLY.getDetail(), true));
+
+    }
 
 
 }
