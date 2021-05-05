@@ -11,7 +11,7 @@ public class UserWithToken extends UserDomain {
     }
 
     public UserWithToken(User user, String token) {
-        super(user.getId(), user.getName(), user.getEmail(), user.getDepartment().getName(), user.getAddress(), user.getGender(), user.getRoles().getRoleName());
+        super(user);
         this.token = token;
     }
 

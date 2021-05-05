@@ -11,6 +11,10 @@ public class UserDomain {
     private String gender;
     private String role;
 
+    public UserDomain() {
+
+    }
+
     public UserDomain(long id, String name, String email, String department, String address, String gender, String role) {
         this.id = id;
         this.name = name;

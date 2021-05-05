@@ -101,6 +101,5 @@ public class UserController {
             return ResponseEntity.ok(new ResponeDomain(Message.INVALID_USER.getDetail(), false));
         }
         return ResponseEntity.ok(new ResponeDomain(Message.SUCCESSFUlLY.getDetail(), true));
-
     }
 }
