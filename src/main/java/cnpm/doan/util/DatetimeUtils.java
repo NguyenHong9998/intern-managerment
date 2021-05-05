@@ -23,6 +23,8 @@ public class DatetimeUtils {
 
     public static String convertDateToString(Date date) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(DDMMYYYYHHmmss);
+        simpleDateFormat.setLenient(false);
+
         System.out.println(date);
         return simpleDateFormat.format(date);
     }

@@ -76,9 +76,7 @@ public class TaskServiceImpl implements TaskService {
             taskDomain.setPoint(String.format("%.2s", task.getPoint()));
             taskDomain.setProjectName(task.getProject().getTitle());
             taskDomain.setIsDone(task.isDone());
-            System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx2");
-            taskDomain.setCreateDate(DatetimeUtils.convertDateToString(task.getCreateDate()));
-            System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx3");
+            taskDomain.setCreateDate(task.getCreateDate().toString());
 
             return taskDomain;
         }).collect(Collectors.toList());
