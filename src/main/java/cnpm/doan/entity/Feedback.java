@@ -12,10 +12,10 @@ public class Feedback {
     private int id;
     @Column(name = "message")
     private String message;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "task_id")
     private Task task;
 

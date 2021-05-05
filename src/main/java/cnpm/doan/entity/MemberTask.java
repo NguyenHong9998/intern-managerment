@@ -10,10 +10,10 @@ public class MemberTask {
     @SequenceGenerator(name = "membertask_seq", sequenceName = "membertask_seq", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "membertask_seq")
     private int id;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "task_id")
     private Task task;
 

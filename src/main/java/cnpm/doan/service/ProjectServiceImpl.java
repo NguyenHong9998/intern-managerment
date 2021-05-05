@@ -57,6 +57,7 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public List<ProjectByUserIdDomain> getProjectByUserId(long userId) {
         List<MemberProject> memberProjects = memProRepository.findAll();
+        System.out.println("aaaaaaaaaaaaaaaa4: "+ userId);
 
         List<ProjectByUserIdDomain> result = memberProjects.stream().filter(t -> t.getUser().getId() == userId)
                 .map(t -> {
@@ -69,6 +70,8 @@ public class ProjectServiceImpl implements ProjectService {
                     domain.setManagerName(t.getProject().getManager().getName());
                     return domain;
                 }).collect(Collectors.toList());
+        System.out.println("aaaaaaaaaaaaaaaa5: "+ userId);
+
         return result;
     }
 

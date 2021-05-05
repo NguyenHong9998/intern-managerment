@@ -21,7 +21,7 @@ public class Project {
     @Column(name = "due_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date dueDate;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "manager_id")
     private User manager;
 
