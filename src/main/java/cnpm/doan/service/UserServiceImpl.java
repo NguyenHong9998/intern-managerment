@@ -87,8 +87,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<WaitingUser> findWaittingUser() {
-        List<User> waitingUsers = userRepository.findWaitingUser();
-        List<WaitingUser> result = waitingUsers.stream().map(user -> new WaitingUser(user)).collect(Collectors.toList());
+        List<User> waitingUsers = userRepository.findAll();
+        List<WaitingUser> result = waitingUsers.stream().filter(t -> t.getRoles() == null ? true : false).map(user -> new WaitingUser(user)).collect(Collectors.toList());
         return result;
     }
 
