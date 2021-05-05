@@ -72,7 +72,11 @@ public class UserController {
     @PutMapping("user/delete")
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
     public ResponseEntity<?> deleteUser(@RequestParam("id_user") int idUser) {
-        userService.deleteUser(idUser);
+        try {
+            userService.deleteUser(idUser);
+        } catch (CustormException e) {
+            return ResponseEntity.ok(new ResponeDomain(e.getErrorType().getDetail(), HTTPStatus.fail));
+        }
         return ResponseEntity.ok(new ResponeDomain(Message.SUCCESSFUlLY.getDetail(), HTTPStatus.success));
     }
 

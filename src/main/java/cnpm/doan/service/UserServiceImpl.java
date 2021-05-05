@@ -88,11 +88,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void deleteUser(int idUser) {
+    public void deleteUser(int idUser) throws CustormException {
         User user = userRepository.findById(idUser).orElse(null);
         if (user != null) {
             user.setIsDeleted(1);
             userRepository.save(user);
+        }else{
+            throw new CustormException(Message.INVALID_USER);
         }
     }
 
