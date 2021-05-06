@@ -81,8 +81,8 @@ public class UserController {
 //            if (user == null) {
 //                return ResponseEntity.ok(new ResponeDomain(Message.INVALID_USER.getDetail(), false));
 //            }
-//        UserDomain userDomain = new UserDomain(user);
-//        return ResponseEntity.ok(new ResponeDomain(userDomain, Message.SUCCESSFUlLY.getDetail(), true));
+//        UserDomain result = new UserDomain(user);
+//        return ResponseEntity.ok(new ResponeDomain(result, Message.SUCCESSFUlLY.getDetail(), true));
 //    }
 
     @GetMapping("/user/waiting_user")

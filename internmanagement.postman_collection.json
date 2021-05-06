@@ -18,7 +18,7 @@
 							"formdata": [
 								{
 									"key": "username",
-									"value": "htkien2511@gmail.com",
+									"value": "sangnguyen@gmail.com",
 									"type": "text"
 								},
 								{
@@ -201,12 +201,13 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:8088/user/waiting_user",
+							"raw": "http://intern-managerment.herokuapp.com/user/waiting_user",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"intern-managerment",
+								"herokuapp",
+								"com"
 							],
-							"port": "8088",
 							"path": [
 								"user",
 								"waiting_user"
@@ -264,7 +265,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MjEwNzA5NjIsInVzZXIiOnsicGFzc3dvcmQiOiIkMmEkMTAkQ0xIS1hxVDBpRmRhaVp5UXhwWElKdXRNNFFnUkRacGxnczVrWllPdXhOeFlELmFaYkFZaUMiLCJ1c2VySWQiOjIsImF1dGhvcml0aWVzIjpbIlJPTEVfQURNSU4iXSwidXNlcm5hbWUiOiJodGtpZW4yNTExQGdtYWlsLmNvbSJ9fQ.RRvXp7YltDwb9YHCFzaiwGyW8Wx20DfCDH9bWptZdkw",
+								"value": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MjEwODMxMTksInVzZXIiOnsicGFzc3dvcmQiOiIkMmEkMTAkQ0xIS1hxVDBpRmRhaVp5UXhwWElKdXRNNFFnUkRacGxnczVrWllPdXhOeFlELmFaYkFZaUMiLCJ1c2VySWQiOjUsImF1dGhvcml0aWVzIjpbIlJPTEVfQURNSU4iXSwidXNlcm5hbWUiOiJzYW5ncGhhbjI5N0BnbWFpbC5jb20ifX0.2c79N3uGZyps3BVgSACCb-ne9RpqVyC8qpzbqqXZwHs",
 								"type": "text"
 							}
 						],
@@ -447,7 +448,7 @@
 							{
 								"key": "Authorization",
 								"type": "text",
-								"value": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MjEwMzkwMDAsInVzZXIiOnsicGFzc3dvcmQiOiIkMmEkMTAkQ0xIS1hxVDBpRmRhaVp5UXhwWElKdXRNNFFnUkRacGxnczVrWllPdXhOeFlELmFaYkFZaUMiLCJ1c2VySWQiOjIsImF1dGhvcml0aWVzIjpbIlJPTEVfQURNSU4iXSwidXNlcm5hbWUiOiJodGtpZW4yNTExQGdtYWlsLmNvbSJ9fQ.s0Cku0o8PodGNKyxBZDnlz7-Ulm5-2JeWhaffBgWDg8"
+								"value": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MjEwODUzMTcsInVzZXIiOnsicGFzc3dvcmQiOiIkMmEkMTAkQ0xIS1hxVDBpRmRhaVp5UXhwWElKdXRNNFFnUkRacGxnczVrWllPdXhOeFlELmFaYkFZaUMiLCJ1c2VySWQiOjUsImF1dGhvcml0aWVzIjpbIlJPTEVfQURNSU4iXSwidXNlcm5hbWUiOiJzYW5ncGhhbjI5N0BnbWFpbC5jb20ifX0.IzZ7W3EJQwd5DRF9oinGSmSnmvTa5gzYz0FRQflSJ7Y"
 							}
 						],
 						"body": {
@@ -482,7 +483,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MjEwMzkwMDAsInVzZXIiOnsicGFzc3dvcmQiOiIkMmEkMTAkQ0xIS1hxVDBpRmRhaVp5UXhwWElKdXRNNFFnUkRacGxnczVrWllPdXhOeFlELmFaYkFZaUMiLCJ1c2VySWQiOjIsImF1dGhvcml0aWVzIjpbIlJPTEVfQURNSU4iXSwidXNlcm5hbWUiOiJodGtpZW4yNTExQGdtYWlsLmNvbSJ9fQ.s0Cku0o8PodGNKyxBZDnlz7-Ulm5-2JeWhaffBgWDg8",
+								"value": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MjEwODUzMTcsInVzZXIiOnsicGFzc3dvcmQiOiIkMmEkMTAkQ0xIS1hxVDBpRmRhaVp5UXhwWElKdXRNNFFnUkRacGxnczVrWllPdXhOeFlELmFaYkFZaUMiLCJ1c2VySWQiOjUsImF1dGhvcml0aWVzIjpbIlJPTEVfQURNSU4iXSwidXNlcm5hbWUiOiJzYW5ncGhhbjI5N0BnbWFpbC5jb20ifX0.IzZ7W3EJQwd5DRF9oinGSmSnmvTa5gzYz0FRQflSJ7Y",
 								"type": "text"
 							}
 						],
@@ -496,7 +497,7 @@
 								},
 								{
 									"key": "description",
-									"value": "zzzzzzzzzzzzzzzzzzzzz",
+									"value": "hihuhihuhihuhihuhihu",
 									"type": "text"
 								},
 								{
@@ -637,9 +638,15 @@
 					"name": "get task of project",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MjEwOTA4MjEsInVzZXIiOnsicGFzc3dvcmQiOiIkMmEkMTAkQ0xIS1hxVDBpRmRhaVp5UXhwWElKdXRNNFFnUkRacGxnczVrWllPdXhOeFlELmFaYkFZaUMiLCJ1c2VySWQiOjUsImF1dGhvcml0aWVzIjpbIlJPTEVfQURNSU4iXSwidXNlcm5hbWUiOiJzYW5ncGhhbjI5N0BnbWFpbC5jb20ifX0.JndU-a6bJIkHneU1yJNGS1pX9k0KcNBMxe90fcz0i04",
+								"type": "text"
+							}
+						],
 						"url": {
-							"raw": "http://intern-managerment.herokuapp.com/task/project?project_id=1",
+							"raw": "http://intern-managerment.herokuapp.com/task/project?project_id=2",
 							"protocol": "http",
 							"host": [
 								"intern-managerment",
@@ -653,7 +660,7 @@
 							"query": [
 								{
 									"key": "project_id",
-									"value": "1"
+									"value": "2"
 								}
 							]
 						}
@@ -664,7 +671,13 @@
 					"name": "create task",
 					"request": {
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MjEwOTI3MzMsInVzZXIiOnsicGFzc3dvcmQiOiIkMmEkMTAkQ0xIS1hxVDBpRmRhaVp5UXhwWElKdXRNNFFnUkRacGxnczVrWllPdXhOeFlELmFaYkFZaUMiLCJ1c2VySWQiOjgsImF1dGhvcml0aWVzIjpbIlJPTEVfVVNFUiJdLCJ1c2VybmFtZSI6InNhbmduZ3V5ZW5AZ21haWwuY29tIn19.TSl4L62qsWKlB01qad-l-uvrxE42r7xgr8BFvXB8lvQ",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "formdata",
 							"formdata": [
@@ -685,7 +698,7 @@
 								},
 								{
 									"key": "idProject",
-									"value": "1",
+									"value": "2",
 									"type": "text"
 								},
 								{
@@ -737,7 +750,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MjAxMTEwNzUsInVzZXIiOnsicGFzc3dvcmQiOiIkMmEkMTAkQ0xIS1hxVDBpRmRhaVp5UXhwWElKdXRNNFFnUkRacGxnczVrWllPdXhOeFlELmFaYkFZaUMiLCJ1c2VySWQiOjIsImF1dGhvcml0aWVzIjpbIlJPTEVfQURNSU4iXSwidXNlcm5hbWUiOiJodGtpZW4yNTExQGdtYWlsLmNvbSJ9fQ.itX9IfMldyR4v9f7AaEysd6jXJjHxvqNLqJhK7dv-fM",
+								"value": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MjEwOTA4MjEsInVzZXIiOnsicGFzc3dvcmQiOiIkMmEkMTAkQ0xIS1hxVDBpRmRhaVp5UXhwWElKdXRNNFFnUkRacGxnczVrWllPdXhOeFlELmFaYkFZaUMiLCJ1c2VySWQiOjUsImF1dGhvcml0aWVzIjpbIlJPTEVfQURNSU4iXSwidXNlcm5hbWUiOiJzYW5ncGhhbjI5N0BnbWFpbC5jb20ifX0.JndU-a6bJIkHneU1yJNGS1pX9k0KcNBMxe90fcz0i04",
 								"type": "text"
 							}
 						],
@@ -746,18 +759,19 @@
 							"formdata": [
 								{
 									"key": "id_task",
-									"value": "1",
+									"value": "5",
 									"type": "text"
 								}
 							]
 						},
 						"url": {
-							"raw": "http://localhost:8088/task/delete",
+							"raw": "http://intern-managerment.herokuapp.com/task/delete",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"intern-managerment",
+								"herokuapp",
+								"com"
 							],
-							"port": "8088",
 							"path": [
 								"task",
 								"delete"
