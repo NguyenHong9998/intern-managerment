@@ -5,7 +5,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 
 public class UserPrincipal implements UserDetails {
-    private Long userId;
+    private int userId;
     private String username;
     private String password;
     private Collection authorities;
@@ -30,11 +30,11 @@ public class UserPrincipal implements UserDetails {
         return true;
     }
 
-    public Long getUserId() {
+    public int getUserId() {
         return userId;
     }
 
-    public void setUserId(Long userId) {
+    public void setUserId(int userId) {
         this.userId = userId;
     }
 

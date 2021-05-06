@@ -6,6 +6,8 @@ import cnpm.doan.domain.UserDomain;
 import cnpm.doan.domain.WaitingUser;
 import cnpm.doan.entity.User;
 import cnpm.doan.security.JwtUtil;
+import cnpm.doan.security.UserPrincipal;
+import cnpm.doan.service.DepartmentService;
 import cnpm.doan.service.UserService;
 import cnpm.doan.util.CustormException;
 import cnpm.doan.util.HTTPStatus;
@@ -27,12 +29,13 @@ public class UserController {
     private UserService userService;
     @Autowired
     private JwtUtil jwtUtil;
+    @Autowired
+    private DepartmentService departmentService;
 
     @GetMapping("/users")
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER')")
     public ResponseEntity getUser() {
         List<User> users = userService.findAll();
-        users.forEach(t-> System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxx:  " +t));
         List<UserDomain> result = users.stream().filter(t -> {
             if (t.getRoles() == null) {
                 return false;
@@ -43,8 +46,6 @@ public class UserController {
             return false;
         }).map(t -> new UserDomain(t))
                 .collect(Collectors.toList());
-        result.forEach(t-> System.out.println("kkkkkkkkkkk:"+ t) );
-
         return ResponseEntity.ok(new ResponeDomain(result, Message.SUCCESSFUlLY.getDetail(), true));
     }
 
@@ -73,17 +74,29 @@ public class UserController {
         return ResponseEntity.ok(new ResponeDomain(userDomain, Message.SUCCESSFUlLY.getDetail(), true));
     }
 
-//    @PreAuthorize("hasAnyAuthority('ROLE_MANAGER','ROLE_USER')")
-//    @GetMapping("/user_profile/edit")
-//    public ResponseEntity<?> updateUserProfile(@ModelAttribute UserDomain userDomain) {
-//        User user = userService.findById(userDomain.getId());
-//        if (!user.getEmail().equals(jwtUtil.))
-//            if (user == null) {
-//                return ResponseEntity.ok(new ResponeDomain(Message.INVALID_USER.getDetail(), false));
-//            }
-//        UserDomain result = new UserDomain(user);
-//        return ResponseEntity.ok(new ResponeDomain(result, Message.SUCCESSFUlLY.getDetail(), true));
-//    }
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN','ROLE_MANAGER','ROLE_USER')")
+    @PostMapping("/user_profile/edit")
+    public ResponseEntity<?> updateUserProfile(@ModelAttribute UserDomain userDomain) {
+        User user = userService.findById(userDomain.getId());
+        UserPrincipal userPrincipal = jwtUtil.getCurrentUser();
+        String role = userPrincipal.getAuthorities().stream().findFirst().get().toString();
+        if (user == null) {
+            return ResponseEntity.ok(new ResponeDomain(Message.INVALID_USER.getDetail(), false));
+        }
+        if (!user.getEmail().equals(userPrincipal.getUsername()) || Integer.valueOf(userDomain.getDepartment()) != user.getDepartment().getId()) {
+            user.setName(userDomain.getName());
+            user.setAddress(userDomain.getAddress());
+            user.setGender(userDomain.getGender());
+            if (role.equals("ROLE_ADMIN")) {
+                user.setId(userDomain.getId());
+                user.setDepartment(departmentService.findById(Integer.valueOf(userDomain.getId())));
+            } else {
+                return ResponseEntity.ok(new ResponeDomain(Message.CANOT_UPDATE_EMAIL.getDetail(), false));
+            }
+        }
+        UserDomain result = new UserDomain(user);
+        return ResponseEntity.ok(new ResponeDomain(result, Message.SUCCESSFUlLY.getDetail(), true));
+    }
 
     @GetMapping("/user/waiting_user")
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")

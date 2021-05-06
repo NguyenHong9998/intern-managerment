@@ -16,4 +16,9 @@ public class DepartmentServiceImpl implements DepartmentService {
     public List<Department> findAllDepartment() {
         return departmentRepository.findAll();
     }
+
+    @Override
+    public Department findById(int id) {
+        return departmentRepository.findById(id).orElse(null);
+    }
 }
