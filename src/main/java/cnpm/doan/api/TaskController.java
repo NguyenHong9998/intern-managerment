@@ -3,6 +3,7 @@ package cnpm.doan.api;
 import cnpm.doan.domain.ResponeDomain;
 import cnpm.doan.domain.TaskDomain;
 import cnpm.doan.domain.TaskRequest;
+import cnpm.doan.domain.TaskUpdateRequest;
 import cnpm.doan.entity.Task;
 import cnpm.doan.entity.User;
 import cnpm.doan.service.*;
@@ -82,8 +83,7 @@ public class TaskController {
 
     @PreAuthorize("hasAnyAuthority('ROLE_MANAGER','ROLE_USER')")
     @PutMapping("/task/update")
-    public ResponseEntity<?> updateTaskByTaskId(@RequestBody TaskDomain taskDomain) {
-        taskService.update(taskDomain);
+    public ResponseEntity<?> updateTaskByTaskId(@RequestBody TaskUpdateRequest taskUpdateRequest) {
         return ResponseEntity.ok(new ResponeDomain(null, Message.SUCCESSFUlLY.getDetail(), true));
     }
 
