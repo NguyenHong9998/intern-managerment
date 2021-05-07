@@ -18,7 +18,7 @@ public class DepartmentController {
     private DepartmentService departmentService;
 
     @PreAuthorize("hasAnyAuthority('ROLE_USER','ROLE_ADMIN','ROLE_MANAGER')")
-    @GetMapping("departments")
+    @GetMapping("/departments")
     public ResponseEntity<?> getAllDepartment() {
         List<Department> departments = departmentService.findAllDepartment();
         return ResponseEntity.ok(new ResponeDomain(departments, Message.SUCCESSFUlLY.getDetail(), true));
