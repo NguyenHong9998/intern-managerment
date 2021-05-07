@@ -23,7 +23,8 @@ public enum Message {
     WAITING_ACCOUNT("Your Account registered successfully, wait for your admin check it or contact to Shappee's admin"),
     INVALID_PROJECT_ID("Invalid Project id in request"),
     INVALID_USER_PROJECT("User does not cor"),
-    CANOT_UPDATE_EMAIL("Cannot update your email or Department, if you want to update, please contact to Shappee's admin");
+    CANOT_UPDATE_EMAIL("Cannot update your email or Department, if you want to update, please contact to Shappee's admin"),
+    PERMISION_EDIT_ANOTHER_ACC("Do not have permission to update another acc");
     private String detail;
 
     Message(String detail) {
