@@ -1,7 +1,5 @@
 package cnpm.doan.domain;
 
-import java.util.Date;
-
 public class TaskDomain {
     private long taskId;
     private String description;
@@ -11,12 +9,12 @@ public class TaskDomain {
     private String point;
     private String projectName;
     private String createDate;
+    private String assignee;
 
     public TaskDomain() {
-
     }
 
-    public TaskDomain(long taskId, String description, String title, String difficulty, boolean isDone, String point, String projectName, String createDate) {
+    public TaskDomain(long taskId, String description, String title, String difficulty, boolean isDone, String point, String projectName, String createDate, String asignee) {
         this.taskId = taskId;
         this.description = description;
         this.title = title;
@@ -25,6 +23,7 @@ public class TaskDomain {
         this.point = point;
         this.projectName = projectName;
         this.createDate = createDate;
+        this.assignee = asignee;
     }
 
     public long getTaskId() {
@@ -89,5 +88,17 @@ public class TaskDomain {
 
     public void setCreateDate(String createDate) {
         this.createDate = createDate;
+    }
+
+    public String getAssignee() {
+        return assignee;
+    }
+
+    public void setDone(boolean done) {
+        isDone = done;
+    }
+
+    public void setAssignee(String assignee) {
+        this.assignee = assignee;
     }
 }

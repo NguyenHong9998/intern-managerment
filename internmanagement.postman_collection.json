@@ -410,7 +410,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "[\r\n    16\r\n]",
+							"raw": "[\r\n    45\r\n]",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -418,15 +418,78 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8088/user/accept",
+							"raw": "http://intern-managerment.herokuapp.com/user/accept",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"intern-managerment",
+								"herokuapp",
+								"com"
 							],
-							"port": "8088",
 							"path": [
 								"user",
 								"accept"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User Profile",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MjExNzA3NDUsInVzZXIiOnsicGFzc3dvcmQiOiIkMmEkMTAkbWZMM0NKZ1l5OHd2ellOSFU2dnlXLk5kNjBCU1ZmMTVjbm1sUU5PY3pvQUNSOFwvWHlxNW5lIiwidXNlcklkIjo0NSwiYXV0aG9yaXRpZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoibmd1eWVuaG9uZzE5OTk5QGdtYWlsLmNvbSJ9fQ.zHBZw2t4Oifl6e4OBNt0XUCHvUanD30CMH-kz4T5BxU",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "ngyenhong19999@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "Nguyễn Thị Hồng",
+									"type": "text"
+								},
+								{
+									"key": "department",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "address",
+									"value": "Quảng Bình",
+									"type": "text"
+								},
+								{
+									"key": "gender",
+									"value": "Nam",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://intern-managerment.herokuapp.com/user_profile/edit",
+							"protocol": "http",
+							"host": [
+								"intern-managerment",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"user_profile",
+								"edit"
 							]
 						}
 					},
@@ -775,6 +838,31 @@
 							"path": [
 								"task",
 								"delete"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "DepatmentController",
+			"item": [
+				{
+					"name": "GetAllDepartment",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://intern-managerment.herokuapp.com/departments",
+							"protocol": "http",
+							"host": [
+								"intern-managerment",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"departments"
 							]
 						}
 					},
