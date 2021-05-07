@@ -27,7 +27,6 @@ public class TaskController {
     @Autowired
     private UserService userService;
 
-
     @Autowired
     private MemberTaskService memberTaskService;
 
