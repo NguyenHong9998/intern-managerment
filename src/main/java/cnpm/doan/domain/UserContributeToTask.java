@@ -1,12 +1,12 @@
 package cnpm.doan.domain;
 
-public class UserTaskDomain {
+public class UserContributeToTask {
 
 
     private int id;
     private String name;
 
-    public UserTaskDomain(int id, String name) {
+    public UserContributeToTask(int id, String name) {
         this.id = id;
         this.name = name;
     }

@@ -12,7 +12,7 @@ public class TaskDomain {
     private String projectName;
     private String createDate;
     private String assignee;
-    private List<UserTaskDomain> userTaskDomains;
+    private List<UserContributeToTask> userTaskDomains;
 
     public TaskDomain() {
     }
@@ -29,11 +29,11 @@ public class TaskDomain {
         this.assignee = asignee;
     }
 
-    public List<UserTaskDomain> getUserTaskDomains() {
+    public List<UserContributeToTask> getUserTaskDomains() {
         return userTaskDomains;
     }
 
-    public void setUserTaskDomains(List<UserTaskDomain> userTaskDomains) {
+    public void setUserTaskDomains(List<UserContributeToTask> userTaskDomains) {
         this.userTaskDomains = userTaskDomains;
     }
 

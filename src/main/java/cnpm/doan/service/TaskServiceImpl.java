@@ -2,15 +2,10 @@ package cnpm.doan.service;
 
 import cnpm.doan.domain.TaskDomain;
 import cnpm.doan.domain.TaskRequest;
-import cnpm.doan.domain.UserTaskDomain;
-import cnpm.doan.entity.Difficulty;
-import cnpm.doan.entity.MemberTask;
-import cnpm.doan.entity.Project;
-import cnpm.doan.entity.Task;
-import cnpm.doan.repository.DifficultyRepository;
-import cnpm.doan.repository.MemberTaskRepository;
-import cnpm.doan.repository.ProjectRepository;
-import cnpm.doan.repository.TaskRepository;
+import cnpm.doan.domain.UserContributeToTask;
+import cnpm.doan.entity.*;
+import cnpm.doan.repository.*;
+import cnpm.doan.security.JwtUtil;
 import cnpm.doan.util.CustormException;
 import cnpm.doan.util.DatetimeUtils;
 import cnpm.doan.util.Message;
@@ -35,6 +30,12 @@ public class TaskServiceImpl implements TaskService {
 
     @Autowired
     MemberTaskRepository memberTaskRepository;
+
+    @Autowired
+    MemberProjectRepository memberProjectRepository;
+
+    @Autowired
+    JwtUtil jwtUtil;
 
     @Override
     public List<Task> findAllTaskByProjectId(int projectId) {
@@ -68,7 +69,12 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public List<TaskDomain> getAllTask(int projectId) {
+    public List<TaskDomain> getAllTask(int projectId) throws CustormException {
+        MemberProject memberProject =
+                memberProjectRepository.findMemberProjectByUserIdAndProjectId(jwtUtil.getCurrentUser().getUserId(), projectId);
+        if (memberProject == null) {
+            throw new CustormException(Message.INVALID_USER_PROJECT);
+        }
         List<Task> findAllTask = findAllTaskByProjectId(projectId);
         List<TaskDomain> result = new ArrayList<>();
         for (Task task : findAllTask) {
@@ -83,9 +89,9 @@ public class TaskServiceImpl implements TaskService {
             taskDomain.setIsDone(task.isDone());
             taskDomain.setCreateDate(task.getCreateDate().toString());
             List<MemberTask> memberTasks = memberTaskRepository.findAllByTaskId(task.getId());
-            List<UserTaskDomain> taskDomains =
+            List<UserContributeToTask> taskDomains =
                     memberTasks.stream().map(utd -> {
-                        return new UserTaskDomain(utd.getUser().getId(), utd.getUser().getName());
+                        return new UserContributeToTask(utd.getUser().getId(), utd.getUser().getName());
                     }).collect(Collectors.toList());
             taskDomain.setUserTaskDomains(taskDomains);
             result.add(taskDomain);
@@ -105,5 +111,10 @@ public class TaskServiceImpl implements TaskService {
         List<MemberTask> memberTasks = memberTaskRepository.findAllByTaskId(taskId);
         memberTasks.forEach(t -> memberTaskRepository.deleteByTaskId(t.getTask().getId()));
         taskRepository.deleteById(taskId);
+    }
+
+    @Override
+    public void update(TaskDomain taskDomain) {
+
     }
 }

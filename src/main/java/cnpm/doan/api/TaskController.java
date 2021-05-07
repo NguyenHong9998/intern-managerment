@@ -3,6 +3,7 @@ package cnpm.doan.api;
 import cnpm.doan.domain.ResponeDomain;
 import cnpm.doan.domain.TaskDomain;
 import cnpm.doan.domain.TaskRequest;
+import cnpm.doan.entity.Task;
 import cnpm.doan.entity.User;
 import cnpm.doan.service.*;
 import cnpm.doan.util.CustormException;
@@ -33,8 +34,12 @@ public class TaskController {
     @PreAuthorize("hasAnyAuthority('ROLE_MANAGER','ROLE_ADMIN', 'ROLE_USER')")
     @GetMapping("/task/project")
     public ResponseEntity<?> getAllTaskByProjectId(@RequestParam("project_id") int projectId) {
-        List<TaskDomain> domain = taskService.getAllTask(projectId);
-        domain.forEach(System.out::println);
+        List<TaskDomain> domain = null;
+        try {
+            domain = taskService.getAllTask(projectId);
+        } catch (CustormException e) {
+            return ResponseEntity.ok(new ResponeDomain(e.getErrorType().getDetail(), HTTPStatus.fail));
+        }
         if (domain.size() == 0) {
             return ResponseEntity.ok(new ResponeDomain(Message.EMPTY_RESULT.getDetail(), HTTPStatus.success));
         }
@@ -52,7 +57,7 @@ public class TaskController {
         return ResponseEntity.ok(new ResponeDomain(null, Message.SUCCESSFUlLY.getDetail(), true));
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN','ROLE_MANAGER')")
+    @PreAuthorize("hasAnyAuthority('ROLE_MANAGER')")
     @PutMapping("/task/delete")
     public ResponseEntity<?> deleteTask(@RequestParam("id_task") int idTask) {
         try {
@@ -75,9 +80,12 @@ public class TaskController {
         return ResponseEntity.ok(new ResponeDomain(null, Message.SUCCESSFUlLY.getDetail(), true));
 
     }
-//    @PutMapping("/task/update")
-//    public ResponseEntity<?> updateTaskByTaskId(@RequestBody TaskDomain taskDomain) {
-//
-//    }
+
+    @PreAuthorize("hasAnyAuthority('ROLE_MANAGER','ROLE_USER')")
+    @PutMapping("/task/update")
+    public ResponseEntity<?> updateTaskByTaskId(@RequestBody TaskDomain taskDomain) {
+        taskService.update(taskDomain);
+        return ResponseEntity.ok(new ResponeDomain(null, Message.SUCCESSFUlLY.getDetail(), true));
+    }
 
 }
