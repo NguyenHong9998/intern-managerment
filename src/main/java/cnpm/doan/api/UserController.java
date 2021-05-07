@@ -83,7 +83,9 @@ public class UserController {
         if (user == null) {
             return ResponseEntity.ok(new ResponeDomain(Message.INVALID_USER.getDetail(), false));
         }
-        if (!user.getEmail().equals(userPrincipal.getUsername()) || Integer.valueOf(userDomain.getDepartment()) != user.getDepartment().getId()) {
+        if (!user.getEmail().equals(userPrincipal.getUsername()) ||
+                (user.getDepartment() == null && userDomain.getDepartment() != null) ||
+                (Integer.valueOf(userDomain.getDepartment()) != user.getDepartment().getId())) {
             user.setName(userDomain.getName());
             user.setAddress(userDomain.getAddress());
             user.setGender(userDomain.getGender());
