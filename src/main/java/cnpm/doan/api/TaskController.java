@@ -30,7 +30,7 @@ public class TaskController {
     @Autowired
     private MemberTaskService memberTaskService;
 
-    @PreAuthorize("hasAnyAuthority('ROLE_MANAGER','ROLE_ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ROLE_MANAGER','ROLE_ADMIN', 'ROLE_USER')")
     @GetMapping("/task/project")
     public ResponseEntity<?> getAllTaskByProjectId(@RequestParam("project_id") int projectId) {
         List<TaskDomain> domain = taskService.getAllTask(projectId);
