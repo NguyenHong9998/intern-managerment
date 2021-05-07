@@ -28,12 +28,12 @@ public class AuthController {
     @PostMapping(value = "/login")
     public ResponseEntity<?> login(@ModelAttribute Account account) {
         User checkUser = userService.findUserByEmail(account.getEmail());
-        if (checkUser != null && checkUser.getRoles() == null) {
-            return ResponseEntity.ok(new ResponeDomain(Message.WAITING_ACCOUNT.getDetail(), false));
-        }
         UserPrincipal userPrincipal = userService.findByUsername(account.getEmail());
         if (account == null || !new BCryptPasswordEncoder().matches(account.getPassword(), userPrincipal.getPassword())) {
             return ResponseEntity.ok(new ResponeDomain(Message.USER_NOT_FOUND.getDetail(), HTTPStatus.fail));
+        }
+        if (checkUser != null && checkUser.getRoles() == null) {
+            return ResponseEntity.ok(new ResponeDomain(Message.WAITING_ACCOUNT.getDetail(), false));
         }
         String token = jwtUtil.generateToken(userPrincipal);
         User user = userService.findUserByEmail(account.getEmail());

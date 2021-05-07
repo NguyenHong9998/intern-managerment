@@ -1,9 +1,6 @@
 package cnpm.doan.api;
 
-import cnpm.doan.domain.RegisterAccount;
-import cnpm.doan.domain.ResponeDomain;
-import cnpm.doan.domain.UserDomain;
-import cnpm.doan.domain.WaitingUser;
+import cnpm.doan.domain.*;
 import cnpm.doan.entity.User;
 import cnpm.doan.security.JwtUtil;
 import cnpm.doan.security.UserPrincipal;
@@ -80,7 +77,7 @@ public class UserController {
         User user = userService.findById(userDomain.getId());
         UserPrincipal userPrincipal = jwtUtil.getCurrentUser();
         String role = userPrincipal.getAuthorities().stream().findFirst().get().toString();
-        if(userDomain.getId() != userPrincipal.getUserId()){
+        if (userDomain.getId() != userPrincipal.getUserId()) {
             return ResponseEntity.ok(new ResponeDomain(Message.PERMISION_EDIT_ANOTHER_ACC.getDetail(), false));
         }
         if (user == null) {

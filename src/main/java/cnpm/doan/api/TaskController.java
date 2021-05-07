@@ -26,11 +26,6 @@ public class TaskController {
     @Autowired
     private UserService userService;
 
-    @Autowired
-    private ProjectService projectService;
-
-    @Autowired
-    private MemberProjectService memberProjectService;
 
     @Autowired
     private MemberTaskService memberTaskService;
@@ -80,6 +75,9 @@ public class TaskController {
         return ResponseEntity.ok(new ResponeDomain(null, Message.SUCCESSFUlLY.getDetail(), true));
 
     }
-
+//    @PutMapping("/task/update")
+//    public ResponseEntity<?> updateTaskByTaskId(@RequestBody TaskDomain taskDomain) {
+//
+//    }
 
 }
