@@ -1,5 +1,7 @@
 package cnpm.doan.domain;
 
+import java.util.List;
+
 public class TaskDomain {
     private long taskId;
     private String description;
@@ -10,6 +12,7 @@ public class TaskDomain {
     private String projectName;
     private String createDate;
     private String assignee;
+    private List<UserTaskDomain> userTaskDomains;
 
     public TaskDomain() {
     }
@@ -24,6 +27,14 @@ public class TaskDomain {
         this.projectName = projectName;
         this.createDate = createDate;
         this.assignee = asignee;
+    }
+
+    public List<UserTaskDomain> getUserTaskDomains() {
+        return userTaskDomains;
+    }
+
+    public void setUserTaskDomains(List<UserTaskDomain> userTaskDomains) {
+        this.userTaskDomains = userTaskDomains;
     }
 
     public long getTaskId() {
@@ -101,4 +112,7 @@ public class TaskDomain {
     public void setAssignee(String assignee) {
         this.assignee = assignee;
     }
+
 }
+
+

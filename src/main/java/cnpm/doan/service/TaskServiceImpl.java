@@ -2,6 +2,7 @@ package cnpm.doan.service;
 
 import cnpm.doan.domain.TaskDomain;
 import cnpm.doan.domain.TaskRequest;
+import cnpm.doan.domain.UserTaskDomain;
 import cnpm.doan.entity.Difficulty;
 import cnpm.doan.entity.MemberTask;
 import cnpm.doan.entity.Project;
@@ -16,6 +17,7 @@ import cnpm.doan.util.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -68,7 +70,9 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public List<TaskDomain> getAllTask(int projectId) {
         List<Task> findAllTask = findAllTaskByProjectId(projectId);
-        List<TaskDomain> result = findAllTask.stream().map(task -> {
+        List<TaskDomain> result = new ArrayList<>();
+        for (Task task : findAllTask) {
+
             TaskDomain taskDomain = new TaskDomain();
             taskDomain.setTaskId(task.getId());
             taskDomain.setDescription(task.getDescription());
@@ -79,10 +83,13 @@ public class TaskServiceImpl implements TaskService {
             taskDomain.setIsDone(task.isDone());
             taskDomain.setCreateDate(task.getCreateDate().toString());
             List<MemberTask> memberTasks = memberTaskRepository.findAllByTaskId(task.getId());
-
-
-            return taskDomain;
-        }).collect(Collectors.toList());
+            List<UserTaskDomain> taskDomains =
+                    memberTasks.stream().map(utd -> {
+                        return new UserTaskDomain(utd.getUser().getId(), utd.getUser().getName());
+                    }).collect(Collectors.toList());
+            taskDomain.setUserTaskDomains(taskDomains);
+            result.add(taskDomain);
+        }
         return result;
     }
 
