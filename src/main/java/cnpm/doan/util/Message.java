@@ -34,6 +34,7 @@ public enum Message {
     CANNOT_DELETE_ANOTHER_FEED("Can not delete feedback off another one"),
     CANNOT_UPDATE_ANOTHER_FEED("Can not update feedback off another one"),
     CANNOT_DELETE_ANOTHER_SCHEDULE("Can not delete schedule off another one"),
+    CANNOT_UPDATE_ANOTHER_SCHEDULE("Can not update schedule off another one"),
     EXIST_NOT_DONE_TASK("This user is contributing to another task that is not already done. Please make the task done or assign that task to another one");
     private String detail;
 

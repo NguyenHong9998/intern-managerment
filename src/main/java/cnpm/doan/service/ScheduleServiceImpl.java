@@ -48,6 +48,10 @@ public class ScheduleServiceImpl implements ScheduleService {
         if (schedule == null) {
             throw new CustormException(Message.INVALID_LEAVE_ID);
         }
+        User user = userRepository.findById(jwtUtil.getCurrentUser().getUserId()).orElse(null);
+        if (schedule.getUser().getId() != jwtUtil.getCurrentUser().getUserId() && user.getRoles().getRoleName().equals("ROLE_USER")) {
+            throw new CustormException(Message.CANNOT_UPDATE_ANOTHER_SCHEDULE);
+        }
         Date date = DatetimeUtils.convertStringToDateOrNull(leaveDomain.getLeaveDate(), DatetimeUtils.YYYYMMDD);
         Schedule scheduleOld = scheduleRepository.findByUserIdAndTime(jwtUtil.getCurrentUser().getUserId(), date);
         if (scheduleOld != null && leaveDomain.getShift() == schedule.getShift()) {
@@ -62,6 +66,9 @@ public class ScheduleServiceImpl implements ScheduleService {
     @Override
     public void delete(int leaveId) throws CustormException {
         Schedule schedule = scheduleRepository.findById(leaveId).orElse(null);
+        if (schedule == null) {
+            throw new CustormException(Message.INVALID_LEAVE_ID);
+        }
         User user = userRepository.findById(jwtUtil.getCurrentUser().getUserId()).orElse(null);
         if (schedule.getUser().getId() != jwtUtil.getCurrentUser().getUserId() && user.getRoles().getRoleName().equals("ROLE_USER")) {
             throw new CustormException(Message.CANNOT_DELETE_ANOTHER_SCHEDULE);
