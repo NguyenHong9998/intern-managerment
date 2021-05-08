@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin
 @RestController
 public class FeedbackController {
     @Autowired
@@ -31,7 +32,7 @@ public class FeedbackController {
     }
 
     @PreAuthorize("hasAnyAuthority('ROLE_USER','ROLE_ADMIN','ROLE_MANAGER')")
-    @PostMapping("/task/add")
+    @PostMapping("/task/feedback/add")
     public ResponseEntity<?> addFeedbackByTaskId(@RequestBody FeedbackDomain feedbackDomain) {
         try {
             feedbackService.addFeedback(feedbackDomain);
@@ -41,7 +42,7 @@ public class FeedbackController {
         return ResponseEntity.ok(new ResponeDomain(feedbackDomain, Message.SUCCESSFUlLY.getDetail(), HTTPStatus.success));
     }
     @PreAuthorize("hasAnyAuthority('ROLE_USER','ROLE_ADMIN','ROLE_MANAGER')")
-    @PostMapping("/task/update")
+    @PostMapping("/task/feedback/update")
     public ResponseEntity<?> updateFeedback(@RequestBody UpdateFeedbackDomain feedbackDomain) {
         try {
             feedbackService.update(feedbackDomain);
@@ -51,7 +52,7 @@ public class FeedbackController {
         return ResponseEntity.ok(new ResponeDomain(feedbackDomain, Message.SUCCESSFUlLY.getDetail(), HTTPStatus.success));
     }
     @PreAuthorize("hasAnyAuthority('ROLE_USER','ROLE_ADMIN','ROLE_MANAGER')")
-    @PutMapping("/task/delete")
+    @PutMapping("/task/feedback/delete")
     public ResponseEntity<?> deleteFeedback(@RequestParam int feedbackId) {
         try {
             feedbackService.delete(feedbackId);

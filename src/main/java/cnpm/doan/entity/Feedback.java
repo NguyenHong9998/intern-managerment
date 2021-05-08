@@ -23,6 +23,18 @@ public class Feedback {
     @JoinColumn(name = "task_id")
     private Task task;
 
+    public Feedback() {
+
+    }
+
+    public Feedback(int id, String message, Date time, User user, Task task) {
+        this.id = id;
+        this.message = message;
+        this.time = time;
+        this.user = user;
+        this.task = task;
+    }
+
     public Date getTime() {
         return time;
     }
