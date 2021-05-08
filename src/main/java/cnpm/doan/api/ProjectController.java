@@ -62,6 +62,21 @@ public class ProjectController {
         return ResponseEntity.ok(new ResponeDomain(projects, Message.SUCCESSFUlLY.getDetail(), true));
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER', 'ROLE_USER')")
+    @GetMapping("/project/users")
+    public ResponseEntity<?> getUsersOfProject(@RequestParam int idProject) {
+        MemberProject memberProject = memberProjectRepository.findMemberProjectByUserIdAndProjectId(idProject, jwtUtil.getCurrentUser().getUserId());
+        if (memberProject == null) {
+            return ResponseEntity.ok(new ResponeDomain(Message.INVALID_PROJECT_ID.getDetail(), true));
+        }
+        List<User> users = memberProjectRepository
+                .findMemberProjectByProjectId(idProject).stream().map(t -> t.getUser()).collect(Collectors.toList());
+        List<WaitingUser> result = users.stream().map(
+                t -> new WaitingUser(t.getName(), t.getEmail(), t.getId())
+        ).collect(Collectors.toList());
+        return ResponseEntity.ok(new ResponeDomain(result, Message.SUCCESSFUlLY.getDetail(), true));
+    }
+
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER')")
     @PostMapping("/project/create")
     public ResponseEntity<?> createProject(@ModelAttribute ProjectDomain request) {
