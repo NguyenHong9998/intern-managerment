@@ -46,10 +46,13 @@ public class AuthController {
     @PreAuthorize("hasAnyAuthority('ROLE_USER','ROLE_ADMIN', 'ROLE_MANAGER')")
     @PostMapping("/change-pass")
     public ResponseEntity<?> changePass(@RequestBody ChangePasswordRequest changePasswordRequest) {
+        User user = userService.findById(jwtUtil.getCurrentUser().getUserId());
         if (changePasswordRequest.getNewPassword() != changePasswordRequest.getOldPassword()) {
             return ResponseEntity.ok(new ResponeDomain(Message.PASS_DIFF.getDetail(), false));
         }
-        User user = userService.findById(jwtUtil.getCurrentUser().getUserId());
+        if (!changePasswordRequest.getOldPassword().equals(new BCryptPasswordEncoder().encode(user.getPassword()))) {
+            return ResponseEntity.ok(new ResponeDomain(Message.INVALID_OLD_PASS.getDetail(), false));
+        }
         userService.updatePassword(user, new BCryptPasswordEncoder().encode(changePasswordRequest.getNewPassword()));
         return ResponseEntity.ok(new ResponeDomain(Message.SUCCESSFUlLY.getDetail(), true));
     }

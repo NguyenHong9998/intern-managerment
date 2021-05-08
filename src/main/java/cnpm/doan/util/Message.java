@@ -26,6 +26,7 @@ public enum Message {
     CANOT_UPDATE_EMAIL("Cannot update your email or Department, if you want to update, please contact to Shappee's admin"),
     PERMISION_EDIT_ANOTHER_ACC("Do not have permission to update another acc"),
     PASS_DIFF("The new password is different from old password"),
+    INVALID_OLD_PASS("Old password is not correct!"),
     EXIST_NOT_DONE_TASK("This user is contributing to another task that is not already done. Please make the task done or assign that task to another one");
     private String detail;
 
