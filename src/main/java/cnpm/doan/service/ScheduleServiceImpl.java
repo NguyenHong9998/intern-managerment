@@ -61,7 +61,8 @@ public class ScheduleServiceImpl implements ScheduleService {
 
     @Override
     public void delete(int leaveId) {
-
+        Schedule schedule = scheduleRepository.findById(leaveId).orElse(null);
+        scheduleRepository.delete(schedule);
     }
 
     @Override

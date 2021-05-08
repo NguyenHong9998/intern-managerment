@@ -35,7 +35,7 @@ public class ScheduleController {
     @PreAuthorize("hasAnyAuthority('ROLE_USER','ROLE_MANAGER', 'ROLE_ADMIN')")
     public ResponseEntity<?> getAllSchedule() {
         List<ScheduleDomain> result = scheduleService.getAll();
-        if(result.size() ==0){
+        if (result.size() == 0) {
             return ResponseEntity.ok(new ResponeDomain(result, Message.EMPTY_RESULT.getDetail(), HTTPStatus.success));
         }
         return ResponseEntity.ok(new ResponeDomain(result, Message.SUCCESSFUlLY.getDetail(), HTTPStatus.success));
@@ -49,6 +49,17 @@ public class ScheduleController {
         } catch (CustormException e) {
             return ResponseEntity.ok(new ResponeDomain(e.getErrorType().getDetail(), HTTPStatus.fail));
         }
+        return ResponseEntity.ok(new ResponeDomain(Message.SUCCESSFUlLY.getDetail(), HTTPStatus.success));
+    }
+
+    @PutMapping("/schedule/delete")
+    @PreAuthorize("hasAnyAuthority('ROLE_USER','ROLE_MANAGER', 'ROLE_ADMIN')")
+    public ResponseEntity<?> deleteSchedule(@RequestParam("leave_id") int leaveId) {
+//        try {
+            scheduleService.delete(leaveId);
+//        } catch (CustormException e) {
+//            return ResponseEntity.ok(new ResponeDomain(e.getErrorType().getDetail(), HTTPStatus.fail));
+//        }
         return ResponseEntity.ok(new ResponeDomain(Message.SUCCESSFUlLY.getDetail(), HTTPStatus.success));
     }
 }
