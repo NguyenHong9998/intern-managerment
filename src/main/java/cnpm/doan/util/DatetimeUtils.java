@@ -28,7 +28,13 @@ public class DatetimeUtils {
         System.out.println(date);
         return simpleDateFormat.format(date);
     }
+    public static String convertDateToStringYYYYMMDD(Date date) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        simpleDateFormat.setLenient(false);
 
+        System.out.println(date);
+        return simpleDateFormat.format(date);
+    }
     public static long getDayBetweenTwoDiffDate(Date date1, Date date2) {
         long diffInMillies = Math.abs(date2.getTime() - date1.getTime());
         if (diffInMillies == 0) {

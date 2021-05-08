@@ -27,8 +27,10 @@ public enum Message {
     CANOT_UPDATE_EMAIL("Cannot update your email or Department, if you want to update, please contact to Shappee's admin"),
     PERMISION_EDIT_ANOTHER_ACC("Do not have permission to update another acc"),
     INVALID_OLD_PASS("Old password is not correct!"),
+    INVALID_LEAVE_ID("Invalid leave id in request"),
     CANNOT_DELETE_MANAGER("Can not delete manager"),
     INVALID_FEEDBACK("Invalid Feedback id in request"),
+    CANNOT_ADD_LEAVE("You have been add leave schedule at same day, please check again"),
     CANNOT_DELETE_ANOTHER_FEED("Can not delete feedback off another one"),
     CANNOT_UPDATE_ANOTHER_FEED("Can not delete feedback off another one"),
     EXIST_NOT_DONE_TASK("This user is contributing to another task that is not already done. Please make the task done or assign that task to another one");
