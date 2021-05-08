@@ -55,6 +55,15 @@ public class User {
         this.roles = roles;
         this.department = department;
     }
+    public User(String name, String password, String email, String address, String gender, Role roles, Department department) {
+        this.gender = gender;
+        this.name = name;
+        this.password = password;
+        this.email = email;
+        this.address = address;
+        this.roles = roles;
+        this.department = department;
+    }
 
     public String getGender() {
         return gender;
