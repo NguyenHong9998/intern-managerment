@@ -36,6 +36,9 @@ public class TaskServiceImpl implements TaskService {
     MemberProjectRepository memberProjectRepository;
 
     @Autowired
+    UserRepository userRepository;
+
+    @Autowired
     JwtUtil jwtUtil;
 
     @Override
@@ -112,25 +115,33 @@ public class TaskServiceImpl implements TaskService {
         if (!task.isDone()) {
             throw new CustormException(Message.TASK_NOT_DONE);
         }
-        List<MemberTask> memberTasks = memberTaskRepository.findAllByTaskId(taskId);
-        memberTasks.forEach(t -> memberTaskRepository.deleteByTaskId(t.getTask().getId()));
+//        List<MemberTask> memberTasks = memberTaskRepository.findAllByTaskId(taskId);
+//        memberTasks.forEach(t -> memberTaskRepository.deleteByTaskId(t.getTask().getId()));
+        memberTaskRepository.deleteByTaskId(task.getId());
         taskRepository.deleteById(taskId);
     }
 
     @Override
     public void update(TaskUpdateRequest taskUpdateRequest) throws CustormException {
-//        Task task = taskRepository.findById(taskUpdateRequest.getTaskId()).orElse(null);
-//        if (task == null) {
-//            throw new CustormException(Message.INVALID_TASK);
-//        }
-//        task.setDueDate(DatetimeUtils.convertStringToDateOrNull(taskUpdateRequest.getDuedate(), DatetimeUtils.YYYYMMDD));
-//        task.setDescription(taskUpdateRequest.getDescription());
-//        task.setTitle(taskUpdateRequest.getTitle());
-//        task.setDone(taskUpdateRequest.isDone());
-//        task.setPoint(Float.valueOf(taskUpdateRequest.getPoint()));
-//        taskRepository.save(task);
-//        for (UserContributeToTask user: taskUpdateRequest.getUserTaskDomains()){
-//            memberTaskRepository.save()
-//        }
+        Task task = taskRepository.findById(taskUpdateRequest.getTaskId()).orElse(null);
+        if (task == null) {
+            throw new CustormException(Message.INVALID_TASK);
+        }
+        task.setDueDate(DatetimeUtils.convertStringToDateOrNull(taskUpdateRequest.getDuedate(), DatetimeUtils.YYYYMMDD));
+        task.setDescription(taskUpdateRequest.getDescription());
+        task.setTitle(taskUpdateRequest.getTitle());
+        task.setDone(taskUpdateRequest.isDone());
+        task.setPoint(Float.valueOf(taskUpdateRequest.getPoint()));
+        taskRepository.save(task);
+        memberTaskRepository.deleteByTaskId(task.getId());
+
+        for (UserContributeToTask user : taskUpdateRequest.getUserTaskDomains()) {
+
+            User userInTask = userRepository.findById(user.getId()).orElse(null);
+            MemberTask memberTask = new MemberTask();
+            memberTask.setTask(task);
+            memberTask.setUser(userInTask);
+            memberTaskRepository.save(memberTask);
+        }
     }
 }
