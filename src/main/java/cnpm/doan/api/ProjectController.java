@@ -130,6 +130,7 @@ public class ProjectController {
     }
     @PostMapping("/test")
     public ResponseEntity<?> deleteAllProjectMember(){
+        taskRepository.deleteAll();
         projectRepository.deleteAll();
         return ResponseEntity.ok(new ResponeDomain(Message.SUCCESSFUlLY.getDetail(), HTTPStatus.success));
     }

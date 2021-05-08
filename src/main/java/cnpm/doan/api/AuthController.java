@@ -2,6 +2,7 @@ package cnpm.doan.api;
 
 
 import cnpm.doan.domain.Account;
+import cnpm.doan.domain.ChangePasswordRequest;
 import cnpm.doan.domain.ResponeDomain;
 import cnpm.doan.domain.UserWithToken;
 import cnpm.doan.entity.User;
@@ -12,6 +13,7 @@ import cnpm.doan.util.HTTPStatus;
 import cnpm.doan.util.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -39,6 +41,17 @@ public class AuthController {
         User user = userService.findUserByEmail(account.getEmail());
         UserWithToken userWithToken = new UserWithToken(user, token);
         return ResponseEntity.ok(new ResponeDomain(userWithToken, Message.SUCCESSFUlLY.getDetail(), true));
+    }
+
+//    @PreAuthorize("hasAnyAuthority('ROLE_USER','ROLE_ADMIN', 'ROLE_MANAGER')")
+    @PostMapping("/change-pass")
+    public ResponseEntity<?> changePass(@RequestBody ChangePasswordRequest changePasswordRequest) {
+        if (changePasswordRequest.getNewPassword() != changePasswordRequest.getOldPassword()) {
+            return ResponseEntity.ok(new ResponeDomain(Message.PASS_DIFF.getDetail(), false));
+        }
+        User user = userService.findById(jwtUtil.getCurrentUser().getUserId());
+        userService.updatePassword(user, new BCryptPasswordEncoder().encode(changePasswordRequest.getNewPassword()));
+        return ResponseEntity.ok(new ResponeDomain(Message.SUCCESSFUlLY.getDetail(), true));
     }
 
     @GetMapping(value = "/")
