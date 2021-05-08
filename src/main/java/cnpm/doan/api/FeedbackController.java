@@ -23,7 +23,7 @@ public class FeedbackController {
 
     @PreAuthorize("hasAnyAuthority('ROLE_USER','ROLE_ADMIN','ROLE_MANAGER')")
     @GetMapping("/task/feedback")
-    public ResponseEntity<?> getFeedbackByTaskId(@RequestParam int taskId) {
+    public ResponseEntity<?> getFeedbackByTaskId(@RequestParam("task_id") int taskId) {
         List<Feedback> feedbacks = feedbackService.getAllFeedbackByTaskId(taskId);
         if (feedbacks.size() == 0) {
             return ResponseEntity.ok(new ResponeDomain(Message.EMPTY_RESULT.getDetail(), HTTPStatus.success));
