@@ -38,6 +38,7 @@ public class ScheduleDomain {
         this.reason = schedule.getReasonLeave();
         this.time = DatetimeUtils.convertDateToString(schedule.getTime());
         this.shift = schedule.getShift();
+        this.userName = schedule.getUser().getName();
     }
 
     public int getId() {
