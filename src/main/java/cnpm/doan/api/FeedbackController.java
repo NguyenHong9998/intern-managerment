@@ -14,6 +14,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @CrossOrigin
 @RestController
@@ -25,6 +26,12 @@ public class FeedbackController {
     @GetMapping("/task/feedback")
     public ResponseEntity<?> getFeedbackByTaskId(@RequestParam("task_id") int taskId) {
         List<Feedback> feedbacks = feedbackService.getAllFeedbackByTaskId(taskId);
+        List<FeedbackDomain> result = feedbacks.stream().map(t -> {
+            FeedbackDomain domain = new FeedbackDomain();
+            domain.setFeedbackContent(t.getMessage());
+            domain.setTaskId(t.getId());
+            return domain;
+        }).collect(Collectors.toList());
         if (feedbacks.size() == 0) {
             return ResponseEntity.ok(new ResponeDomain(Message.EMPTY_RESULT.getDetail(), HTTPStatus.success));
         }
@@ -41,6 +48,7 @@ public class FeedbackController {
         }
         return ResponseEntity.ok(new ResponeDomain(feedbackDomain, Message.SUCCESSFUlLY.getDetail(), HTTPStatus.success));
     }
+
     @PreAuthorize("hasAnyAuthority('ROLE_USER','ROLE_ADMIN','ROLE_MANAGER')")
     @PostMapping("/task/feedback/update")
     public ResponseEntity<?> updateFeedback(@RequestBody UpdateFeedbackDomain feedbackDomain) {
@@ -51,6 +59,7 @@ public class FeedbackController {
         }
         return ResponseEntity.ok(new ResponeDomain(feedbackDomain, Message.SUCCESSFUlLY.getDetail(), HTTPStatus.success));
     }
+
     @PreAuthorize("hasAnyAuthority('ROLE_USER','ROLE_ADMIN','ROLE_MANAGER')")
     @PutMapping("/task/feedback/delete")
     public ResponseEntity<?> deleteFeedback(@RequestParam("feedback_id") int feedbackId) {
