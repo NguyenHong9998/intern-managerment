@@ -53,7 +53,7 @@ public class FeedbackController {
     }
     @PreAuthorize("hasAnyAuthority('ROLE_USER','ROLE_ADMIN','ROLE_MANAGER')")
     @PutMapping("/task/feedback/delete")
-    public ResponseEntity<?> deleteFeedback(@RequestParam int feedbackId) {
+    public ResponseEntity<?> deleteFeedback(@RequestParam("feedback_id") int feedbackId) {
         try {
             feedbackService.delete(feedbackId);
         } catch (CustormException e) {
