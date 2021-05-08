@@ -15,4 +15,7 @@ public interface ScheduleService {
     void delete(int leaveId) throws CustormException;
 
     List<ScheduleDomain> getAll();
+
+    List<ScheduleDomain> findByUserId(int userID);
+
 }

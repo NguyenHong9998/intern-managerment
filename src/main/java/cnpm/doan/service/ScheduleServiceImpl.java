@@ -82,4 +82,13 @@ public class ScheduleServiceImpl implements ScheduleService {
         List<ScheduleDomain> scheduleDomains = schedules.stream().map(t -> new ScheduleDomain(t)).collect(Collectors.toList());
         return scheduleDomains;
     }
+
+    @Override
+    public List<ScheduleDomain> findByUserId(int userID) {
+        List<Schedule> schedules = scheduleRepository.findAll();
+        List<ScheduleDomain> scheduleDomains = schedules.stream()
+                .filter(t -> t.getUser().getId() == userID)
+                .map(t -> new ScheduleDomain(t)).collect(Collectors.toList());
+        return scheduleDomains;
+    }
 }

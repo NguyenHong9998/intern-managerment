@@ -41,6 +41,16 @@ public class ScheduleController {
         return ResponseEntity.ok(new ResponeDomain(result, Message.SUCCESSFUlLY.getDetail(), HTTPStatus.success));
     }
 
+    @GetMapping("/schedule")
+    @PreAuthorize("hasAnyAuthority('ROLE_USER','ROLE_MANAGER', 'ROLE_ADMIN')")
+    public ResponseEntity<?> getAllSchedule(@RequestParam("user_id") int userId) {
+        List<ScheduleDomain> result = scheduleService.findByUserId(userId);
+        if (result.size() == 0) {
+            return ResponseEntity.ok(new ResponeDomain(result, Message.EMPTY_RESULT.getDetail(), HTTPStatus.success));
+        }
+        return ResponseEntity.ok(new ResponeDomain(result, Message.SUCCESSFUlLY.getDetail(), HTTPStatus.success));
+    }
+
     @PutMapping("/schedule/update")
     @PreAuthorize("hasAnyAuthority('ROLE_USER','ROLE_MANAGER', 'ROLE_ADMIN')")
     public ResponseEntity<?> upadateSchedule(@RequestParam("leave_id") int leaveId, @RequestBody LeaveDomain leaveDomain) {
