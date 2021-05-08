@@ -1,10 +1,8 @@
 package cnpm.doan.api;
 
 import cnpm.doan.domain.ResponeDomain;
-import cnpm.doan.entity.Department;
-import cnpm.doan.entity.Project;
-import cnpm.doan.entity.Role;
-import cnpm.doan.entity.User;
+import cnpm.doan.entity.*;
+import cnpm.doan.repository.MemberProjectRepository;
 import cnpm.doan.repository.ProjectRepository;
 import cnpm.doan.repository.RoleRepository;
 import cnpm.doan.repository.UserRepository;
@@ -35,6 +33,9 @@ public class InsertData {
 
     @Autowired
     ProjectRepository projectRepository;
+
+    @Autowired
+    MemberProjectRepository memberProjectRepository;
 
     @PostMapping("/insert-data-user")
     public ResponseEntity<?> insertData() {
@@ -83,6 +84,25 @@ public class InsertData {
                 new Project("News management", "Backend: Java ; Frontend: React; Database: Postgres", DatetimeUtils.convertStringToDateOrNull(date, pattern), manager.get(1))
         );
         projectRepository.saveAll(projects);
+        return ResponseEntity.ok(new ResponeDomain(Message.SUCCESSFUlLY.getDetail(), true));
+    }
+
+    @PostMapping("/insert-data-project-member")
+    public ResponseEntity<?> insertDataProjectMember() {
+        memberProjectRepository.deleteAll();
+
+        List<User> users = userRepository.findUserByRoleName("ROLE_USER");
+        List<Project> projects = projectRepository.findAll();
+//        String title, String description, Date dueDate, User manager
+        List<MemberProject> projects_member = Arrays.asList(
+                new MemberProject(users.get(0), projects.get(1)),
+                new MemberProject(users.get(0), projects.get(2)),
+                new MemberProject(users.get(1), projects.get(1)),
+                new MemberProject(users.get(1), projects.get(2)),
+                new MemberProject(users.get(2), projects.get(1)),
+                new MemberProject(users.get(2), projects.get(2))
+        );
+        memberProjectRepository.saveAll(projects_member);
         return ResponseEntity.ok(new ResponeDomain(Message.SUCCESSFUlLY.getDetail(), true));
     }
 }

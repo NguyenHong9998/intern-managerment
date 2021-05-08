@@ -40,4 +40,13 @@ public class MemberProject {
     public void setProject(Project project) {
         this.project = project;
     }
+
+    public MemberProject() {
+
+    }
+
+    public MemberProject(User user, Project project) {
+        this.user = user;
+        this.project = project;
+    }
 }
