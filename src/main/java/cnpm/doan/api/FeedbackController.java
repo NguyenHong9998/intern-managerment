@@ -1,7 +1,6 @@
 package cnpm.doan.api;
 
 import cnpm.doan.domain.FeedbackDomain;
-import cnpm.doan.domain.FeedbackResponseDomain;
 import cnpm.doan.domain.ResponeDomain;
 import cnpm.doan.domain.UpdateFeedbackDomain;
 import cnpm.doan.entity.Feedback;
@@ -27,8 +26,8 @@ public class FeedbackController {
     @GetMapping("/task/feedback")
     public ResponseEntity<?> getFeedbackByTaskId(@RequestParam("task_id") int taskId) {
         List<Feedback> feedbacks = feedbackService.getAllFeedbackByTaskId(taskId);
-        List<FeedbackResponseDomain> result = feedbacks.stream().map(t -> {
-            FeedbackResponseDomain domain = new FeedbackResponseDomain();
+        List<FeedbackDomain> result = feedbacks.stream().map(t -> {
+            FeedbackDomain domain = new FeedbackDomain();
             domain.setFeedbackContent(t.getMessage());
             domain.setTaskId(t.getId());
             return domain;
@@ -36,7 +35,7 @@ public class FeedbackController {
         if (feedbacks.size() == 0) {
             return ResponseEntity.ok(new ResponeDomain(Message.EMPTY_RESULT.getDetail(), HTTPStatus.success));
         }
-        return ResponseEntity.ok(new ResponeDomain(feedbacks, Message.SUCCESSFUlLY.getDetail(), HTTPStatus.success));
+        return ResponseEntity.ok(new ResponeDomain(result, Message.SUCCESSFUlLY.getDetail(), HTTPStatus.success));
     }
 
     @PreAuthorize("hasAnyAuthority('ROLE_USER','ROLE_ADMIN','ROLE_MANAGER')")
