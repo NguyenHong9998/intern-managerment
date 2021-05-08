@@ -1,6 +1,7 @@
 package cnpm.doan.api;
 
 import cnpm.doan.domain.*;
+import cnpm.doan.entity.Department;
 import cnpm.doan.entity.User;
 import cnpm.doan.security.JwtUtil;
 import cnpm.doan.security.UserPrincipal;
@@ -91,6 +92,7 @@ public class UserController {
         if (!user.getEmail().equals(userPrincipal.getUsername()) ||
                 (user.getDepartment() == null && userDomain.getDepartment() != null) ||
                 (Integer.valueOf(userDomain.getDepartment()) != user.getDepartment().getId())) {
+            Department department = departmentService.findById(Integer.valueOf(userDomain.getDepartment()));
             user.setName(userDomain.getName());
             user.setAddress(userDomain.getAddress());
             user.setGender(userDomain.getGender());
@@ -100,6 +102,7 @@ public class UserController {
             } else {
                 return ResponseEntity.ok(new ResponeDomain(Message.CANOT_UPDATE_EMAIL.getDetail(), false));
             }
+            user.setDepartment(department);
             userService.createUser(user);
         }
         UserDomain result = new UserDomain(user);
