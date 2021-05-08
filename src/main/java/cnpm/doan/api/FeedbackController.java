@@ -1,6 +1,7 @@
 package cnpm.doan.api;
 
 import cnpm.doan.domain.FeedbackDomain;
+import cnpm.doan.domain.FeedbackResponseDomain;
 import cnpm.doan.domain.ResponeDomain;
 import cnpm.doan.domain.UpdateFeedbackDomain;
 import cnpm.doan.entity.Feedback;
@@ -26,8 +27,8 @@ public class FeedbackController {
     @GetMapping("/task/feedback")
     public ResponseEntity<?> getFeedbackByTaskId(@RequestParam("task_id") int taskId) {
         List<Feedback> feedbacks = feedbackService.getAllFeedbackByTaskId(taskId);
-        List<FeedbackDomain> result = feedbacks.stream().map(t -> {
-            FeedbackDomain domain = new FeedbackDomain();
+        List<FeedbackResponseDomain> result = feedbacks.stream().map(t -> {
+            FeedbackResponseDomain domain = new FeedbackResponseDomain();
             domain.setFeedbackContent(t.getMessage());
             domain.setTaskId(t.getId());
             return domain;
