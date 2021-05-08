@@ -3,7 +3,9 @@ package cnpm.doan.service;
 import cnpm.doan.domain.LeaveDomain;
 import cnpm.doan.domain.ScheduleDomain;
 import cnpm.doan.entity.Schedule;
+import cnpm.doan.entity.User;
 import cnpm.doan.repository.ScheduleRepository;
+import cnpm.doan.repository.UserRepository;
 import cnpm.doan.security.JwtUtil;
 import cnpm.doan.util.CustormException;
 import cnpm.doan.util.DatetimeUtils;
@@ -21,18 +23,22 @@ public class ScheduleServiceImpl implements ScheduleService {
     private ScheduleRepository scheduleRepository;
     @Autowired
     private JwtUtil jwtUtil;
+    @Autowired
+    private UserRepository userRepository;
 
     @Override
     public void add(LeaveDomain leaveDomain) throws CustormException {
-        Date date = DatetimeUtils.convertStringToDateOrNull(leaveDomain.getLeaveDate(), DatetimeUtils.YYYYMMDD);
+        Date date = DatetimeUtils.convertStringToDateOrNull(leaveDomain.getLeaveDate(), DatetimeUtils.DDMMYYYYHHmmss);
         Schedule scheduleOld = scheduleRepository.findByUserIdAndTime(jwtUtil.getCurrentUser().getUserId(), date);
         if (scheduleOld != null && leaveDomain.getShift() == scheduleOld.getShift()) {
             throw new CustormException(Message.CANNOT_ADD_LEAVE);
         }
+        User user = userRepository.findById(jwtUtil.getCurrentUser().getUserId()).orElse(null);
         Schedule schedule = new Schedule();
         schedule.setReasonLeave(leaveDomain.getReasonContent());
         schedule.setTime(date);
         schedule.setShift(leaveDomain.getShift());
+        schedule.setUser(user);
         scheduleRepository.save(schedule);
     }
 
