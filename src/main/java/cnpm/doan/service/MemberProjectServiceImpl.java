@@ -14,4 +14,9 @@ public class MemberProjectServiceImpl implements MemberProjectService {
     public MemberProject findMemberProjectByUserIdAndProjectId(int userId, int projectId) {
         return memberProjectRepository.findMemberProjectByUserIdAndProjectId(userId, projectId);
     }
+
+    @Override
+    public void truncateTable() {
+        memberProjectRepository.deleteAll();
+    }
 }

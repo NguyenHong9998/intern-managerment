@@ -103,6 +103,10 @@ public class ProjectServiceImpl implements ProjectService {
         if (task != null) {
             throw new CustormException(Message.PROJECT_NOT_DONE);
         }
+        List<MemberProject> memberProjects = memProRepository.findAll().stream().filter(t -> t.getProject().getId() == idProject).collect(Collectors.toList());
+        for (MemberProject memberProject : memberProjects) {
+            memProRepository.delete(memberProject);
+        }
         project.setIsDeleted(1);
         projectRepository.save(project);
     }

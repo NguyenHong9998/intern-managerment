@@ -125,4 +125,9 @@ public class ProjectController {
         }
         return ResponseEntity.ok(new ResponeDomain(Message.SUCCESSFUlLY.getDetail(), HTTPStatus.success));
     }
+    @PostMapping("/test")
+    public ResponseEntity<?> deleteAllProjectMember(){
+        memberProjectRepository.deleteAll();
+        return ResponseEntity.ok(new ResponeDomain(Message.SUCCESSFUlLY.getDetail(), HTTPStatus.success));
+    }
 }

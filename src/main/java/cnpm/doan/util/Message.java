@@ -24,7 +24,8 @@ public enum Message {
     INVALID_PROJECT_ID("Invalid Project id in request"),
     INVALID_USER_PROJECT("You can not get Task of Project that you do not contribute"),
     CANOT_UPDATE_EMAIL("Cannot update your email or Department, if you want to update, please contact to Shappee's admin"),
-    PERMISION_EDIT_ANOTHER_ACC("Do not have permission to update another acc");
+    PERMISION_EDIT_ANOTHER_ACC("Do not have permission to update another acc"),
+    EXIST_NOT_DONE_TASK("This user is contributing to another task that is not already done. Please make the task done or assign that task to another one");
     private String detail;
 
     Message(String detail) {
