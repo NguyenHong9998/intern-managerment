@@ -1,6 +1,7 @@
 package cnpm.doan.entity;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "feedback")
@@ -12,12 +13,23 @@ public class Feedback {
     private int id;
     @Column(name = "message")
     private String message;
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "time")
+    private Date time;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "task_id")
     private Task task;
+
+    public Date getTime() {
+        return time;
+    }
+
+    public void setTime(Date time) {
+        this.time = time;
+    }
 
     public int getId() {
         return id;

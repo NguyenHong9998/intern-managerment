@@ -25,8 +25,11 @@ public enum Message {
     INVALID_USER_PROJECT("You can not get Task of Project that you do not contribute"),
     CANOT_UPDATE_EMAIL("Cannot update your email or Department, if you want to update, please contact to Shappee's admin"),
     PERMISION_EDIT_ANOTHER_ACC("Do not have permission to update another acc"),
-    PASS_DIFF("The new password is different from old password"),
     INVALID_OLD_PASS("Old password is not correct!"),
+    CANNOT_DELETE_MANAGER("Can not delete manager"),
+    INVALID_FEEDBACK("Invalid Feedback id in request"),
+    CANNOT_DELETE_ANOTHER_FEED("Can not delete feedback off another one"),
+    CANNOT_UPDATE_ANOTHER_FEED("Can not delete feedback off another one"),
     EXIST_NOT_DONE_TASK("This user is contributing to another task that is not already done. Please make the task done or assign that task to another one");
     private String detail;
 

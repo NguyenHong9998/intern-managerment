@@ -7,6 +7,7 @@ import cnpm.doan.entity.Task;
 import cnpm.doan.entity.User;
 import cnpm.doan.repository.MemberProjectRepository;
 import cnpm.doan.repository.TaskRepository;
+import cnpm.doan.security.JwtUtil;
 import cnpm.doan.service.ProjectService;
 import cnpm.doan.service.UserService;
 import cnpm.doan.util.CustormException;
@@ -30,6 +31,8 @@ public class ProjectController {
     private UserService userService;
     @Autowired
     private MemberProjectRepository memberProjectRepository;
+    @Autowired
+    private JwtUtil jwtUtil;
 
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
     @GetMapping("/projects")
@@ -46,12 +49,12 @@ public class ProjectController {
 
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER', 'ROLE_USER')")
     @GetMapping("/project")
-    public ResponseEntity<?> getProjectByUsername(@RequestParam("user_id") int userId) {
-        User user = userService.findById(userId);
-        if (user == null) {
-            return ResponseEntity.ok(new ResponeDomain(Message.INVALID_USER.getDetail(), false));
-        }
-        List<ProjectByUserIdDomain> projects = projectService.getProjectByUserId(userId);
+    public ResponseEntity<?> getProjectByUsername() {
+//        User user = userService.findById(jwtUtil.getCurrentUser().getUserId());
+//        if (user == null) {
+//            return ResponseEntity.ok(new ResponeDomain(Message.INVALID_USER.getDetail(), false));
+//        }
+        List<ProjectByUserIdDomain> projects = projectService.getProjectByUserId(jwtUtil.getCurrentUser().getUserId());
         if (projects.size() == 0) {
             return ResponseEntity.ok(new ResponeDomain(Message.EMPTY_RESULT.getDetail(), true));
         }

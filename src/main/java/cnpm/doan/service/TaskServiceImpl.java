@@ -41,6 +41,9 @@ public class TaskServiceImpl implements TaskService {
     @Autowired
     JwtUtil jwtUtil;
 
+    @Autowired
+    FeedbackRepository feedbackRepository;
+
     @Override
     public List<Task> findAllTaskByProjectId(int projectId) {
         return taskRepository.findAllByProjectId(projectId);
@@ -108,6 +111,7 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public void deleteTask(int taskId) throws CustormException {
+        feedbackRepository.deleteByTaskId(taskId);
         Task task = taskRepository.findById(taskId).orElse(null);
         if (task == null) {
             throw new CustormException(Message.INVALID_TASK);

@@ -104,8 +104,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void deleteUser(int idUser) throws CustormException {
+
         User user = userRepository.findById(idUser).orElse(null);
         if (user != null) {
+            if (user.getRoles().getRoleName().equals("ROLE_MANAGER")) {
+                throw new CustormException(Message.CANNOT_DELETE_MANAGER);
+            }
             List<MemberTask> memberTasks = memberTaskRepository.findAll().stream().filter(t -> t.getUser().getId() == user.getId()).collect(Collectors.toList());
             for (MemberTask memberTask : memberTasks) {
                 if (!memberTask.getTask().isDone()) {
