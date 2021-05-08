@@ -37,10 +37,11 @@ public class ManagerController {
     @GetMapping("/managers")
     public ResponseEntity<?> getAllManager() {
         List<User> managers = userService.findAll();
+        managers.forEach(t -> System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxx: " + t));
         if (managers.size() == 0) {
             return ResponseEntity.ok(new ResponeDomain(Message.EMPTY_RESULT.getDetail(), Message.SUCCESSFUlLY.getDetail(), true));
         }
-        List<UserDomain> managerInforDomains = managers.stream().filter(t->t.getRoles().getRoleName().equals("ROLE_MANAGER"))
+        List<UserDomain> managerInforDomains = managers.stream().filter(t -> t.getRoles().getRoleName().equals("ROLE_MANAGER"))
                 .map(t -> new UserDomain(t)).collect(Collectors.toList());
         return ResponseEntity.ok(new ResponeDomain(managerInforDomains, Message.SUCCESSFUlLY.getDetail(), true));
     }
