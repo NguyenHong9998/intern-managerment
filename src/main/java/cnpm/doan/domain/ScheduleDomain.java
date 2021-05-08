@@ -36,7 +36,7 @@ public class ScheduleDomain {
     public ScheduleDomain(Schedule schedule) {
         this.id = schedule.getId();
         this.reason = schedule.getReasonLeave();
-        this.time = DatetimeUtils.convertDateToStringYYYYMMDD(schedule.getTime());
+        this.time = DatetimeUtils.convertDateToString(schedule.getTime());
         this.shift = schedule.getShift();
     }
 
