@@ -532,11 +532,8 @@
 				},
 				{
 					"name": "add manager",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
 					"request": {
-						"method": "GET",
+						"method": "POST",
 						"header": [
 							{
 								"key": "Authorization",
@@ -555,6 +552,11 @@
 								{
 									"key": "password",
 									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "Nguyễn Chiến",
 									"type": "text"
 								}
 							]
