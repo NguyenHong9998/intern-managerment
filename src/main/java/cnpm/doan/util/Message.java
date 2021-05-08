@@ -22,6 +22,7 @@ public enum Message {
     TASK_NOT_DONE("This task is not done yet. Please make it already done and delete again"),
     WAITING_ACCOUNT("Your Account registered successfully, wait for your admin check it or contact to Shappee's admin"),
     INVALID_PROJECT_ID("Invalid Project id in request"),
+    CANNOT_GET_PRO_ANOTHER("Cannot get projects of another user"),
     INVALID_USER_PROJECT("You can not get Task of Project that you do not contribute"),
     CANOT_UPDATE_EMAIL("Cannot update your email or Department, if you want to update, please contact to Shappee's admin"),
     PERMISION_EDIT_ANOTHER_ACC("Do not have permission to update another acc"),

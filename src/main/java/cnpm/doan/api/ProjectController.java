@@ -47,12 +47,18 @@ public class ProjectController {
 
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER', 'ROLE_USER')")
     @GetMapping("/project")
-    public ResponseEntity<?> getProjectByUsername() {
+    public ResponseEntity<?> getProjectByUsername(@RequestParam("user_id") int userId) {
+        User user = userService.findById(jwtUtil.getCurrentUser().getUserId());
+
+        if (userId != jwtUtil.getCurrentUser().getUserId()
+                && user.getRoles().getRoleName().equals("ROLE_USER")) {
+            return ResponseEntity.ok(new ResponeDomain(Message.CANNOT_GET_PRO_ANOTHER.getDetail(), false));
+        }
 //        User user = userService.findById(jwtUtil.getCurrentUser().getUserId());
 //        if (user == null) {
 //            return ResponseEntity.ok(new ResponeDomain(Message.INVALID_USER.getDetail(), false));
 //        }
-        List<ProjectByUserIdDomain> projects = projectService.getProjectByUserId(jwtUtil.getCurrentUser().getUserId());
+        List<ProjectByUserIdDomain> projects = projectService.getProjectByUserId(userId);
         if (projects.size() == 0) {
             return ResponseEntity.ok(new ResponeDomain(Message.EMPTY_RESULT.getDetail(), true));
         }

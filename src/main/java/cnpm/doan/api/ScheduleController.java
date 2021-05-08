@@ -25,4 +25,11 @@ public class ScheduleController {
         scheduleService.add(leaveDomain);
         return ResponseEntity.ok(new ResponeDomain(Message.SUCCESSFUlLY.getDetail(), HTTPStatus.success));
     }
+
+    @PostMapping("/schedules")
+    @PreAuthorize("hasAnyAuthority('ROLE_USER','ROLE_MANAGER', 'ROLE_ADMIN')")
+    public ResponseEntity<?> getAllSchedule() {
+        scheduleService.getAll();
+        return ResponseEntity.ok(new ResponeDomain(Message.SUCCESSFUlLY.getDetail(), HTTPStatus.success));
+    }
 }

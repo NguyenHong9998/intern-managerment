@@ -5,6 +5,8 @@ import cnpm.doan.entity.Schedule;
 import cnpm.doan.util.DatetimeUtils;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ScheduleServiceImpl implements ScheduleService {
     @Override
@@ -25,4 +27,8 @@ public class ScheduleServiceImpl implements ScheduleService {
 
     }
 
+    @Override
+    public List<Schedule> getAll() {
+        return null;
+    }
 }
