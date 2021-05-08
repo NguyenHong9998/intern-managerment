@@ -64,7 +64,7 @@ public class ProjectController {
 
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER', 'ROLE_USER')")
     @GetMapping("/project/users")
-    public ResponseEntity<?> getUsersOfProject(@RequestParam int idProject) {
+    public ResponseEntity<?> getUsersOfProject(@RequestParam("id_project") int idProject) {
         MemberProject memberProject = memberProjectRepository.findMemberProjectByUserIdAndProjectId(idProject, jwtUtil.getCurrentUser().getUserId());
         if (memberProject == null) {
             return ResponseEntity.ok(new ResponeDomain(Message.INVALID_PROJECT_ID.getDetail(), true));
