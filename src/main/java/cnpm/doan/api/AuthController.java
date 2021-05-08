@@ -48,8 +48,8 @@ public class AuthController {
     public ResponseEntity<?> changePass(@RequestBody ChangePasswordRequest changePasswordRequest) {
         System.out.println("old: " + changePasswordRequest.getOldPassword() + "new: " + changePasswordRequest.getNewPassword());
         User user = userService.findById(jwtUtil.getCurrentUser().getUserId());
-        if (!changePasswordRequest.getNewPassword().equals(changePasswordRequest.getOldPassword())) {
-            return ResponseEntity.ok(new ResponeDomain(Message.PASS_DIFF.getDetail(), false));
+        if (!changePasswordRequest.getOldPassword().equals(new BCryptPasswordEncoder().encode(user.getPassword()))) {
+            return ResponseEntity.ok(new ResponeDomain(Message.INVALID_OLD_PASS.getDetail(), false));
         }
         userService.updatePassword(user, new BCryptPasswordEncoder().encode(changePasswordRequest.getNewPassword()));
         return ResponseEntity.ok(new ResponeDomain(Message.SUCCESSFUlLY.getDetail(), true));
