@@ -78,6 +78,10 @@ public class UserController {
         User user = userService.findById(userDomain.getId());
         UserPrincipal userPrincipal = jwtUtil.getCurrentUser();
         String role = userPrincipal.getAuthorities().stream().findFirst().get().toString();
+        User user1 = userService.findUserByEmail(userDomain.getEmail());
+        if (user1 != null) {
+            return ResponseEntity.ok(new ResponeDomain(Message.EMAIL_EXISTED.getDetail(), false));
+        }
         if (userDomain.getId() != userPrincipal.getUserId()) {
             return ResponseEntity.ok(new ResponeDomain(Message.PERMISION_EDIT_ANOTHER_ACC.getDetail(), false));
         }
