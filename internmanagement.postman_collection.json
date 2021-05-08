@@ -18,37 +18,37 @@
 							"formdata": [
 								{
 									"key": "username",
-									"value": "sangnguyen@gmail.com",
+									"value": "htkame2511@gmail.com\n",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "password",
+									"value": "12345",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "username",
+									"value": "nguyenhong19999@gmail.com",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "password",
+									"value": "2",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "username",
+									"value": "sangphan297@gmail.com",
 									"type": "text"
 								},
 								{
 									"key": "password",
 									"value": "1",
 									"type": "text"
-								},
-								{
-									"key": "username",
-									"value": "nguyenhong19999@gmail.com",
-									"type": "text",
-									"disabled": true
-								},
-								{
-									"key": "password",
-									"value": "2",
-									"type": "text",
-									"disabled": true
-								},
-								{
-									"key": "username",
-									"value": "nguyenhong19999@gmail.com",
-									"type": "text",
-									"disabled": true
-								},
-								{
-									"key": "password",
-									"value": "2",
-									"type": "text",
-									"disabled": true
 								}
 							]
 						},
@@ -143,6 +143,41 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Change password",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MjEzMjAxOTUsInVzZXIiOnsicGFzc3dvcmQiOiIkMmEkMTAkUzhReGdXUkdkQ3N3MzBJMnVRa3pmdWx2ZWtZSVBnVkRuQ3AuQUlsM25Gc01iWmhPNjBld08iLCJ1c2VySWQiOjcxLCJhdXRob3JpdGllcyI6WyJST0xFX1VTRVIiXSwidXNlcm5hbWUiOiJuZ3V5ZW5ob25nMTk5OTlAZ21haWwuY29tIn19.CjtU0D7o80__9PyhqNJnWQNOC0gQMoUERn7T0Ag0bXI",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"old_password\": \"1\",\r\n    \"new_password\": \"2\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://intern-managerment.herokuapp.com/change-pass",
+							"protocol": "http",
+							"host": [
+								"intern-managerment",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"change-pass"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -159,7 +194,7 @@
 							"formdata": [
 								{
 									"key": "username",
-									"value": "nguyenhong19999@gmail.com",
+									"value": "nguyenchien99@gmail.com",
 									"type": "text"
 								},
 								{
@@ -169,7 +204,7 @@
 								},
 								{
 									"key": "name",
-									"value": "OKEOKEOKEOE",
+									"value": "Chiến Nguyễn",
 									"type": "text"
 								}
 							]
@@ -440,7 +475,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MjExNzA3NDUsInVzZXIiOnsicGFzc3dvcmQiOiIkMmEkMTAkbWZMM0NKZ1l5OHd2ellOSFU2dnlXLk5kNjBCU1ZmMTVjbm1sUU5PY3pvQUNSOFwvWHlxNW5lIiwidXNlcklkIjo0NSwiYXV0aG9yaXRpZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoibmd1eWVuaG9uZzE5OTk5QGdtYWlsLmNvbSJ9fQ.zHBZw2t4Oifl6e4OBNt0XUCHvUanD30CMH-kz4T5BxU",
+								"value": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MjEyNjAzMTYsInVzZXIiOnsicGFzc3dvcmQiOiIkMmEkMTAkbWZMM0NKZ1l5OHd2ellOSFU2dnlXLk5kNjBCU1ZmMTVjbm1sUU5PY3pvQUNSOFwvWHlxNW5lIiwidXNlcklkIjo0NSwiYXV0aG9yaXRpZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoibmd1eWVuaG9uZzE5OTk5QGdtYWlsLmNvbSJ9fQ.Nr-FcpZrY7VE4ohp7r8n7zF0jeKei4W7KqEBMvgSulI",
 								"type": "text"
 							}
 						],
@@ -449,7 +484,7 @@
 							"formdata": [
 								{
 									"key": "id",
-									"value": "1",
+									"value": "45",
 									"type": "text"
 								},
 								{
@@ -494,6 +529,51 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "add manager",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MjEzMzAyMTEsInVzZXIiOnsicGFzc3dvcmQiOiIkMmEkMTAkUzhReGdXUkdkQ3N3MzBJMnVRa3pmdWx2ZWtZSVBnVkRuQ3AuQUlsM25Gc01iWmhPNjBld08iLCJ1c2VySWQiOjcwLCJhdXRob3JpdGllcyI6WyJST0xFX0FETUlOIl0sInVzZXJuYW1lIjoiaHRraWVuMjUxMUBnbWFpbC5jb20ifX0.zcjC-hHwgBUX7pejNaGOMmMaFfyqbbtUElxeE3sHrE0",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "username",
+									"value": "nguyenchien99@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "2",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://intern-managerment.herokuapp.com/manager/add",
+							"protocol": "http",
+							"host": [
+								"intern-managerment",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"manager",
+								"add"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -511,7 +591,7 @@
 							{
 								"key": "Authorization",
 								"type": "text",
-								"value": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MjEwODUzMTcsInVzZXIiOnsicGFzc3dvcmQiOiIkMmEkMTAkQ0xIS1hxVDBpRmRhaVp5UXhwWElKdXRNNFFnUkRacGxnczVrWllPdXhOeFlELmFaYkFZaUMiLCJ1c2VySWQiOjUsImF1dGhvcml0aWVzIjpbIlJPTEVfQURNSU4iXSwidXNlcm5hbWUiOiJzYW5ncGhhbjI5N0BnbWFpbC5jb20ifX0.IzZ7W3EJQwd5DRF9oinGSmSnmvTa5gzYz0FRQflSJ7Y"
+								"value": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MjEzMzEwMTMsInVzZXIiOnsicGFzc3dvcmQiOiIkMmEkMTAkUzhReGdXUkdkQ3N3MzBJMnVRa3pmdWx2ZWtZSVBnVkRuQ3AuQUlsM25Gc01iWmhPNjBld08iLCJ1c2VySWQiOjczLCJhdXRob3JpdGllcyI6WyJST0xFX1VTRVIiXSwidXNlcm5hbWUiOiJzYW5ncGhhbjI5N0BnbWFpbC5jb20ifX0.HVNVbGQ5vYGDnsxW-ah8kSjziQvkEB2XYj3n4gTnhrI"
 							}
 						],
 						"body": {
@@ -519,7 +599,7 @@
 							"formdata": []
 						},
 						"url": {
-							"raw": "http://intern-managerment.herokuapp.com/project?user_id=3",
+							"raw": "http://intern-managerment.herokuapp.com/project?user_id=73",
 							"protocol": "http",
 							"host": [
 								"intern-managerment",
@@ -532,7 +612,7 @@
 							"query": [
 								{
 									"key": "user_id",
-									"value": "3"
+									"value": "73"
 								}
 							]
 						}
@@ -603,7 +683,7 @@
 							}
 						],
 						"url": {
-							"raw": "http://intern-managerment.herokuapp.com/project/delete?id_project=1",
+							"raw": "http://intern-managerment.herokuapp.com/project/delete?id_project=2",
 							"protocol": "http",
 							"host": [
 								"intern-managerment",
@@ -617,7 +697,7 @@
 							"query": [
 								{
 									"key": "id_project",
-									"value": "1"
+									"value": "2"
 								}
 							]
 						}
@@ -687,6 +767,39 @@
 							],
 							"path": [
 								"projects"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all user of projet",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MjEzMzEwMTMsInVzZXIiOnsicGFzc3dvcmQiOiIkMmEkMTAkUzhReGdXUkdkQ3N3MzBJMnVRa3pmdWx2ZWtZSVBnVkRuQ3AuQUlsM25Gc01iWmhPNjBld08iLCJ1c2VySWQiOjczLCJhdXRob3JpdGllcyI6WyJST0xFX1VTRVIiXSwidXNlcm5hbWUiOiJzYW5ncGhhbjI5N0BnbWFpbC5jb20ifX0.HVNVbGQ5vYGDnsxW-ah8kSjziQvkEB2XYj3n4gTnhrI",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://intern-managerment.herokuapp.com/project/users?id_project=10",
+							"protocol": "http",
+							"host": [
+								"intern-managerment",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"project",
+								"users"
+							],
+							"query": [
+								{
+									"key": "id_project",
+									"value": "10"
+								}
 							]
 						}
 					},
@@ -822,7 +935,7 @@
 							"formdata": [
 								{
 									"key": "id_task",
-									"value": "5",
+									"value": "4",
 									"type": "text"
 								}
 							]
@@ -842,6 +955,42 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "update task",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MjEyNjAzMTYsInVzZXIiOnsicGFzc3dvcmQiOiIkMmEkMTAkbWZMM0NKZ1l5OHd2ellOSFU2dnlXLk5kNjBCU1ZmMTVjbm1sUU5PY3pvQUNSOFwvWHlxNW5lIiwidXNlcklkIjo0NSwiYXV0aG9yaXRpZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoibmd1eWVuaG9uZzE5OTk5QGdtYWlsLmNvbSJ9fQ.Nr-FcpZrY7VE4ohp7r8n7zF0jeKei4W7KqEBMvgSulI",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"taskId\": 1,\r\n    \"description\": \"test thu json format description\",\r\n    \"title\": \"test thu json format title\",\r\n    \"difficulty\": 1,\r\n    \"isDone\": true,\r\n    \"point\": 8.0,\r\n    \"duedate\": \"2021/12/12\",\r\n    \"user_contribute_to_task\": [\r\n        {\r\n            \"id\": 1,\r\n            \"name\": \"Hong\"\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://intern-managerment.herokuapp.com/task/update",
+							"protocol": "http",
+							"host": [
+								"intern-managerment",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"task",
+								"update"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -852,7 +1001,13 @@
 					"name": "GetAllDepartment",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MjEyNjAzMTYsInVzZXIiOnsicGFzc3dvcmQiOiIkMmEkMTAkbWZMM0NKZ1l5OHd2ellOSFU2dnlXLk5kNjBCU1ZmMTVjbm1sUU5PY3pvQUNSOFwvWHlxNW5lIiwidXNlcklkIjo0NSwiYXV0aG9yaXRpZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoibmd1eWVuaG9uZzE5OTk5QGdtYWlsLmNvbSJ9fQ.Nr-FcpZrY7VE4ohp7r8n7zF0jeKei4W7KqEBMvgSulI",
+								"type": "text"
+							}
+						],
 						"url": {
 							"raw": "http://intern-managerment.herokuapp.com/departments",
 							"protocol": "http",
@@ -863,6 +1018,310 @@
 							],
 							"path": [
 								"departments"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ScheduleController",
+			"item": [
+				{
+					"name": "Add Leave Requset",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MjEzMzEwMTMsInVzZXIiOnsicGFzc3dvcmQiOiIkMmEkMTAkUzhReGdXUkdkQ3N3MzBJMnVRa3pmdWx2ZWtZSVBnVkRuQ3AuQUlsM25Gc01iWmhPNjBld08iLCJ1c2VySWQiOjczLCJhdXRob3JpdGllcyI6WyJST0xFX1VTRVIiXSwidXNlcm5hbWUiOiJzYW5ncGhhbjI5N0BnbWFpbC5jb20ifX0.HVNVbGQ5vYGDnsxW-ah8kSjziQvkEB2XYj3n4gTnhrI",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"shift\": 1,\r\n    \"leave_date\": \"2020/12/12\",\r\n    \"reason_content\": \"Personal reason\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://intern-managerment.herokuapp.com/schedule/add",
+							"protocol": "http",
+							"host": [
+								"intern-managerment",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"schedule",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all Schedule by user id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MjEzMzEwMTMsInVzZXIiOnsicGFzc3dvcmQiOiIkMmEkMTAkUzhReGdXUkdkQ3N3MzBJMnVRa3pmdWx2ZWtZSVBnVkRuQ3AuQUlsM25Gc01iWmhPNjBld08iLCJ1c2VySWQiOjczLCJhdXRob3JpdGllcyI6WyJST0xFX1VTRVIiXSwidXNlcm5hbWUiOiJzYW5ncGhhbjI5N0BnbWFpbC5jb20ifX0.HVNVbGQ5vYGDnsxW-ah8kSjziQvkEB2XYj3n4gTnhrI",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://intern-managerment.herokuapp.com/schedule?user_id=73",
+							"protocol": "http",
+							"host": [
+								"intern-managerment",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"schedule"
+							],
+							"query": [
+								{
+									"key": "user_id",
+									"value": "73"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all schedule",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteschedule by id",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MjEzMzEwMTMsInVzZXIiOnsicGFzc3dvcmQiOiIkMmEkMTAkUzhReGdXUkdkQ3N3MzBJMnVRa3pmdWx2ZWtZSVBnVkRuQ3AuQUlsM25Gc01iWmhPNjBld08iLCJ1c2VySWQiOjczLCJhdXRob3JpdGllcyI6WyJST0xFX1VTRVIiXSwidXNlcm5hbWUiOiJzYW5ncGhhbjI5N0BnbWFpbC5jb20ifX0.HVNVbGQ5vYGDnsxW-ah8kSjziQvkEB2XYj3n4gTnhrI",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "http://intern-managerment.herokuapp.com/schedule/delete?leave_id=2",
+							"protocol": "http",
+							"host": [
+								"intern-managerment",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"schedule",
+								"delete"
+							],
+							"query": [
+								{
+									"key": "leave_id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update schedule by id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"shift\": 2,\r\n    \"leave_date\": \"2020/12/12\",\r\n    \"reason_content\": \"Personal reason\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://intern-managerment.herokuapp.com/schedule/update?leave_id=3",
+							"protocol": "http",
+							"host": [
+								"intern-managerment",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"schedule",
+								"update"
+							],
+							"query": [
+								{
+									"key": "leave_id",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "FeedbackCOntroller",
+			"item": [
+				{
+					"name": "get feedback by task id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MjEzMzkyODUsInVzZXIiOnsicGFzc3dvcmQiOiIkMmEkMTAkUzhReGdXUkdkQ3N3MzBJMnVRa3pmdWx2ZWtZSVBnVkRuQ3AuQUlsM25Gc01iWmhPNjBld08iLCJ1c2VySWQiOjczLCJhdXRob3JpdGllcyI6WyJST0xFX1VTRVIiXSwidXNlcm5hbWUiOiJzYW5ncGhhbjI5N0BnbWFpbC5jb20ifX0.coOHOL8-z0lGyE4A51rwf8_QNUJZXkWyW2l7HHSyGP0",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://intern-managerment.herokuapp.com/task/feedback?task_id=5",
+							"protocol": "http",
+							"host": [
+								"intern-managerment",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"task",
+								"feedback"
+							],
+							"query": [
+								{
+									"key": "task_id",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add feedback",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"task_id\": 5,\r\n    \"feedback_content\": \"Em chưa hiểu về yêu cầu của task này, mọi người có thể giai thích cho em được k ạ.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://intern-managerment.herokuapp.com/task/feedback/add",
+							"protocol": "http",
+							"host": [
+								"intern-managerment",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"task",
+								"feedback",
+								"add"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete feedback",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MjEzMzkyODUsInVzZXIiOnsicGFzc3dvcmQiOiIkMmEkMTAkUzhReGdXUkdkQ3N3MzBJMnVRa3pmdWx2ZWtZSVBnVkRuQ3AuQUlsM25Gc01iWmhPNjBld08iLCJ1c2VySWQiOjczLCJhdXRob3JpdGllcyI6WyJST0xFX1VTRVIiXSwidXNlcm5hbWUiOiJzYW5ncGhhbjI5N0BnbWFpbC5jb20ifX0.coOHOL8-z0lGyE4A51rwf8_QNUJZXkWyW2l7HHSyGP0",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://intern-managerment.herokuapp.com/task/feedback/delete?feedback_id=4",
+							"protocol": "http",
+							"host": [
+								"intern-managerment",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"task",
+								"feedback",
+								"delete"
+							],
+							"query": [
+								{
+									"key": "feedback_id",
+									"value": "4"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update feedback",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MjEzMzkyODUsInVzZXIiOnsicGFzc3dvcmQiOiIkMmEkMTAkUzhReGdXUkdkQ3N3MzBJMnVRa3pmdWx2ZWtZSVBnVkRuQ3AuQUlsM25Gc01iWmhPNjBld08iLCJ1c2VySWQiOjczLCJhdXRob3JpdGllcyI6WyJST0xFX1VTRVIiXSwidXNlcm5hbWUiOiJzYW5ncGhhbjI5N0BnbWFpbC5jb20ifX0.coOHOL8-z0lGyE4A51rwf8_QNUJZXkWyW2l7HHSyGP0",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"feedback_id\": 5,\r\n    \"feedback_content\": \"description của task chưa rõ\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://intern-managerment.herokuapp.com/task/feedback/update",
+							"protocol": "http",
+							"host": [
+								"intern-managerment",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"task",
+								"feedback",
+								"update"
 							]
 						}
 					},

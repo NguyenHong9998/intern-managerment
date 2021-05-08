@@ -46,7 +46,7 @@ public class FeedbackController {
         } catch (CustormException e) {
             return ResponseEntity.ok(new ResponeDomain(e.getErrorType().getDetail(), false));
         }
-        return ResponseEntity.ok(new ResponeDomain(feedbackDomain, Message.SUCCESSFUlLY.getDetail(), HTTPStatus.success));
+        return ResponseEntity.ok(new ResponeDomain(Message.SUCCESSFUlLY.getDetail(), HTTPStatus.success));
     }
 
     @PreAuthorize("hasAnyAuthority('ROLE_USER','ROLE_ADMIN','ROLE_MANAGER')")

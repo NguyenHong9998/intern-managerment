@@ -45,7 +45,7 @@ public class ManagerController {
     }
 
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
-    @GetMapping("/manager/add")
+    @PostMapping("/manager/add")
     public ResponseEntity<?> addAllManager(@ModelAttribute RegisterAccount account) {
         User user = userService.findUserByEmail(account.getEmail());
         if (user != null) {
