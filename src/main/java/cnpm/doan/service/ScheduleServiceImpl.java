@@ -60,8 +60,12 @@ public class ScheduleServiceImpl implements ScheduleService {
     }
 
     @Override
-    public void delete(int leaveId) {
+    public void delete(int leaveId) throws CustormException {
         Schedule schedule = scheduleRepository.findById(leaveId).orElse(null);
+        User user = userRepository.findById(jwtUtil.getCurrentUser().getUserId()).orElse(null);
+        if (schedule.getUser().getId() != jwtUtil.getCurrentUser().getUserId() && user.getRoles().getRoleName().equals("ROLE_USER")) {
+            throw new CustormException(Message.CANNOT_DELETE_ANOTHER_SCHEDULE);
+        }
         scheduleRepository.delete(schedule);
     }
 

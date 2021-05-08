@@ -12,7 +12,7 @@ public interface ScheduleService {
 
     void update(int leaveId,LeaveDomain leaveDomain) throws CustormException;
 
-    void delete(int leaveId);
+    void delete(int leaveId) throws CustormException;
 
     List<ScheduleDomain> getAll();
 }

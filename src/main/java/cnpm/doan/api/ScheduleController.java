@@ -55,11 +55,11 @@ public class ScheduleController {
     @PutMapping("/schedule/delete")
     @PreAuthorize("hasAnyAuthority('ROLE_USER','ROLE_MANAGER', 'ROLE_ADMIN')")
     public ResponseEntity<?> deleteSchedule(@RequestParam("leave_id") int leaveId) {
-//        try {
+        try {
             scheduleService.delete(leaveId);
-//        } catch (CustormException e) {
-//            return ResponseEntity.ok(new ResponeDomain(e.getErrorType().getDetail(), HTTPStatus.fail));
-//        }
+        } catch (CustormException e) {
+            return ResponseEntity.ok(new ResponeDomain(e.getErrorType().getDetail(), HTTPStatus.fail));
+        }
         return ResponseEntity.ok(new ResponeDomain(Message.SUCCESSFUlLY.getDetail(), HTTPStatus.success));
     }
 }
