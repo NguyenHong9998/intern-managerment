@@ -43,7 +43,7 @@ public class AuthController {
         return ResponseEntity.ok(new ResponeDomain(userWithToken, Message.SUCCESSFUlLY.getDetail(), true));
     }
 
-//    @PreAuthorize("hasAnyAuthority('ROLE_USER','ROLE_ADMIN', 'ROLE_MANAGER')")
+    @PreAuthorize("hasAnyAuthority('ROLE_USER','ROLE_ADMIN', 'ROLE_MANAGER')")
     @PostMapping("/change-pass")
     public ResponseEntity<?> changePass(@RequestBody ChangePasswordRequest changePasswordRequest) {
         if (changePasswordRequest.getNewPassword() != changePasswordRequest.getOldPassword()) {
