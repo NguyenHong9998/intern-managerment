@@ -7,20 +7,28 @@ import java.util.List;
 
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class TaskUpdateRequest {
-    private long taskId;
+    private int taskId;
     private String description;
     private String title;
     private int difficulty;
     private boolean isDone;
     private String point;
-    private String assignee;
-    private List<UserContributeToTask> userTaskDomains;
+    private String duedate;
+    private List<UserContributeToTask> userContributeToTask;
 
-    public long getTaskId() {
+    public String getDuedate() {
+        return duedate;
+    }
+
+    public void setDuedate(String duedate) {
+        this.duedate = duedate;
+    }
+
+    public int getTaskId() {
         return taskId;
     }
 
-    public void setTaskId(long taskId) {
+    public void setTaskId(int taskId) {
         this.taskId = taskId;
     }
 
@@ -64,19 +72,11 @@ public class TaskUpdateRequest {
         this.point = point;
     }
 
-    public String getAssignee() {
-        return assignee;
-    }
-
-    public void setAssignee(String assignee) {
-        this.assignee = assignee;
-    }
-
     public List<UserContributeToTask> getUserTaskDomains() {
-        return userTaskDomains;
+        return userContributeToTask;
     }
 
     public void setUserTaskDomains(List<UserContributeToTask> userTaskDomains) {
-        this.userTaskDomains = userTaskDomains;
+        this.userContributeToTask = userTaskDomains;
     }
 }

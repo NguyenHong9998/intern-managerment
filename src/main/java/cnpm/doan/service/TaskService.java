@@ -2,6 +2,7 @@ package cnpm.doan.service;
 
 import cnpm.doan.domain.TaskDomain;
 import cnpm.doan.domain.TaskRequest;
+import cnpm.doan.domain.TaskUpdateRequest;
 import cnpm.doan.entity.Task;
 import cnpm.doan.util.CustormException;
 
@@ -16,5 +17,5 @@ public interface TaskService {
 
     void deleteTask(int taskId) throws CustormException;
 
-    void update(TaskDomain taskDomain);
+    void update(TaskUpdateRequest TaskUpdateRequest) throws CustormException;
 }

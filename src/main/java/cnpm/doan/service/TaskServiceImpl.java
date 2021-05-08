@@ -2,6 +2,7 @@ package cnpm.doan.service;
 
 import cnpm.doan.domain.TaskDomain;
 import cnpm.doan.domain.TaskRequest;
+import cnpm.doan.domain.TaskUpdateRequest;
 import cnpm.doan.domain.UserContributeToTask;
 import cnpm.doan.entity.*;
 import cnpm.doan.repository.*;
@@ -117,7 +118,19 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public void update(TaskDomain taskDomain) {
-
+    public void update(TaskUpdateRequest taskUpdateRequest) throws CustormException {
+//        Task task = taskRepository.findById(taskUpdateRequest.getTaskId()).orElse(null);
+//        if (task == null) {
+//            throw new CustormException(Message.INVALID_TASK);
+//        }
+//        task.setDueDate(DatetimeUtils.convertStringToDateOrNull(taskUpdateRequest.getDuedate(), DatetimeUtils.YYYYMMDD));
+//        task.setDescription(taskUpdateRequest.getDescription());
+//        task.setTitle(taskUpdateRequest.getTitle());
+//        task.setDone(taskUpdateRequest.isDone());
+//        task.setPoint(Float.valueOf(taskUpdateRequest.getPoint()));
+//        taskRepository.save(task);
+//        for (UserContributeToTask user: taskUpdateRequest.getUserTaskDomains()){
+//            memberTaskRepository.save()
+//        }
     }
 }

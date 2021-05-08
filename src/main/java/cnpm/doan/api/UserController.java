@@ -57,7 +57,10 @@ public class UserController {
         newUser.setEmail(account.getEmail());
         newUser.setPassword(new BCryptPasswordEncoder().encode(account.getPassword()));
         userService.createUser(newUser);
-        return ResponseEntity.ok(new ResponeDomain(account.getEmail(), Message.SUCCESSFUlLY.getDetail(), true));
+        UserContributeToTask userContributeToTask = new UserContributeToTask();
+        userContributeToTask.setId(newUser.getId());
+        userContributeToTask.setName(newUser.getName());
+        return ResponseEntity.ok(new ResponeDomain(userContributeToTask, Message.SUCCESSFUlLY.getDetail(), true));
     }
 
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN','ROLE_MANAGER','ROLE_USER')")
