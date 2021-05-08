@@ -6,6 +6,7 @@ import cnpm.doan.entity.Project;
 import cnpm.doan.entity.Task;
 import cnpm.doan.entity.User;
 import cnpm.doan.repository.MemberProjectRepository;
+import cnpm.doan.repository.ProjectRepository;
 import cnpm.doan.repository.TaskRepository;
 import cnpm.doan.service.ProjectService;
 import cnpm.doan.service.UserService;
@@ -32,6 +33,8 @@ public class ProjectController {
     private MemberProjectRepository memberProjectRepository;
     @Autowired
     private TaskRepository taskRepository;
+    @Autowired
+    private ProjectRepository projectRepository;
 
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
     @GetMapping("/projects")
@@ -127,7 +130,7 @@ public class ProjectController {
     }
     @PostMapping("/test")
     public ResponseEntity<?> deleteAllProjectMember(){
-        memberProjectRepository.deleteAll();
+        projectRepository.deleteAll();
         return ResponseEntity.ok(new ResponeDomain(Message.SUCCESSFUlLY.getDetail(), HTTPStatus.success));
     }
 }
