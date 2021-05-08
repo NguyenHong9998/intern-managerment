@@ -35,6 +35,9 @@ public class ScheduleController {
     @PreAuthorize("hasAnyAuthority('ROLE_USER','ROLE_MANAGER', 'ROLE_ADMIN')")
     public ResponseEntity<?> getAllSchedule() {
         List<ScheduleDomain> result = scheduleService.getAll();
+        if(result.size() ==0){
+            return ResponseEntity.ok(new ResponeDomain(result, Message.EMPTY_RESULT.getDetail(), HTTPStatus.success));
+        }
         return ResponseEntity.ok(new ResponeDomain(result, Message.SUCCESSFUlLY.getDetail(), HTTPStatus.success));
     }
 
