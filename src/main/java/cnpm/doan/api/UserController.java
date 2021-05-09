@@ -89,22 +89,23 @@ public class UserController {
         if (user == null) {
             return ResponseEntity.ok(new ResponeDomain(Message.INVALID_USER.getDetail(), false));
         }
-        if (user.getEmail().equals(userPrincipal.getUsername()) &&
-                (user.getDepartment() == null && userDomain.getDepartment() != null) &&
+        Department department = departmentService.findById(Integer.valueOf(userDomain.getDepartment()));
+        user.setName(userDomain.getName());
+        user.setAddress(userDomain.getAddress());
+        user.setGender(userDomain.getGender());
+        user.setId(userDomain.getId());
+        user.setDepartment(department);
+        if (!user.getEmail().equals(userPrincipal.getUsername()) ||
+                !(user.getDepartment() == null && userDomain.getDepartment() != null) ||
                 (Integer.valueOf(userDomain.getDepartment()) == user.getDepartment().getId())) {
-            Department department = departmentService.findById(Integer.valueOf(userDomain.getDepartment()));
-            user.setName(userDomain.getName());
-            user.setAddress(userDomain.getAddress());
-            user.setGender(userDomain.getGender());
             if (role.equals("ROLE_ADMIN")) {
-                user.setId(userDomain.getId());
                 user.setDepartment(departmentService.findById(Integer.valueOf(userDomain.getId())));
             } else {
                 return ResponseEntity.ok(new ResponeDomain(Message.CANOT_UPDATE_EMAIL.getDetail(), false));
             }
-            user.setDepartment(department);
-            userService.createUser(user);
+
         }
+        userService.createUser(user);
         UserDomain result = new UserDomain(user);
         return ResponseEntity.ok(new ResponeDomain(result, Message.SUCCESSFUlLY.getDetail(), true));
     }

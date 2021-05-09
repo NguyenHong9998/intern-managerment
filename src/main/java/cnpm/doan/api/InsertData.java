@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Arrays;
@@ -115,6 +116,14 @@ public class InsertData {
             return t;
         }).collect(Collectors.toList());
         projectRepository.saveAll(projects);
+        return ResponseEntity.ok(new ResponeDomain(Message.SUCCESSFUlLY.getDetail(), true));
+    }
+
+    @PostMapping("/pass")
+    public ResponseEntity<?> updaepass(@RequestParam("user_id") int userId) {
+        User user = userRepository.findById(userId).orElse(null);
+        user.setPassword(new BCryptPasswordEncoder().encode("1"));
+        userRepository.save(user);
         return ResponseEntity.ok(new ResponeDomain(Message.SUCCESSFUlLY.getDetail(), true));
     }
 }
