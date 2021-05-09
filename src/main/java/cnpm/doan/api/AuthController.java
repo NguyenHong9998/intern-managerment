@@ -47,12 +47,11 @@ public class AuthController {
     @PostMapping("/change-pass")
     public ResponseEntity<?> changePass(@RequestBody ChangePasswordRequest changePasswordRequest) {
         User user = userService.findById(jwtUtil.getCurrentUser().getUserId());
-        if (!new BCryptPasswordEncoder().matches(user.getPassword(), new BCryptPasswordEncoder().encode(changePasswordRequest.getOldPassword()))) {
+        if (!new BCryptPasswordEncoder().matches(changePasswordRequest.getOldPassword(), user.getPassword())) {
             return ResponseEntity.ok(new ResponeDomain(Message.INVALID_OLD_PASS.getDetail(), false));
         }
         user.setPassword(new BCryptPasswordEncoder().encode(changePasswordRequest.getNewPassword()));
         userService.createUser(user);
-//        userService.updatePassword(user, new BCryptPasswordEncoder().encode(changePasswordRequest.getNewPassword()));
         return ResponseEntity.ok(new ResponeDomain(Message.SUCCESSFUlLY.getDetail(), true));
     }
 
