@@ -11,7 +11,7 @@ public class TaskDomain {
     private String point;
     private String projectName;
     private String createDate;
-    private List<UserContributeToTask> userTaskDomains;
+    private List<UserContributeToTask> usersAssignee;
 
     public TaskDomain() {
     }
@@ -25,15 +25,15 @@ public class TaskDomain {
         this.point = point;
         this.projectName = projectName;
         this.createDate = createDate;
-        this.userTaskDomains = userTaskDomains;
+        this.usersAssignee = userTaskDomains;
     }
 
-    public List<UserContributeToTask> getUserTaskDomains() {
-        return userTaskDomains;
+    public List<UserContributeToTask> getUsersAssignee() {
+        return usersAssignee;
     }
 
-    public void setUserTaskDomains(List<UserContributeToTask> userTaskDomains) {
-        this.userTaskDomains = userTaskDomains;
+    public void setUsersAssignee(List<UserContributeToTask> usersAssignee) {
+        this.usersAssignee = usersAssignee;
     }
 
     public long getTaskId() {
