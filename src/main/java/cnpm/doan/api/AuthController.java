@@ -51,7 +51,8 @@ public class AuthController {
         if (!changePasswordRequest.getOldPassword().equals(new BCryptPasswordEncoder().encode(user.getPassword()))) {
             return ResponseEntity.ok(new ResponeDomain(Message.INVALID_OLD_PASS.getDetail(), false));
         }
-        userService.updatePassword(user, new BCryptPasswordEncoder().encode(changePasswordRequest.getNewPassword()));
+        userService.createUser(user);
+//        userService.updatePassword(user, new BCryptPasswordEncoder().encode(changePasswordRequest.getNewPassword()));
         return ResponseEntity.ok(new ResponeDomain(Message.SUCCESSFUlLY.getDetail(), true));
     }
 
