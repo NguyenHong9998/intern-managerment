@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 public class InsertData {
@@ -76,12 +77,12 @@ public class InsertData {
         List<User> manager = userRepository.findUserByRoleName("ROLE_MANAGER");
 //        String title, String description, Date dueDate, User manager
         List<Project> projects = Arrays.asList(
-                new Project("Intern management", "Backend: Java ; Frontend: React; Database: Postgres", DatetimeUtils.convertStringToDateOrNull(date, pattern), manager.get(1)),
-                new Project("Fashion shop management", "Backend: Java ; Frontend: React; Database: Postgres", DatetimeUtils.convertStringToDateOrNull(date, pattern), manager.get(0)),
-                new Project("Library management", "Backend: Java ; Frontend: React; Database: Postgres", DatetimeUtils.convertStringToDateOrNull(date, pattern), manager.get(1)),
-                new Project("Student management", "Backend: Java ; Frontend: React; Database: Postgres", DatetimeUtils.convertStringToDateOrNull(date, pattern), manager.get(0)),
-                new Project("Coffee shop management", "Backend: Java ; Frontend: React; Database: Postgres", DatetimeUtils.convertStringToDateOrNull(date, pattern), manager.get(2)),
-                new Project("News management", "Backend: Java ; Frontend: React; Database: Postgres", DatetimeUtils.convertStringToDateOrNull(date, pattern), manager.get(1))
+                new Project("Intern management", "Backend: Java ; Frontend: React; Database: Postgres", DatetimeUtils.convertStringToDateOrNull(date, pattern), new Date(), manager.get(1)),
+                new Project("Fashion shop management", "Backend: Java ; Frontend: React; Database: Postgres", DatetimeUtils.convertStringToDateOrNull(date, pattern), new Date(), manager.get(0)),
+                new Project("Library management", "Backend: Java ; Frontend: React; Database: Postgres", DatetimeUtils.convertStringToDateOrNull(date, pattern), new Date(), manager.get(1)),
+                new Project("Student management", "Backend: Java ; Frontend: React; Database: Postgres", DatetimeUtils.convertStringToDateOrNull(date, pattern), new Date(), manager.get(0)),
+                new Project("Coffee shop management", "Backend: Java ; Frontend: React; Database: Postgres", DatetimeUtils.convertStringToDateOrNull(date, pattern), new Date(), manager.get(2)),
+                new Project("News management", "Backend: Java ; Frontend: React; Database: Postgres", DatetimeUtils.convertStringToDateOrNull(date, pattern), new Date(), manager.get(1))
         );
         projectRepository.saveAll(projects);
         return ResponseEntity.ok(new ResponeDomain(Message.SUCCESSFUlLY.getDetail(), true));
@@ -103,6 +104,16 @@ public class InsertData {
                 new MemberProject(users.get(2), projects.get(2))
         );
         memberProjectRepository.saveAll(projects_member);
+        return ResponseEntity.ok(new ResponeDomain(Message.SUCCESSFUlLY.getDetail(), true));
+    }
+
+    @PostMapping("/set-date")
+    public ResponseEntity<?> updateDate() {
+        List<Project> projects = projectRepository.
+                findAll().stream().filter(t -> t.getStartDate() == null).map(t -> {
+            t.setStartDate(new Date());
+            return t;
+        }).collect(Collectors.toList());
         return ResponseEntity.ok(new ResponeDomain(Message.SUCCESSFUlLY.getDetail(), true));
     }
 }

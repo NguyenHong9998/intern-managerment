@@ -48,6 +48,7 @@ public class ProjectServiceImpl implements ProjectService {
                     domain.setDueDate(t.getDueDate().toString());
                     domain.setTitle(t.getTitle());
                     domain.setManagerName(t.getManager().getName());
+                    domain.setStartDate(t.getStartDate().toString());
                     return domain;
                 }
         ).collect(Collectors.toList());

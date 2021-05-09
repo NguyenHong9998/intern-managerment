@@ -21,6 +21,9 @@ public class Project {
     @Column(name = "due_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date dueDate;
+    @Column(name = "start_date")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date startDate;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "manager_id")
     private User manager;
@@ -29,15 +32,24 @@ public class Project {
 
     }
 
-    public Project(String title, String description, Date dueDate, User manager) {
+    public Project(String title, String description, Date dueDate, Date startDate, User manager) {
         this.title = title;
         this.description = description;
         this.dueDate = dueDate;
         this.manager = manager;
+        this.startDate = startDate;
     }
 
     @Column(name = "is_deleted", nullable = false, columnDefinition = "int default 0")
     private int isDeleted = 0;
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
 
     public int getIsDeleted() {
         return isDeleted;

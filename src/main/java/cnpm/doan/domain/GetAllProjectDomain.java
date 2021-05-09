@@ -6,17 +6,27 @@ public class GetAllProjectDomain {
     private String dueDate;
     private String title;
     private String managerName;
+    private String startDate;
 
     public GetAllProjectDomain() {
 
     }
 
-    public GetAllProjectDomain(String projectId, String description, String dueDate, String title, String managerName) {
+    public GetAllProjectDomain(String projectId, String description, String dueDate, String startDate, String title, String managerName) {
         this.description = description;
         this.dueDate = dueDate;
+        this.startDate=startDate;
         this.title = title;
         this.managerName = managerName;
         this.projectId = projectId;
+    }
+
+    public String getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
     }
 
     public String getProjectId() {
