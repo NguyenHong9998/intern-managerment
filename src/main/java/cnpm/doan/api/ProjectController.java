@@ -5,6 +5,7 @@ import cnpm.doan.entity.MemberProject;
 import cnpm.doan.entity.Project;
 import cnpm.doan.entity.User;
 import cnpm.doan.repository.MemberProjectRepository;
+import cnpm.doan.repository.ProjectRepository;
 import cnpm.doan.security.JwtUtil;
 import cnpm.doan.service.ProjectService;
 import cnpm.doan.service.UserService;
@@ -32,6 +33,9 @@ public class ProjectController {
     private MemberProjectRepository memberProjectRepository;
     @Autowired
     private JwtUtil jwtUtil;
+
+    @Autowired
+    private ProjectRepository projectRepository;
 
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
     @GetMapping("/projects")
@@ -159,6 +163,7 @@ public class ProjectController {
         project.setDescription(projectDomain.getDescription());
         project.setDueDate(DatetimeUtils.convertStringToDateOrNull(projectDomain.getDueDate(), DatetimeUtils.YYYYMMDD));
         project.setManager(manager);
+        projectRepository.save(project);
         return ResponseEntity.ok(new ResponeDomain(Message.SUCCESSFUlLY.getDetail(), HTTPStatus.success));
     }
 }
