@@ -77,10 +77,12 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public List<TaskDomain> getAllTask(int projectId) throws CustormException {
-        MemberProject memberProject =
-                memberProjectRepository.findMemberProjectByUserIdAndProjectId(jwtUtil.getCurrentUser().getUserId(), projectId);
-        if (memberProject == null) {
-            throw new CustormException(Message.INVALID_USER_PROJECT);
+        User user = userRepository.findById(jwtUtil.getCurrentUser().getUserId()).orElse(null);
+        if (!user.getRoles().getRoleName().equals("ROLE_ADMIN")) {
+            MemberProject memberProject = memberProjectRepository.findMemberProjectByUserIdAndProjectId(user.getId(), projectId);
+            if (memberProject == null) {
+                throw new CustormException(Message.INVALID_USER_PROJECT);
+            }
         }
         List<Task> findAllTask = findAllTaskByProjectId(projectId);
         List<TaskDomain> result = new ArrayList<>();

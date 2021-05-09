@@ -194,7 +194,7 @@
 							"formdata": [
 								{
 									"key": "username",
-									"value": "nguyenchien99@gmail.com",
+									"value": "nguyenchien9999@gmail.com",
 									"type": "text"
 								},
 								{
@@ -546,7 +546,7 @@
 							"formdata": [
 								{
 									"key": "username",
-									"value": "nguyenchien99@gmail.com",
+									"value": "nguyenchien@gmail.com",
 									"type": "text"
 								},
 								{
@@ -755,7 +755,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTk3OTI2MTUsInVzZXIiOnsicGFzc3dvcmQiOiIkMmEkMTAkQ0xIS1hxVDBpRmRhaVp5UXhwWElKdXRNNFFnUkRacGxnczVrWllPdXhOeFlELmFaYkFZaUMiLCJ1c2VySWQiOjIsImF1dGhvcml0aWVzIjpbIlJPTEVfQURNSU4iXSwidXNlcm5hbWUiOiJodGtpZW4yNTExQGdtYWlsLmNvbSJ9fQ.qFL1A26Bmem_VR7zBs0cgqpy-QYrZKKY7D_eRfdSchQ",
+								"value": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MjEzNDg2MDYsInVzZXIiOnsicGFzc3dvcmQiOiIkMmEkMTAkUzhReGdXUkdkQ3N3MzBJMnVRa3pmdWx2ZWtZSVBnVkRuQ3AuQUlsM25Gc01iWmhPNjBld08iLCJ1c2VySWQiOjcwLCJhdXRob3JpdGllcyI6WyJST0xFX0FETUlOIl0sInVzZXJuYW1lIjoiaHRraWVuMjUxMUBnbWFpbC5jb20ifX0.rD75L6GELIdBD8YnayIkgH0LyC2K-weKLynEB3glrlg",
 								"type": "text"
 							}
 						],
@@ -1102,9 +1102,24 @@
 					"name": "get all schedule",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MjEzNDg2MDYsInVzZXIiOnsicGFzc3dvcmQiOiIkMmEkMTAkUzhReGdXUkdkQ3N3MzBJMnVRa3pmdWx2ZWtZSVBnVkRuQ3AuQUlsM25Gc01iWmhPNjBld08iLCJ1c2VySWQiOjcwLCJhdXRob3JpdGllcyI6WyJST0xFX0FETUlOIl0sInVzZXJuYW1lIjoiaHRraWVuMjUxMUBnbWFpbC5jb20ifX0.rD75L6GELIdBD8YnayIkgH0LyC2K-weKLynEB3glrlg",
+								"type": "text"
+							}
+						],
 						"url": {
-							"raw": ""
+							"raw": "http://intern-managerment.herokuapp.com/schedules",
+							"protocol": "http",
+							"host": [
+								"intern-managerment",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"schedules"
+							]
 						}
 					},
 					"response": []

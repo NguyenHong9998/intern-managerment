@@ -37,7 +37,6 @@ public class ManagerController {
     @GetMapping("/managers")
     public ResponseEntity<?> getAllManager() {
         List<User> managers = userService.findAll();
-        managers.forEach(t -> System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxx: " + t));
         if (managers.size() == 0) {
             return ResponseEntity.ok(new ResponeDomain(Message.EMPTY_RESULT.getDetail(), Message.SUCCESSFUlLY.getDetail(), true));
         }
