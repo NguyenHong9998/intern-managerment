@@ -7,8 +7,12 @@ public class ProjectByUserIdDomain extends GetAllProjectDomain {
 
     }
 
-    public ProjectByUserIdDomain(String projectId, String description, String dueDate, String title, String managerName, String userId) {
-        super(projectId, description, dueDate, title, managerName);
+    public ProjectByUserIdDomain(String userId) {
+        this.userId = userId;
+    }
+
+    public ProjectByUserIdDomain(String projectId, String description, String dueDate, String startDate, String title, String managerName, String userId) {
+        super(projectId, description, dueDate, startDate, title, managerName);
         this.userId = userId;
     }
 
