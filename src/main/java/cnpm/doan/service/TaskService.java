@@ -17,5 +17,5 @@ public interface TaskService {
 
     void deleteTask(int taskId) throws CustormException;
 
-    void update(TaskUpdateRequest TaskUpdateRequest) throws CustormException;
+    void update(int taskId, TaskUpdateRequest TaskUpdateRequest) throws CustormException;
 }

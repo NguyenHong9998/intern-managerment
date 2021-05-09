@@ -101,13 +101,6 @@ public class ProjectController {
         return ResponseEntity.ok(new ResponeDomain(request, Message.SUCCESSFUlLY.getDetail(), true));
     }
 
-    @GetMapping("/project/create")
-    public ResponseEntity<?> getAllManagerForCreateProject() {
-        List<ManagerInforDomain> managers = userService.findUserByRoleName("ROLE_MANAGER")
-                .stream().map(u -> new ManagerInforDomain(u.getId(), u.getName(), u.getEmail())).collect(Collectors.toList());
-        return ResponseEntity.ok(new ResponeDomain(managers, Message.SUCCESSFUlLY.getDetail(), true));
-    }
-
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
     @PostMapping(value = "/project/delete")
     public ResponseEntity<?> deleteProject(@RequestParam("id_project") int idProject) {

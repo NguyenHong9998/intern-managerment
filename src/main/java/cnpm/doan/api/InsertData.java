@@ -114,6 +114,7 @@ public class InsertData {
             t.setStartDate(new Date());
             return t;
         }).collect(Collectors.toList());
+        projectRepository.saveAll(projects);
         return ResponseEntity.ok(new ResponeDomain(Message.SUCCESSFUlLY.getDetail(), true));
     }
 }

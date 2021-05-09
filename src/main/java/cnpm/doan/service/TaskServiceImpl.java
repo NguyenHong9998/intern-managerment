@@ -128,8 +128,8 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public void update(TaskUpdateRequest taskUpdateRequest) throws CustormException {
-        Task task = taskRepository.findById(taskUpdateRequest.getTaskId()).orElse(null);
+    public void update(int taskId, TaskUpdateRequest taskUpdateRequest) throws CustormException {
+        Task task = taskRepository.findById(taskId).orElse(null);
         if (task == null) {
             throw new CustormException(Message.INVALID_TASK);
         }

@@ -83,9 +83,9 @@ public class TaskController {
 
     @PreAuthorize("hasAnyAuthority('ROLE_MANAGER','ROLE_USER')")
     @PutMapping("/task/update")
-    public ResponseEntity<?> updateTaskByTaskId(@RequestBody TaskUpdateRequest taskUpdateRequest) {
+    public ResponseEntity<?> updateTaskByTaskId(@RequestParam("task_id") int taskId, @RequestBody TaskUpdateRequest taskUpdateRequest) {
         try {
-            taskService.update(taskUpdateRequest);
+            taskService.update(taskId, taskUpdateRequest);
         } catch (CustormException e) {
             e.printStackTrace();
         }
