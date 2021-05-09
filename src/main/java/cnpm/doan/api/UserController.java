@@ -103,7 +103,6 @@ public class UserController {
             } else {
                 return ResponseEntity.ok(new ResponeDomain(Message.CANOT_UPDATE_EMAIL.getDetail(), false));
             }
-
         }
         userService.createUser(user);
         UserDomain result = new UserDomain(user);
