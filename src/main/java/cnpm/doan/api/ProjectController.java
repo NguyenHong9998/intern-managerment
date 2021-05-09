@@ -59,10 +59,6 @@ public class ProjectController {
                 && user.getRoles().getRoleName().equals("ROLE_USER")) {
             return ResponseEntity.ok(new ResponeDomain(Message.CANNOT_GET_PRO_ANOTHER.getDetail(), false));
         }
-//        User user = userService.findById(jwtUtil.getCurrentUser().getUserId());
-//        if (user == null) {
-//            return ResponseEntity.ok(new ResponeDomain(Message.INVALID_USER.getDetail(), false));
-//        }
         List<ProjectByUserIdDomain> projects = projectService.getProjectByUserId(userId);
         if (projects.size() == 0) {
             return ResponseEntity.ok(new ResponeDomain(Message.EMPTY_RESULT.getDetail(), true));
