@@ -82,6 +82,7 @@ public class ProjectServiceImpl implements ProjectService {
         if (date == null || date.before(date)) {
             throw new CustormException(Message.INVALID_DATE);
         }
+        project.setStartDate(new Date());
         project.setDueDate(date);
         project.setTitle(domain.getTitle());
         projectRepository.save(project);
