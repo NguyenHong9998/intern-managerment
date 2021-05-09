@@ -99,7 +99,7 @@ public class ProjectController {
         } catch (CustormException e) {
             return ResponseEntity.ok(new ResponeDomain(e.getErrorType().getDetail(), false));
         }
-        return ResponseEntity.ok(new ResponeDomain(request, Message.SUCCESSFUlLY.getDetail(), true));
+        return ResponseEntity.ok(new ResponeDomain(Message.SUCCESSFUlLY.getDetail(), true));
     }
 
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
