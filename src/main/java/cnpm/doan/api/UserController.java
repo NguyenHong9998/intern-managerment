@@ -95,7 +95,7 @@ public class UserController {
         user.setGender(userDomain.getGender());
         user.setId(userDomain.getId());
         UserDomain result = new UserDomain(user);
-        if (!user.getEmail().equals(userPrincipal.getUsername()) ||
+        if (!(user.getEmail()).equals(user.getEmail()) ||
                 !(user.getDepartment() == null && userDomain.getDepartment() != null) ||
                 (Integer.valueOf(userDomain.getDepartment()) == user.getDepartment().getId())) {
             if (role.equals("ROLE_ADMIN")) {
