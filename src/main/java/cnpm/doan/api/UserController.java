@@ -95,15 +95,16 @@ public class UserController {
         user.setGender(userDomain.getGender());
         user.setId(userDomain.getId());
         UserDomain result = new UserDomain(user);
-        if (!(user.getEmail()).equals(user.getEmail()) ||
-                !(user.getDepartment() == null && userDomain.getDepartment() != null) ||
-                (Integer.valueOf(userDomain.getDepartment()) == user.getDepartment().getId())) {
+        boolean s1 = user.getEmail().equals(userDomain.getEmail());
+        boolean s2 = (user.getDepartment() == null) && (department != null);
+        boolean s3 = (user.getDepartment().getId()) != Integer.valueOf(userDomain.getDepartment());
+        System.out.println("xxxxxxxxxxx: " + s1 + ", " + s2 + " ," + s3);
+        if (s1 && s2 && s3) {
             if (role.equals("ROLE_ADMIN")) {
                 user.setDepartment(department);
                 user.setEmail(userDomain.getEmail());
                 userService.createUser(user);
                 return ResponseEntity.ok(new ResponeDomain(result, Message.SUCCESSFUlLY.getDetail(), true));
-
             } else {
                 return ResponseEntity.ok(new ResponeDomain(Message.CANOT_UPDATE_EMAIL.getDetail(), false));
             }
