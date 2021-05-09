@@ -94,18 +94,21 @@ public class UserController {
         user.setAddress(userDomain.getAddress());
         user.setGender(userDomain.getGender());
         user.setId(userDomain.getId());
-        user.setDepartment(department);
+        UserDomain result = new UserDomain(user);
         if (!user.getEmail().equals(userPrincipal.getUsername()) ||
                 !(user.getDepartment() == null && userDomain.getDepartment() != null) ||
                 (Integer.valueOf(userDomain.getDepartment()) == user.getDepartment().getId())) {
             if (role.equals("ROLE_ADMIN")) {
-                user.setDepartment(departmentService.findById(Integer.valueOf(userDomain.getId())));
+                user.setDepartment(department);
+                user.setEmail(userDomain.getEmail());
+                userService.createUser(user);
+                return ResponseEntity.ok(new ResponeDomain(result, Message.SUCCESSFUlLY.getDetail(), true));
+
             } else {
                 return ResponseEntity.ok(new ResponeDomain(Message.CANOT_UPDATE_EMAIL.getDetail(), false));
             }
         }
         userService.createUser(user);
-        UserDomain result = new UserDomain(user);
         return ResponseEntity.ok(new ResponeDomain(result, Message.SUCCESSFUlLY.getDetail(), true));
     }
 
