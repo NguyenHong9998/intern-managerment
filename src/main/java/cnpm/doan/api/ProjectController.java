@@ -148,7 +148,7 @@ public class ProjectController {
             return ResponseEntity.ok(new ResponeDomain(Message.INVALID_PROJECT_ID.getDetail(), HTTPStatus.fail));
         }
         User user = userService.findById(jwtUtil.getCurrentUser().getUserId());
-        if (!user.getRoles().getRoleName().equals("ROLE_MANAGER") || !user.getRoles().getRoleName().equals("ROLE_ADMIN")) {
+        if (!user.getRoles().getRoleName().equals("ROLE_MANAGER") && !user.getRoles().getRoleName().equals("ROLE_ADMIN")) {
             return ResponseEntity.ok(new ResponeDomain(Message.CANNOT_UPDATE_PROJECT.getDetail(), HTTPStatus.fail));
         }
         User manager = userService.findById(projectDomain.getIdOfAdmin());
