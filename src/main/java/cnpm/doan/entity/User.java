@@ -154,7 +154,7 @@ public class User {
                 ", email='" + email + '\'' +
                 ", address='" + address + '\'' +
                 ", gender='" + gender + '\'' +
-                ", roles=" + roles +
+                ", roles=" + roles.getRoleName() +
                 ", department=" + department +
                 ", resetPasswordToken='" + resetPasswordToken + '\'' +
                 ", isDeleted=" + isDeleted +
