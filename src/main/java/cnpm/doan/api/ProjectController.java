@@ -9,6 +9,7 @@ import cnpm.doan.security.JwtUtil;
 import cnpm.doan.service.ProjectService;
 import cnpm.doan.service.UserService;
 import cnpm.doan.util.CustormException;
+import cnpm.doan.util.DatetimeUtils;
 import cnpm.doan.util.HTTPStatus;
 import cnpm.doan.util.Message;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -136,6 +137,28 @@ public class ProjectController {
             memberProject.setUser(user);
             memberProjectRepository.save(memberProject);
         }
+        return ResponseEntity.ok(new ResponeDomain(Message.SUCCESSFUlLY.getDetail(), HTTPStatus.success));
+    }
+
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN','ROLE_MANAGER')")
+    @PutMapping("/project/update")
+    public ResponseEntity<?> updateProject(@RequestParam("id_project") int idProject, @ModelAttribute ProjectDomain projectDomain) {
+        Project project = projectService.findProjectById(idProject);
+        if (project == null) {
+            return ResponseEntity.ok(new ResponeDomain(Message.INVALID_PROJECT_ID.getDetail(), HTTPStatus.fail));
+        }
+        User user = userService.findById(jwtUtil.getCurrentUser().getUserId());
+        if (!user.getRoles().getRoleName().equals("ROLE_MANAGER") || !user.getRoles().getRoleName().equals("ROLE_ADMIN")) {
+            return ResponseEntity.ok(new ResponeDomain(Message.CANNOT_UPDATE_PROJECT.getDetail(), HTTPStatus.fail));
+        }
+        User manager = userService.findById(projectDomain.getIdOfAdmin());
+        if (manager == null) {
+            return ResponseEntity.ok(new ResponeDomain(Message.INVALID_MANGER.getDetail(), HTTPStatus.fail));
+        }
+        project.setTitle(projectDomain.getTitle());
+        project.setDescription(projectDomain.getDescription());
+        project.setDueDate(DatetimeUtils.convertStringToDateOrNull(projectDomain.getDueDate(), DatetimeUtils.YYYYMMDD));
+        project.setManager(manager);
         return ResponseEntity.ok(new ResponeDomain(Message.SUCCESSFUlLY.getDetail(), HTTPStatus.success));
     }
 }
