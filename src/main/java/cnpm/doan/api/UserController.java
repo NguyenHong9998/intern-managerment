@@ -94,7 +94,6 @@ public class UserController {
         user.setAddress(userDomain.getAddress());
         user.setGender(userDomain.getGender());
         user.setId(userDomain.getId());
-        UserDomain result = new UserDomain(user);
         boolean s1 = user.getEmail().equals(userDomain.getEmail());
         boolean s2 = (user.getDepartment() == null) && (department != null);
         boolean s3 = (user.getDepartment().getId()) != Integer.valueOf(userDomain.getDepartment());
@@ -104,13 +103,14 @@ public class UserController {
                 user.setDepartment(department);
                 user.setEmail(userDomain.getEmail());
                 userService.createUser(user);
-                return ResponseEntity.ok(new ResponeDomain(result, Message.SUCCESSFUlLY.getDetail(), true));
+                return ResponseEntity.ok(new ResponeDomain(new UserDomain(user), Message.SUCCESSFUlLY.getDetail(), true));
             } else {
                 return ResponseEntity.ok(new ResponeDomain(Message.CANOT_UPDATE_EMAIL.getDetail(), false));
             }
         }
+
         userService.createUser(user);
-        return ResponseEntity.ok(new ResponeDomain(result, Message.SUCCESSFUlLY.getDetail(), true));
+        return ResponseEntity.ok(new ResponeDomain(new UserDomain(user), Message.SUCCESSFUlLY.getDetail(), true));
     }
 
     @GetMapping("/user/waiting_user")
