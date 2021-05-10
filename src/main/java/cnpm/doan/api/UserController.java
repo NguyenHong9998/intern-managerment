@@ -97,7 +97,7 @@ public class UserController {
 //        boolean s1 = user.getEmail().equals(userDomain.getEmail());
 //        boolean s2 = (user.getDepartment() == null) && (department != null);
 //        boolean s3 = (user.getDepartment().getId()) != Integer.valueOf(userDomain.getDepartment());
-        System.out.println("xxxxxxxxxxx: " + s1 + ", " + s2 + " ," + s3);
+//        System.out.println("xxxxxxxxxxx: " + s1 + ", " + s2 + " ," + s3);
         if (!(user.getEmail().equals(userDomain.getEmail())
                 && (user.getDepartment() == null) && (department != null)
                 && (user.getDepartment().getId()) != Integer.valueOf(userDomain.getDepartment()))) {
