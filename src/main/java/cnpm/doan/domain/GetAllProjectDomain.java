@@ -1,7 +1,7 @@
 package cnpm.doan.domain;
 
 public class GetAllProjectDomain {
-    private String projectId;
+    private int  projectId;
     private String description;
     private String dueDate;
     private String title;
@@ -12,7 +12,7 @@ public class GetAllProjectDomain {
 
     }
 
-    public GetAllProjectDomain(String projectId, String description, String dueDate, String startDate, String title, String managerName) {
+    public GetAllProjectDomain(int projectId, String description, String dueDate, String startDate, String title, String managerName) {
         this.description = description;
         this.dueDate = dueDate;
         this.startDate=startDate;
@@ -29,11 +29,11 @@ public class GetAllProjectDomain {
         this.startDate = startDate;
     }
 
-    public String getProjectId() {
+    public int getProjectId() {
         return projectId;
     }
 
-    public void setProjectId(String projectId) {
+    public void setProjectId(int projectId) {
         this.projectId = projectId;
     }
 

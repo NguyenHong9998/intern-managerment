@@ -46,7 +46,7 @@ public class TaskController {
         return ResponseEntity.ok(new ResponeDomain(domain, Message.SUCCESSFUlLY.getDetail(), HTTPStatus.success));
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_MANAGER','ROLE_USER')")
+    @PreAuthorize("hasAnyAuthority('ROLE_MANAGER','ROLE_USER', 'ROLE_ADMIN')")
     @PostMapping("/task/create")
     public ResponseEntity<?> createTask(@ModelAttribute TaskRequest taskRequest) {
         try {
@@ -57,7 +57,7 @@ public class TaskController {
         return ResponseEntity.ok(new ResponeDomain(null, Message.SUCCESSFUlLY.getDetail(), true));
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_MANAGER')")
+    @PreAuthorize("hasAnyAuthority('ROLE_MANAGER', 'ROLE_ADMIN')")
     @PutMapping("/task/delete")
     public ResponseEntity<?> deleteTask(@RequestParam("id_task") int idTask) {
         try {
@@ -68,7 +68,7 @@ public class TaskController {
         return ResponseEntity.ok(new ResponeDomain(null, Message.SUCCESSFUlLY.getDetail(), true));
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_MANAGER')")
+    @PreAuthorize("hasAnyAuthority('ROLE_MANAGER', 'ROLE_ADMIN')")
     @PostMapping("/task/assign_user")
     public ResponseEntity<?> assignUserToTask(@RequestParam("id_task") int idTask, @RequestParam("id_user") String userIds) {
         List<User> users = Arrays.stream(userIds.split(",")).map(id -> userService.findById(Integer.valueOf(id))).collect(Collectors.toList());
@@ -81,7 +81,7 @@ public class TaskController {
 
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_MANAGER','ROLE_USER')")
+    @PreAuthorize("hasAnyAuthority('ROLE_MANAGER','ROLE_USER', 'ROLE_ADMIN')")
     @PutMapping("/task/update")
     public ResponseEntity<?> updateTaskByTaskId(@RequestParam("task_id") int taskId, @RequestBody TaskUpdateRequest taskUpdateRequest) {
         try {

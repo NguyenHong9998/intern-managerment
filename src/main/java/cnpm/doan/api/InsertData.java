@@ -2,10 +2,7 @@ package cnpm.doan.api;
 
 import cnpm.doan.domain.ResponeDomain;
 import cnpm.doan.entity.*;
-import cnpm.doan.repository.MemberProjectRepository;
-import cnpm.doan.repository.ProjectRepository;
-import cnpm.doan.repository.RoleRepository;
-import cnpm.doan.repository.UserRepository;
+import cnpm.doan.repository.*;
 import cnpm.doan.service.DepartmentService;
 import cnpm.doan.service.UserService;
 import cnpm.doan.util.DatetimeUtils;
@@ -17,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -38,6 +36,12 @@ public class InsertData {
 
     @Autowired
     MemberProjectRepository memberProjectRepository;
+
+    @Autowired
+    LeaderPermissionRepository leaderPermissionRepository;
+
+    @Autowired
+    PermissionRepository permissionRepository;
 
     @PostMapping("/insert-data-user")
     public ResponseEntity<?> insertData() {
@@ -124,6 +128,33 @@ public class InsertData {
         User user = userRepository.findById(userId).orElse(null);
         user.setPassword(new BCryptPasswordEncoder().encode("1"));
         userRepository.save(user);
+        return ResponseEntity.ok(new ResponeDomain(Message.SUCCESSFUlLY.getDetail(), true));
+    }
+
+    @PostMapping("/permission")
+    public ResponseEntity<?> insertPermission() {
+        List<String> permission = Arrays.asList(
+                "Leader.GetAllUsers",
+                "Leader.EditUser",
+                "Leader.CreateUser",
+                "Leader.DeleteUser",
+                "Leader.GetAllProjectsByLeaderId",
+                "Leader.EditProject",
+                "Leader.CreateProject",
+                "Leader.DeleteProject",
+                "Leader.GetAllTasksByProjectId",
+                "Leader.EditTask",
+                "Leader.CreateTask",
+                "Leader.DeleteTask",
+                "Leader.GetScheduleOfUser",
+                "Leader.EditSchedule"
+        );
+        List<Permission> permissionsList = new ArrayList<>();
+        for (String p : permission) {
+            Permission permission1 = new Permission(p);
+            permissionsList.add(permission1);
+        }
+        permissionRepository.saveAll(permissionsList);
         return ResponseEntity.ok(new ResponeDomain(Message.SUCCESSFUlLY.getDetail(), true));
     }
 }

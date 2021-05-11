@@ -97,6 +97,7 @@ public class TaskServiceImpl implements TaskService {
             taskDomain.setProjectName(task.getProject().getTitle());
             taskDomain.setIsDone(task.isDone());
             taskDomain.setCreateDate(task.getCreateDate().toString());
+            taskDomain.setDueDate(task.getDueDate().toString());
             List<MemberTask> memberTasks = memberTaskRepository.findAllByTaskId(task.getId());
             List<UserContributeToTask> taskDomains =
                     memberTasks.stream().map(utd -> {

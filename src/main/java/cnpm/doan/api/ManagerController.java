@@ -3,6 +3,7 @@ package cnpm.doan.api;
 import cnpm.doan.domain.*;
 import cnpm.doan.entity.Role;
 import cnpm.doan.entity.User;
+import cnpm.doan.service.LeaderPermissionService;
 import cnpm.doan.service.RoleService;
 import cnpm.doan.service.UserService;
 import cnpm.doan.util.Message;
@@ -22,16 +23,6 @@ public class ManagerController {
     private UserService userService;
     @Autowired
     private RoleService roleService;
-
-//    @PostMapping("/manager_profile")
-//    public ResponseEntity<?> getManagerProfile(@RequestParam("email") String email) {
-//        User manager = userService.findUserByEmail(email);
-//        if (manager == null) {
-//            return ResponseEntity.ok(new ResponeDomain(Message.USER_NOT_FOUND.getDetail(), false));
-//        }
-//        UserDomain userDomain = new UserDomain(manager);
-//        return ResponseEntity.ok(new ResponeDomain(userDomain, Message.SUCCESSFUlLY.getDetail(), true));
-//    }
 
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
     @GetMapping("/managers")

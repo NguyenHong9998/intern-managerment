@@ -43,7 +43,7 @@ public class ProjectServiceImpl implements ProjectService {
         List<GetAllProjectDomain> result = projects.stream().map(
                 t -> {
                     GetAllProjectDomain domain = new GetAllProjectDomain();
-                    domain.setProjectId(String.valueOf(t.getId()));
+                    domain.setProjectId(t.getId());
                     domain.setDescription(t.getDescription());
                     domain.setDueDate(t.getDueDate().toString());
                     domain.setTitle(t.getTitle());
@@ -61,7 +61,7 @@ public class ProjectServiceImpl implements ProjectService {
         List<ProjectByUserIdDomain> result = memberProjects.stream().filter(t -> t.getUser().getId() == userId)
                 .map(t -> {
                     ProjectByUserIdDomain domain = new ProjectByUserIdDomain();
-                    domain.setProjectId(String.valueOf(t.getProject().getId()));
+                    domain.setProjectId(t.getProject().getId());
                     domain.setDescription(t.getProject().getDescription());
                     domain.setUserId(String.valueOf(userId));
                     domain.setDueDate(t.getProject().getDueDate().toString());

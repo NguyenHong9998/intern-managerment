@@ -11,12 +11,13 @@ public class TaskDomain {
     private String point;
     private String projectName;
     private String createDate;
+    private String dueDate;
     private List<UserContributeToTask> usersAssignee;
 
     public TaskDomain() {
     }
 
-    public TaskDomain(long taskId, String description, String title, String difficulty, boolean isDone, String point, String projectName, String createDate, List<UserContributeToTask> userTaskDomains) {
+    public TaskDomain(long taskId, String description, String title, String difficulty, boolean isDone, String point, String projectName, String createDate, String dueDate, List<UserContributeToTask> userTaskDomains) {
         this.taskId = taskId;
         this.description = description;
         this.title = title;
@@ -25,7 +26,16 @@ public class TaskDomain {
         this.point = point;
         this.projectName = projectName;
         this.createDate = createDate;
+        this.dueDate = dueDate;
         this.usersAssignee = userTaskDomains;
+    }
+
+    public String getDueDate() {
+        return dueDate;
+    }
+
+    public void setDueDate(String dueDate) {
+        this.dueDate = dueDate;
     }
 
     public List<UserContributeToTask> getUsersAssignee() {
