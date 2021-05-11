@@ -37,7 +37,7 @@ public class ProjectController {
     @Autowired
     private ProjectRepository projectRepository;
 
-    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN','ROLE_MANAGER', 'ROLE_USER')")
     @GetMapping("/projects")
     public ResponseEntity<?> getAllProject() {
         List<GetAllProjectDomain> projects = projectService.getAllProject();
@@ -84,7 +84,7 @@ public class ProjectController {
         return ResponseEntity.ok(new ResponeDomain(result, Message.SUCCESSFUlLY.getDetail(), true));
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER')")
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN','ROLE_MANAGER', 'ROLE_USER')")
     @PostMapping("/project/create")
     public ResponseEntity<?> createProject(@ModelAttribute ProjectDomain request) {
         User manager = userService.findById(request.getIdOfAdmin());
@@ -102,7 +102,7 @@ public class ProjectController {
         return ResponseEntity.ok(new ResponeDomain(Message.SUCCESSFUlLY.getDetail(), true));
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN','ROLE_MANAGER', 'ROLE_USER')")
     @PostMapping(value = "/project/delete")
     public ResponseEntity<?> deleteProject(@RequestParam("id_project") int idProject) {
         try {
@@ -113,7 +113,7 @@ public class ProjectController {
         return ResponseEntity.ok(new ResponeDomain(Message.SUCCESSFUlLY.getDetail(), true));
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN','ROLE_MANAGER')")
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN','ROLE_MANAGER', 'ROLE_USER')")
     @PutMapping("/project/assign_user")
     public ResponseEntity<?> assignUserToProject(@RequestParam("id_project") int idProject, @RequestParam("id_user") String userIds) {
         List<User> users = Arrays.stream(userIds.split(",")).map(id -> userService.findById(Integer.valueOf(id))).collect(Collectors.toList());
@@ -140,7 +140,7 @@ public class ProjectController {
         return ResponseEntity.ok(new ResponeDomain(Message.SUCCESSFUlLY.getDetail(), HTTPStatus.success));
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN','ROLE_MANAGER')")
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN','ROLE_MANAGER', 'ROLE_USER')")
     @PutMapping("/project/update")
     public ResponseEntity<?> updateProject(@RequestParam("id_project") int idProject, @ModelAttribute ProjectDomain projectDomain) {
         Project project = projectService.findProjectById(idProject);

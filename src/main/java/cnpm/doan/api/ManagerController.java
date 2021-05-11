@@ -24,7 +24,7 @@ public class ManagerController {
     @Autowired
     private RoleService roleService;
 
-    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN','ROLE_MANAGER', 'ROLE_USER')")
     @GetMapping("/managers")
     public ResponseEntity<?> getAllManager() {
         List<User> managers = userService.findAll();
@@ -43,7 +43,7 @@ public class ManagerController {
         return ResponseEntity.ok(new ResponeDomain(managerInforDomains, Message.SUCCESSFUlLY.getDetail(), true));
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN','ROLE_MANAGER', 'ROLE_USER')")
     @PostMapping("/manager/add")
     public ResponseEntity<?> addAllManager(@ModelAttribute RegisterAccount account) {
         User user = userService.findUserByEmail(account.getEmail());

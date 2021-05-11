@@ -57,7 +57,7 @@ public class TaskController {
         return ResponseEntity.ok(new ResponeDomain(null, Message.SUCCESSFUlLY.getDetail(), true));
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_MANAGER', 'ROLE_ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN','ROLE_MANAGER', 'ROLE_USER')")
     @PutMapping("/task/delete")
     public ResponseEntity<?> deleteTask(@RequestParam("id_task") int idTask) {
         try {
@@ -68,7 +68,7 @@ public class TaskController {
         return ResponseEntity.ok(new ResponeDomain(null, Message.SUCCESSFUlLY.getDetail(), true));
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_MANAGER', 'ROLE_ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN','ROLE_MANAGER', 'ROLE_USER')")
     @PostMapping("/task/assign_user")
     public ResponseEntity<?> assignUserToTask(@RequestParam("id_task") int idTask, @RequestParam("id_user") String userIds) {
         List<User> users = Arrays.stream(userIds.split(",")).map(id -> userService.findById(Integer.valueOf(id))).collect(Collectors.toList());

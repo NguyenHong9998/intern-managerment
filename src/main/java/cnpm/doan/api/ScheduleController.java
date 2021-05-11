@@ -21,7 +21,7 @@ public class ScheduleController {
     private ScheduleService scheduleService;
 
     @PostMapping("/schedule/add")
-    @PreAuthorize("hasAnyAuthority('ROLE_USER')")
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN','ROLE_MANAGER', 'ROLE_USER')")
     public ResponseEntity<?> addLeaveRequest(@RequestBody LeaveDomain leaveDomain) {
         try {
             scheduleService.add(leaveDomain);

@@ -57,6 +57,6 @@ public class AuthController {
 
     @GetMapping(value = "/")
     public String home() {
-        return "Không có gì ngoài sự xinh đẹp của bạn Hồng :)))))";
+        return "";
     }
 }

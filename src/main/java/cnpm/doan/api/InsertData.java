@@ -157,4 +157,17 @@ public class InsertData {
         permissionRepository.saveAll(permissionsList);
         return ResponseEntity.ok(new ResponeDomain(Message.SUCCESSFUlLY.getDetail(), true));
     }
+
+    @PostMapping("/update_gender")
+    public ResponseEntity<?> updateGender() {
+        List<User> users = userRepository.findAll().stream().map(t -> {
+            if (t.getGender().equals("Nam")) {
+                t.setGender("Femail");
+            } else if (t.getGender().equals("Nữ")) {
+                t.setGender("Nữ");
+            }
+            return t;
+        }).collect(Collectors.toList());
+        return ResponseEntity.ok(new ResponeDomain(Message.SUCCESSFUlLY.getDetail(), true));
+    }
 }
