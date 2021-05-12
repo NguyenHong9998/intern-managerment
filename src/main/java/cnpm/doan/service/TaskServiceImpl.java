@@ -13,6 +13,7 @@ import cnpm.doan.util.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -136,6 +137,7 @@ public class TaskServiceImpl implements TaskService {
         taskRepository.deleteById(taskId);
     }
 
+    @Transactional
     @Override
     public void update(int taskId, TaskUpdateRequest taskUpdateRequest) throws CustormException {
         Task task = taskRepository.findById(taskId).orElse(null);
@@ -147,17 +149,10 @@ public class TaskServiceImpl implements TaskService {
         task.setTitle(taskUpdateRequest.getTitle());
         task.setDone(taskUpdateRequest.isDone());
         task.setPoint(Float.valueOf(taskUpdateRequest.getPoint()));
-
         taskRepository.save(task);
         memberTaskRepository.deleteByTaskId(task.getId());
-        List<User> users = taskUpdateRequest.getUsersAssignee().stream().map(t ->
-        {
-            User user = userRepository.findById(t.getId()).orElse(null);
-            return user;
-        }).collect(Collectors.toList());
-        memberTaskService.assignUserToTask(taskId, users);
-        for (UserContributeToTask user : taskUpdateRequest.getUsersAssignee()) {
 
+        for (UserContributeToTask user : taskUpdateRequest.getUsersAssignee()) {
             User userInTask = userRepository.findById(user.getId()).orElse(null);
             MemberTask memberTask = new MemberTask();
             memberTask.setTask(task);
