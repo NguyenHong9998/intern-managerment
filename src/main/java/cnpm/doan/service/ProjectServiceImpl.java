@@ -1,9 +1,6 @@
 package cnpm.doan.service;
 
-import cnpm.doan.domain.GetAllProjectDomain;
-import cnpm.doan.domain.ProjectByUserIdDomain;
-import cnpm.doan.domain.ProjectDomain;
-import cnpm.doan.domain.ResponeDomain;
+import cnpm.doan.domain.*;
 import cnpm.doan.entity.MemberProject;
 import cnpm.doan.entity.Project;
 import cnpm.doan.entity.Task;
@@ -42,13 +39,22 @@ public class ProjectServiceImpl implements ProjectService {
         List<Project> projects = projectRepository.findAll();
         List<GetAllProjectDomain> result = projects.stream().map(
                 t -> {
+                    List<MemberProject> memberProjects = memProRepository.findMemberProjectByProjectId(t.getId());
+                    List<UserProject> userProjects = memberProjects.stream().map(x -> {
+                        UserProject userProject = new UserProject();
+                        userProject.setId(x.getUser().getId());
+                        userProject.setName(x.getUser().getName());
+                        return userProject;
+                    }).collect(Collectors.toList());
                     GetAllProjectDomain domain = new GetAllProjectDomain();
                     domain.setProjectId(t.getId());
                     domain.setDescription(t.getDescription());
                     domain.setDueDate(t.getDueDate().toString());
                     domain.setTitle(t.getTitle());
-                    domain.setManagerName(t.getManager().getName());
+                    ManagerInforDomain manager = new ManagerInforDomain(t.getManager().getId(), t.getManager().getName(), t.getManager().getEmail());
+                    domain.setManagerName(manager);
                     domain.setStartDate(t.getStartDate().toString());
+                    domain.setUserAssignee(userProjects);
                     return domain;
                 }
         ).collect(Collectors.toList());
@@ -66,7 +72,8 @@ public class ProjectServiceImpl implements ProjectService {
                     domain.setUserId(String.valueOf(userId));
                     domain.setDueDate(t.getProject().getDueDate().toString());
                     domain.setTitle(t.getProject().getTitle());
-                    domain.setManagerName(t.getProject().getManager().getName());
+                    ManagerInforDomain manager = new ManagerInforDomain(t.getProject().getManager().getId(), t.getProject().getManager().getName(), t.getProject().getManager().getEmail());
+                    domain.setManagerName(manager);
                     return domain;
                 }).collect(Collectors.toList());
         return result;
