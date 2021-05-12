@@ -1,9 +1,9 @@
 package cnpm.doan.service;
 
-import cnpm.doan.entity.Permission;
+import cnpm.doan.entity.PermissionEntity;
 
 import java.util.List;
 
 public interface PermissionService {
-    List<Permission> getAllPermission();
+    List<PermissionEntity> getAllPermission();
 }

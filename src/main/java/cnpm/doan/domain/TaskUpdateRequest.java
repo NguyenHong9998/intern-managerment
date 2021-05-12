@@ -7,20 +7,23 @@ import java.util.List;
 
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class TaskUpdateRequest {
+    private long taskId;
     private String description;
     private String title;
-    private int difficulty;
+    private String difficulty;
     private boolean isDone;
     private String point;
-    private String duedate;
-    private List<UserContributeToTask> userContributeToTask;
+    private String projectName;
+    private String createDate;
+    private String dueDate;
+    private List<UserContributeToTask> usersAssignee;
 
-    public String getDuedate() {
-        return duedate;
+    public long getTaskId() {
+        return taskId;
     }
 
-    public void setDuedate(String duedate) {
-        this.duedate = duedate;
+    public void setTaskId(long taskId) {
+        this.taskId = taskId;
     }
 
     public String getDescription() {
@@ -39,11 +42,11 @@ public class TaskUpdateRequest {
         this.title = title;
     }
 
-    public int getDifficulty() {
+    public String getDifficulty() {
         return difficulty;
     }
 
-    public void setDifficulty (int difficulty) {
+    public void setDifficulty(String difficulty) {
         this.difficulty = difficulty;
     }
 
@@ -63,11 +66,35 @@ public class TaskUpdateRequest {
         this.point = point;
     }
 
-    public List<UserContributeToTask> getUserTaskDomains() {
-        return userContributeToTask;
+    public String getProjectName() {
+        return projectName;
     }
 
-    public void setUserTaskDomains(List<UserContributeToTask> userTaskDomains) {
-        this.userContributeToTask = userTaskDomains;
+    public void setProjectName(String projectName) {
+        this.projectName = projectName;
+    }
+
+    public String getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(String createDate) {
+        this.createDate = createDate;
+    }
+
+    public String getDueDate() {
+        return dueDate;
+    }
+
+    public void setDueDate(String dueDate) {
+        this.dueDate = dueDate;
+    }
+
+    public List<UserContributeToTask> getUsersAssignee() {
+        return usersAssignee;
+    }
+
+    public void setUsersAssignee(List<UserContributeToTask> usersAssignee) {
+        this.usersAssignee = usersAssignee;
     }
 }

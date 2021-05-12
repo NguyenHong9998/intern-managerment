@@ -1,6 +1,6 @@
 package cnpm.doan.service;
 
-import cnpm.doan.entity.Permission;
+import cnpm.doan.entity.PermissionEntity;
 import cnpm.doan.repository.PermissionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,7 +13,7 @@ public class PermissionServiceImpl implements PermissionService {
     private PermissionRepository permissionRepository;
 
     @Override
-    public List<Permission> getAllPermission() {
+    public List<PermissionEntity> getAllPermission() {
         return permissionRepository.findAll();
     }
 }

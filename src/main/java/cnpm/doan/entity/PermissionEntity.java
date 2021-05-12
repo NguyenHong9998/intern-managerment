@@ -1,12 +1,11 @@
 package cnpm.doan.entity;
 
-import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "permission")
-public class Permission {
+public class PermissionEntity {
     @Id
     @Column(name = "id")
     @SequenceGenerator(name = "permission_seq", sequenceName = "permission_seq", allocationSize = 1)
@@ -15,15 +14,15 @@ public class Permission {
     @Column(name = "name")
     private String name;
 
-    public Permission() {
+    public PermissionEntity() {
 
     }
 
-    public Permission(String name) {
+    public PermissionEntity(String name) {
         this.name = name;
     }
 
-    public Permission(int id, String name) {
+    public PermissionEntity(int id, String name) {
         this.id = id;
         this.name = name;
     }

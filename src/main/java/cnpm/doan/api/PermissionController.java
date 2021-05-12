@@ -1,7 +1,7 @@
 package cnpm.doan.api;
 
 import cnpm.doan.domain.ResponeDomain;
-import cnpm.doan.entity.Permission;
+import cnpm.doan.entity.PermissionEntity;
 import cnpm.doan.repository.PermissionRepository;
 import cnpm.doan.util.HTTPStatus;
 import cnpm.doan.util.Message;
@@ -19,7 +19,7 @@ public class PermissionController {
 
     @GetMapping("/permissions")
     public ResponseEntity<?> getAllPermission() {
-        List<Permission> permissions = permissionRepository.findAll();
+        List<PermissionEntity> permissions = permissionRepository.findAll();
         return ResponseEntity.ok(new ResponeDomain(permissions, Message.SUCCESSFUlLY.getDetail(), HTTPStatus.success));
     }
 }

@@ -15,12 +15,12 @@ public class LeadPermission {
     private User user;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "permission_id")
-    private Permission permission;
+    private PermissionEntity permission;
 
     public LeadPermission() {
     }
 
-    public LeadPermission(int id, User user, Permission permission) {
+    public LeadPermission(int id, User user, PermissionEntity permission) {
         this.id = id;
         this.user = user;
         this.permission = permission;
@@ -42,11 +42,11 @@ public class LeadPermission {
         this.user = user;
     }
 
-    public Permission getPermission() {
+    public PermissionEntity getPermission() {
         return permission;
     }
 
-    public void setPermission(Permission permission) {
+    public void setPermission(PermissionEntity permission) {
         this.permission = permission;
     }
 }

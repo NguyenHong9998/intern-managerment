@@ -134,7 +134,7 @@ public class TaskServiceImpl implements TaskService {
         if (task == null) {
             throw new CustormException(Message.INVALID_TASK);
         }
-        task.setDueDate(DatetimeUtils.convertStringToDateOrNull(taskUpdateRequest.getDuedate(), DatetimeUtils.YYYYMMDD));
+        task.setDueDate(DatetimeUtils.convertStringToDateOrNull(taskUpdateRequest.getDueDate(), DatetimeUtils.YYYYMMDD));
         task.setDescription(taskUpdateRequest.getDescription());
         task.setTitle(taskUpdateRequest.getTitle());
         task.setDone(taskUpdateRequest.isDone());
@@ -142,7 +142,7 @@ public class TaskServiceImpl implements TaskService {
         taskRepository.save(task);
         memberTaskRepository.deleteByTaskId(task.getId());
 
-        for (UserContributeToTask user : taskUpdateRequest.getUserTaskDomains()) {
+        for (UserContributeToTask user : taskUpdateRequest.getUsersAssignee()) {
 
             User userInTask = userRepository.findById(user.getId()).orElse(null);
             MemberTask memberTask = new MemberTask();

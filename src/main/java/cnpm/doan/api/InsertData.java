@@ -4,7 +4,6 @@ import cnpm.doan.domain.ResponeDomain;
 import cnpm.doan.entity.*;
 import cnpm.doan.repository.*;
 import cnpm.doan.service.DepartmentService;
-import cnpm.doan.service.UserService;
 import cnpm.doan.util.DatetimeUtils;
 import cnpm.doan.util.Message;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -149,9 +148,9 @@ public class InsertData {
                 "Leader.GetScheduleOfUser",
                 "Leader.EditSchedule"
         );
-        List<Permission> permissionsList = new ArrayList<>();
+        List<PermissionEntity> permissionsList = new ArrayList<>();
         for (String p : permission) {
-            Permission permission1 = new Permission(p);
+            PermissionEntity permission1 = new PermissionEntity(p);
             permissionsList.add(permission1);
         }
         permissionRepository.saveAll(permissionsList);
