@@ -103,10 +103,13 @@ public class TaskServiceImpl implements TaskService {
             List<MemberTask> memberTasks = memberTaskRepository.findAllByTaskId(task.getId());
             List<UserContributeToTask> taskDomains =
                     memberTasks.stream().map(utd -> {
-                        UserContributeToTask userContributeToTask = new UserContributeToTask();
-                        userContributeToTask.setId(utd.getUser().getId());
-                        userContributeToTask.setName(utd.getUser().getName());
-                        return userContributeToTask;
+                        if (utd.getUser() != null) {
+                            UserContributeToTask userContributeToTask = new UserContributeToTask();
+                            userContributeToTask.setId(utd.getUser().getId());
+                            userContributeToTask.setName(utd.getUser().getName());
+                            return userContributeToTask;
+                        }
+                        return null;
                     }).collect(Collectors.toList());
             taskDomain.setUsersAssignee(taskDomains);
             result.add(taskDomain);
