@@ -44,6 +44,9 @@ public class TaskServiceImpl implements TaskService {
     @Autowired
     FeedbackRepository feedbackRepository;
 
+    @Autowired
+    MemberTaskService memberTaskService;
+
     @Override
     public List<Task> findAllTaskByProjectId(int projectId) {
         return taskRepository.findAllByProjectId(projectId);
@@ -144,9 +147,15 @@ public class TaskServiceImpl implements TaskService {
         task.setTitle(taskUpdateRequest.getTitle());
         task.setDone(taskUpdateRequest.isDone());
         task.setPoint(Float.valueOf(taskUpdateRequest.getPoint()));
+
         taskRepository.save(task);
         memberTaskRepository.deleteByTaskId(task.getId());
-
+        List<User> users = taskUpdateRequest.getUsersAssignee().stream().map(t ->
+        {
+            User user = userRepository.findById(t.getId()).orElse(null);
+            return user;
+        }).collect(Collectors.toList());
+        memberTaskService.assignUserToTask(taskId, users);
         for (UserContributeToTask user : taskUpdateRequest.getUsersAssignee()) {
 
             User userInTask = userRepository.findById(user.getId()).orElse(null);
