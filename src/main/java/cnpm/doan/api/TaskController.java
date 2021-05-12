@@ -68,24 +68,24 @@ public class TaskController {
         return ResponseEntity.ok(new ResponeDomain(null, Message.SUCCESSFUlLY.getDetail(), true));
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN','ROLE_MANAGER', 'ROLE_USER')")
-    @PostMapping("/task/assign_user")
-    public ResponseEntity<?> assignUserToTask(@RequestParam("id_task") int idTask, @RequestParam("id_user") String userIds) {
-        List<User> users = Arrays.stream(userIds.split(",")).map(id -> userService.findById(Integer.valueOf(id))).collect(Collectors.toList());
-        try {
-            memberTaskService.assignUserToTask(idTask, users);
-        } catch (CustormException e) {
-            return ResponseEntity.ok(new ResponeDomain(null, e.getErrorType().getDetail(), true));
-        }
-        return ResponseEntity.ok(new ResponeDomain(null, Message.SUCCESSFUlLY.getDetail(), true));
-
-    }
+//    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN','ROLE_MANAGER', 'ROLE_USER')")
+//    @PostMapping("/task/assign_user")
+//    public ResponseEntity<?> assignUserToTask(@RequestParam("id_task") int idTask, @RequestParam("id_user") String userIds) {
+//        List<User> users = Arrays.stream(userIds.split(",")).map(id -> userService.findById(Integer.valueOf(id))).collect(Collectors.toList());
+//        try {
+//            memberTaskService.assignUserToTask(idTask, users);
+//        } catch (CustormException e) {
+//            return ResponseEntity.ok(new ResponeDomain(null, e.getErrorType().getDetail(), true));
+//        }
+//        return ResponseEntity.ok(new ResponeDomain(null, Message.SUCCESSFUlLY.getDetail(), true));
+//
+//    }
 
     @PreAuthorize("hasAnyAuthority('ROLE_MANAGER','ROLE_USER', 'ROLE_ADMIN')")
     @PutMapping("/task/update")
-    public ResponseEntity<?> updateTaskByTaskId(@RequestParam("task_id") int taskId, @RequestBody TaskUpdateRequest taskUpdateRequest) {
+    public ResponseEntity<?> updateTaskByTaskId(@RequestBody TaskUpdateRequest taskUpdateRequest) {
         try {
-            taskService.update(taskId, taskUpdateRequest);
+            taskService.update(taskUpdateRequest.getTaskId(), taskUpdateRequest);
         } catch (CustormException e) {
             e.printStackTrace();
         }

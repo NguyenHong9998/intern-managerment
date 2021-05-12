@@ -7,7 +7,7 @@ import java.util.List;
 
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class TaskUpdateRequest {
-    private long taskId;
+    private int taskId;
     private String description;
     private String title;
     private String difficulty;
@@ -18,11 +18,11 @@ public class TaskUpdateRequest {
     private String dueDate;
     private List<UserContributeToTask> usersAssignee;
 
-    public long getTaskId() {
+    public int getTaskId() {
         return taskId;
     }
 
-    public void setTaskId(long taskId) {
+    public void setTaskId(int taskId) {
         this.taskId = taskId;
     }
 
