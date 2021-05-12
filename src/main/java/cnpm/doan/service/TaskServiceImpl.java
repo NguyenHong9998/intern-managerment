@@ -109,9 +109,9 @@ public class TaskServiceImpl implements TaskService {
                             userContributeToTask.setName(utd.getUser().getName());
                             return userContributeToTask;
                         }
-                        return userContributeToTask;
+                        return null;
                     }).collect(Collectors.toList());
-            taskDomain.setUsersAssignee(taskDomains);
+            taskDomain.setUsersAssignee(taskDomains.stream().filter(t -> t != null).collect(Collectors.toList()));
             result.add(taskDomain);
         }
         return result;
