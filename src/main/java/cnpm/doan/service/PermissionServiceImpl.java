@@ -26,6 +26,17 @@ public class PermissionServiceImpl implements PermissionService {
     LeaderPermissionRepository leaderPermissionRepository;
 
     @Override
+    public List<PermissionEntity> getPermissionOfManager(int managerId) throws CustormException {
+        User manager = userRepository.findById(managerId).orElse(null);
+        if (manager == null || !manager.getRoles().getRoleName().equals("ROLE_MANAGER")) {
+            throw new CustormException(Message.INVALID_MANGER);
+        }
+        List<PermissionEntity> permissionEntities = leaderPermissionRepository.findAllByUserId(managerId)
+                .stream().map(t -> t.getPermission()).collect(Collectors.toList());
+        return permissionEntities;
+    }
+
+    @Override
     public void addPermissionOfManager(PermissionManagerDomain permissionManagerDomain) throws CustormException {
         User manager = userRepository.findById(permissionManagerDomain.getManagerId()).orElse(null);
         if (manager == null || !manager.getRoles().getRoleName().equals("ROLE_MANAGER")) {
