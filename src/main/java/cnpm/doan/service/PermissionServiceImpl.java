@@ -1,5 +1,6 @@
 package cnpm.doan.service;
 
+import cnpm.doan.domain.PermissionDomain;
 import cnpm.doan.domain.PermissionManagerDomain;
 import cnpm.doan.entity.LeadPermission;
 import cnpm.doan.entity.PermissionEntity;
@@ -25,13 +26,18 @@ public class PermissionServiceImpl implements PermissionService {
     LeaderPermissionRepository leaderPermissionRepository;
 
     @Override
-    public List<PermissionEntity> getPermissionOfManager(int managerId) throws CustormException {
+    public List<PermissionDomain> getPermissionOfManager(int managerId) throws CustormException {
         User manager = userRepository.findById(managerId).orElse(null);
         if (manager == null || !manager.getRoles().getRoleName().equals("ROLE_MANAGER")) {
             throw new CustormException(Message.INVALID_MANGER);
         }
-        List<PermissionEntity> permissionEntities = leaderPermissionRepository.findAllByUserId(managerId)
-                .stream().map(t -> t.getPermission()).collect(Collectors.toList());
+        List<PermissionDomain> permissionEntities = leaderPermissionRepository.findAllByUserId(managerId)
+                .stream().map(t -> {
+                    PermissionDomain permissionDomain = new PermissionDomain();
+                    permissionDomain.setId(t.getPermission().getId());
+                    permissionDomain.setName(t.getPermission().getName());
+                    return permissionDomain;
+                }).collect(Collectors.toList());
         return permissionEntities;
     }
 

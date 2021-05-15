@@ -1,5 +1,6 @@
 package cnpm.doan.api;
 
+import cnpm.doan.domain.PermissionDomain;
 import cnpm.doan.domain.PermissionManagerDomain;
 import cnpm.doan.domain.ResponeDomain;
 import cnpm.doan.entity.PermissionEntity;
@@ -46,7 +47,7 @@ public class PermissionController {
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
     @GetMapping("/permission")
     public ResponseEntity<?> addPermssion(@RequestParam("manager_id") int managerId) {
-        List<PermissionEntity> permissionEntities = new ArrayList<>();
+        List<PermissionDomain> permissionEntities = new ArrayList<>();
         try {
             permissionEntities = permissionService.getPermissionOfManager(managerId);
         } catch (CustormException e) {
