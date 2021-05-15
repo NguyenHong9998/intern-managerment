@@ -8,15 +8,18 @@ import cnpm.doan.service.PermissionService;
 import cnpm.doan.util.CustormException;
 import cnpm.doan.util.HTTPStatus;
 import cnpm.doan.util.Message;
+import org.graalvm.util.CollectionsUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.Collections;
 import java.util.List;
 
 @Controller
@@ -45,12 +48,16 @@ public class PermissionController {
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
     @GetMapping("/permission")
     public ResponseEntity<?> addPermssion(@RequestParam("manager_id") int managerId) {
+        List<PermissionEntity> permissionEntities = null;
         try {
-            permissionService.getPermissionOfManager(managerId);
+            permissionEntities = permissionService.getPermissionOfManager(managerId);
         } catch (CustormException e) {
             return ResponseEntity.ok(new ResponeDomain(e.getErrorType().getDetail(), HTTPStatus.fail));
         }
-        return ResponseEntity.ok(new ResponeDomain(Message.SUCCESSFUlLY.getDetail(), HTTPStatus.success));
+        if (CollectionUtils.isEmpty(permissionEntities)) {
+            return ResponseEntity.ok(new ResponeDomain(Message.EMPTY_RESULT.getDetail(), HTTPStatus.success));
+        }
+        return ResponseEntity.ok(new ResponeDomain(permissionEntities, Message.SUCCESSFUlLY.getDetail(), HTTPStatus.success));
 
     }
 
