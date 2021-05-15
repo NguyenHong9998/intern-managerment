@@ -1,13 +1,14 @@
 package cnpm.doan.api;
 
 
-import cnpm.doan.domain.Account;
-import cnpm.doan.domain.ChangePasswordRequest;
-import cnpm.doan.domain.ResponeDomain;
-import cnpm.doan.domain.UserWithToken;
+import cnpm.doan.domain.*;
+import cnpm.doan.entity.LeadPermission;
 import cnpm.doan.entity.User;
+import cnpm.doan.repository.LeaderPermissionRepository;
+import cnpm.doan.repository.PermissionRepository;
 import cnpm.doan.security.JwtUtil;
 import cnpm.doan.security.UserPrincipal;
+import cnpm.doan.service.PermissionService;
 import cnpm.doan.service.UserService;
 import cnpm.doan.util.HTTPStatus;
 import cnpm.doan.util.Message;
@@ -16,6 +17,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @CrossOrigin(maxAge = 3600)
 @RestController
@@ -26,6 +30,9 @@ public class AuthController {
 
     @Autowired
     private JwtUtil jwtUtil;
+
+    @Autowired
+    private LeaderPermissionRepository leaderPermissionRepository;
 
     @PostMapping(value = "/login")
     public ResponseEntity<?> login(@ModelAttribute Account account) {
@@ -40,6 +47,12 @@ public class AuthController {
         String token = jwtUtil.generateToken(userPrincipal);
         User user = userService.findUserByEmail(account.getEmail());
         UserWithToken userWithToken = new UserWithToken(user, token);
+        List<PermissionDomain> permissionDomains = leaderPermissionRepository.findAll().stream().filter(t -> t.getUser().getEmail().equals(account.getEmail())).map(t -> {
+            PermissionDomain permissionDomain = new PermissionDomain();
+            permissionDomain.setName(t.getPermission().getName());
+            permissionDomain.setId(t.getPermission().getId());
+            return permissionDomain;
+        }).collect(Collectors.toList());
         return ResponseEntity.ok(new ResponeDomain(userWithToken, Message.SUCCESSFUlLY.getDetail(), true));
     }
 
