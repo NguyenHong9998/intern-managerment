@@ -3,12 +3,10 @@ package cnpm.doan.api;
 import cnpm.doan.domain.PermissionManagerDomain;
 import cnpm.doan.domain.ResponeDomain;
 import cnpm.doan.entity.PermissionEntity;
-import cnpm.doan.repository.PermissionRepository;
 import cnpm.doan.service.PermissionService;
 import cnpm.doan.util.CustormException;
 import cnpm.doan.util.HTTPStatus;
 import cnpm.doan.util.Message;
-import org.graalvm.util.CollectionsUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -19,7 +17,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.Collections;
 import java.util.List;
 
 @Controller
