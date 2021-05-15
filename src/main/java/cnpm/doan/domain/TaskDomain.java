@@ -7,7 +7,7 @@ public class TaskDomain {
     private String description;
     private String title;
     private String difficulty;
-    private boolean isDone;
+    private int isDone;
     private String point;
     private String projectName;
     private String createDate;
@@ -17,7 +17,7 @@ public class TaskDomain {
     public TaskDomain() {
     }
 
-    public TaskDomain(long taskId, String description, String title, String difficulty, boolean isDone, String point, String projectName, String createDate, String dueDate, List<UserContributeToTask> userTaskDomains) {
+    public TaskDomain(long taskId, String description, String title, String difficulty, int isDone, String point, String projectName, String createDate, String dueDate, List<UserContributeToTask> userTaskDomains) {
         this.taskId = taskId;
         this.description = description;
         this.title = title;
@@ -78,11 +78,11 @@ public class TaskDomain {
         this.difficulty = difficulty;
     }
 
-    public boolean getIsDone() {
+    public int getIsDone() {
         return isDone;
     }
 
-    public void setIsDone(boolean isDone) {
+    public void setIsDone(int isDone) {
         this.isDone = isDone;
     }
 
@@ -110,7 +110,7 @@ public class TaskDomain {
         this.createDate = createDate;
     }
 
-    public void setDone(boolean done) {
+    public void setDone(int done) {
         isDone = done;
     }
 
