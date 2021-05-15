@@ -30,7 +30,6 @@ public class FeedbackController {
         List<FeedbackResponseDomain> result = feedbacks.stream().map(t -> {
             FeedbackResponseDomain domain = new FeedbackResponseDomain();
             domain.setFeedbackContent(t.getMessage());
-            domain.setTaskId(taskId);
             domain.setFeedbackId(t.getId());
             domain.setDate(t.getTime().toString());
             return domain;
@@ -38,7 +37,6 @@ public class FeedbackController {
         if (feedbacks.size() == 0) {
             return ResponseEntity.ok(new ResponeDomain(Message.EMPTY_RESULT.getDetail(), HTTPStatus.success));
         }
-        result.forEach(t-> System.out.println("resulttttttttttttttt: "+ t));
         return ResponseEntity.ok(new ResponeDomain(result, Message.SUCCESSFUlLY.getDetail(), HTTPStatus.success));
     }
 
