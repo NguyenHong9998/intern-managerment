@@ -175,7 +175,6 @@ public class InsertData {
 
     @PostMapping("/update/task")
     public ResponseEntity<?> updateStatusTask() {
-
         List<Task> tasks = taskRepository.findAll().stream().map(t -> {
             t.setDone(0);
             return t;
