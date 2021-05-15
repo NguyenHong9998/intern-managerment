@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -45,7 +46,7 @@ public class PermissionController {
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
     @GetMapping("/permission")
     public ResponseEntity<?> addPermssion(@RequestParam("manager_id") int managerId) {
-        List<PermissionEntity> permissionEntities = null;
+        List<PermissionEntity> permissionEntities = new ArrayList<>();
         try {
             permissionEntities = permissionService.getPermissionOfManager(managerId);
         } catch (CustormException e) {
@@ -54,6 +55,7 @@ public class PermissionController {
         if (CollectionUtils.isEmpty(permissionEntities)) {
             return ResponseEntity.ok(new ResponeDomain(Message.EMPTY_RESULT.getDetail(), HTTPStatus.success));
         }
+        permissionEntities.forEach(t -> System.out.println("xxxxxxxxxxxxxx:" + t));
         return ResponseEntity.ok(new ResponeDomain(permissionEntities, Message.SUCCESSFUlLY.getDetail(), HTTPStatus.success));
 
     }
