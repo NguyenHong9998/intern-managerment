@@ -32,6 +32,7 @@ public class PermissionServiceImpl implements PermissionService {
         }
         List<PermissionEntity> permissionEntities = leaderPermissionRepository.findAllByUserId(managerId)
                 .stream().map(t -> t.getPermission()).collect(Collectors.toList());
+        permissionEntities.forEach(t -> System.out.println("ppppppppppppppppppp: " + t));
         return permissionEntities;
     }
 
