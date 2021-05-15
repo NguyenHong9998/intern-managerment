@@ -74,4 +74,15 @@ public class Feedback {
     public void setTask(Task task) {
         this.task = task;
     }
+
+    @Override
+    public String toString() {
+        return "Feedback{" +
+                "id=" + id +
+                ", message='" + message + '\'' +
+                ", time=" + time +
+                ", user=" + user +
+                ", task=" + task +
+                '}';
+    }
 }

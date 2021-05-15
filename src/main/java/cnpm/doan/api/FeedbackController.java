@@ -36,6 +36,7 @@ public class FeedbackController {
         if (feedbacks.size() == 0) {
             return ResponseEntity.ok(new ResponeDomain(Message.EMPTY_RESULT.getDetail(), HTTPStatus.success));
         }
+        result.forEach(t-> System.out.println("resulttttttttttttttt: "+ t));
         return ResponseEntity.ok(new ResponeDomain(result, Message.SUCCESSFUlLY.getDetail(), HTTPStatus.success));
     }
 

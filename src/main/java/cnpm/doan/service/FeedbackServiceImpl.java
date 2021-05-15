@@ -30,7 +30,9 @@ public class FeedbackServiceImpl implements FeedbackService {
 
     @Override
     public List<Feedback> getAllFeedbackByTaskId(int taskId) {
-        return feedbackRepository.findFeedbackByTaskId(taskId);
+        List<Feedback> feedbacks= feedbackRepository.findFeedbackByTaskId(taskId);
+        feedbacks.forEach(t-> System.out.println("dbbbbbbbbbbbbbbb:"  + t));
+        return feedbacks;
     }
 
     @Override
