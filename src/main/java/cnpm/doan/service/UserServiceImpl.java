@@ -112,7 +112,7 @@ public class UserServiceImpl implements UserService {
 //            }
             List<MemberTask> memberTasks = memberTaskRepository.findAll().stream().filter(t -> t.getUser().getId() == user.getId()).collect(Collectors.toList());
             for (MemberTask memberTask : memberTasks) {
-                if (!memberTask.getTask().isDone()) {
+                if (memberTask.getTask().isDone() == 0) {
                     throw new CustormException(Message.EXIST_NOT_DONE_TASK);
                 }
             }
