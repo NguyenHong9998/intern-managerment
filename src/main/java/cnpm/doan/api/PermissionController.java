@@ -43,7 +43,7 @@ public class PermissionController {
     }
 
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
-    @GetMapping("/permission/")
+    @GetMapping("/permission")
     public ResponseEntity<?> addPermssion(@RequestParam("manager_id") int managerId) {
         try {
             permissionService.getPermissionOfManager(managerId);
