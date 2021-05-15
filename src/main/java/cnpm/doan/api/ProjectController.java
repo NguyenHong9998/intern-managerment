@@ -122,6 +122,8 @@ public class ProjectController {
         if (project == null) {
             return ResponseEntity.ok(new ResponeDomain(Message.INVALID_PROJECT_ID.getDetail(), HTTPStatus.fail));
         }
+        List<MemberProject> memberProjects = memberProjectRepository.findMemberProjectByProjectId(idProject);
+        memberProjectRepository.deleteAll(memberProjects);
         for (User user : users) {
             if (user == null) {
                 return ResponseEntity.ok(new ResponeDomain(Message.INVALID_USER.getDetail(), HTTPStatus.fail));
