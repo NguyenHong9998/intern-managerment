@@ -31,6 +31,7 @@ public enum Message {
     INVALID_LEAVE_ID("Invalid leave id in request"),
     CANNOT_DELETE_MANAGER("Can not delete manager"),
     INVALID_FEEDBACK("Invalid Feedback id in request"),
+    INVALID_PERMISION_ID("Invalid permission id in request"),
     CANNOT_UPDATE_PROJECT("You cannot update this project"),
     CANNOT_ADD_LEAVE("You have been add leave schedule at same day, please check again"),
     CANNOT_DELETE_ANOTHER_FEED("Can not delete feedback off another one"),
