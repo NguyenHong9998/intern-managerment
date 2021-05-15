@@ -175,11 +175,7 @@ public class InsertData {
 
     @PostMapping("/update/task")
     public ResponseEntity<?> updateStatusTask() {
-        List<Task> tasks = taskRepository.findAll().stream().map(t -> {
-            t.setDone(0);
-            return t;
-        }).collect(Collectors.toList());
-        taskRepository.saveAll(tasks);
+        taskRepository.update();
         return ResponseEntity.ok(new ResponeDomain(Message.SUCCESSFUlLY.getDetail(), true));
     }
 }
