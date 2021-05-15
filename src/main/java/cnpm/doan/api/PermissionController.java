@@ -56,10 +56,20 @@ public class PermissionController {
         if (CollectionUtils.isEmpty(permissionEntities)) {
             return ResponseEntity.ok(new ResponeDomain(Message.EMPTY_RESULT.getDetail(), HTTPStatus.success));
         }
-        permissionEntities.forEach(t -> System.out.println("xxxxxxxxxxxxxx:" + t));
         return ResponseEntity.ok(new ResponeDomain(permissionEntities, Message.SUCCESSFUlLY.getDetail(), HTTPStatus.success));
 
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
+    @PostMapping("/permission/edit")
+    public ResponseEntity<?> editPermssion(@RequestBody PermissionManagerDomain permissionManagerDomain) {
+        try {
+            permissionService.editPermissonOfManager(permissionManagerDomain);
+        } catch (CustormException e) {
+            return ResponseEntity.ok(new ResponeDomain(e.getErrorType().getDetail(), HTTPStatus.fail));
+        }
+        return ResponseEntity.ok(new ResponeDomain(Message.SUCCESSFUlLY.getDetail(), HTTPStatus.success));
+
+    }
 }
 

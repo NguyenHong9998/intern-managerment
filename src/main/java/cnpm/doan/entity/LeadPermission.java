@@ -1,9 +1,12 @@
 package cnpm.doan.entity;
 
+import org.hibernate.annotations.Where;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "permission_user")
+@Where(clause = "is_deleted = 0")
 public class LeadPermission {
     @Id
     @Column(name = "id")
@@ -16,6 +19,8 @@ public class LeadPermission {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "permission_id")
     private PermissionEntity permission;
+    @Column(name = "is_deleted", nullable = false, columnDefinition = "int default 0")
+    private int isDeleted = 0;
 
     public LeadPermission() {
     }
@@ -24,6 +29,14 @@ public class LeadPermission {
         this.id = id;
         this.user = user;
         this.permission = permission;
+    }
+
+    public void setIsDeleted(int isDeleted) {
+        this.isDeleted = isDeleted;
+    }
+
+    public int getIsDeleted() {
+        return isDeleted;
     }
 
     public int getId() {

@@ -9,7 +9,10 @@ import java.util.List;
 
 public interface PermissionService {
     List<PermissionEntity> getAllPermission();
+
     List<PermissionDomain> getPermissionOfManager(int managerId) throws CustormException;
+
+    void editPermissonOfManager(PermissionManagerDomain permissionManagerDomain) throws CustormException;
 
     void addPermissionOfManager(PermissionManagerDomain permissionManagerDomain) throws CustormException;
 }
