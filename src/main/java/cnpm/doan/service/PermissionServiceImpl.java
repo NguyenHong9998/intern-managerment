@@ -28,7 +28,7 @@ public class PermissionServiceImpl implements PermissionService {
     @Override
     public void addPermissionOfManager(PermissionManagerDomain permissionManagerDomain) throws CustormException {
         User manager = userRepository.findById(permissionManagerDomain.getManagerId()).orElse(null);
-        if (manager == null || manager.getRoles().getRoleName().equals("ROLE_MANAGER")) {
+        if (manager == null || !manager.getRoles().getRoleName().equals("ROLE_MANAGER")) {
             throw new CustormException(Message.INVALID_MANGER);
         }
         List<Integer> permissionEntities = permissionManagerDomain.getPermissionId();
