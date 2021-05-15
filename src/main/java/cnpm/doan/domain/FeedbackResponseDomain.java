@@ -4,9 +4,9 @@ import cnpm.doan.entity.Feedback;
 import cnpm.doan.util.DatetimeUtils;
 
 public class FeedbackResponseDomain {
+    private int feedbackId;
     private String feedbackContent;
     private String date;
-    private int feedbackId;
 
     public int getFeedbackId() {
         return feedbackId;
