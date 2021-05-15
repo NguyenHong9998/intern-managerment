@@ -9,6 +9,7 @@ import java.util.List;
 
 @Repository
 public interface FeedbackRepository extends JpaRepository<Feedback, Integer> {
+    @Query("select f from Feedback f where f.task.id = ?1")
     List<Feedback> findFeedbackByTaskId(int taskId);
 
     void deleteByTaskId(int taskId);
