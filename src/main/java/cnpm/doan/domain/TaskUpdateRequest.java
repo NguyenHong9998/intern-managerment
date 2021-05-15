@@ -11,7 +11,7 @@ public class TaskUpdateRequest {
     private String description;
     private String title;
     private String difficulty;
-    private int isDone;
+    private boolean isDone;
     private String point;
     private String projectName;
     private String createDate;
@@ -50,11 +50,11 @@ public class TaskUpdateRequest {
         this.difficulty = difficulty;
     }
 
-    public int isDone() {
+    public boolean isDone() {
         return isDone;
     }
 
-    public void setDone(int done) {
+    public void setDone(boolean done) {
         isDone = done;
     }
 
@@ -96,21 +96,5 @@ public class TaskUpdateRequest {
 
     public void setUsersAssignee(List<UserContributeToTask> usersAssignee) {
         this.usersAssignee = usersAssignee;
-    }
-
-    @Override
-    public String toString() {
-        return "TaskUpdateRequest{" +
-                "taskId=" + taskId +
-                ", description='" + description + '\'' +
-                ", title='" + title + '\'' +
-                ", difficulty='" + difficulty + '\'' +
-                ", isDone=" + isDone +
-                ", point='" + point + '\'' +
-                ", projectName='" + projectName + '\'' +
-                ", createDate='" + createDate + '\'' +
-                ", dueDate='" + dueDate + '\'' +
-                ", usersAssignee=" + usersAssignee +
-                '}';
     }
 }

@@ -19,7 +19,7 @@ public class Task {
     @Column(name = "description")
     private String description;
     @Column(name = "is_done")
-    private int isDone;
+    private boolean isDone;
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "due_date")
     private Date dueDate;
@@ -77,11 +77,11 @@ public class Task {
         this.description = description;
     }
 
-    public int isDone() {
+    public boolean isDone() {
         return isDone;
     }
 
-    public void setDone(int done) {
+    public void setDone(boolean done) {
         isDone = done;
     }
 
