@@ -53,6 +53,7 @@ public class AuthController {
             permissionDomain.setId(t.getPermission().getId());
             return permissionDomain;
         }).collect(Collectors.toList());
+        userWithToken.setPermissionDomains(permissionDomains);
         return ResponseEntity.ok(new ResponeDomain(userWithToken, Message.SUCCESSFUlLY.getDetail(), true));
     }
 
