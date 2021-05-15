@@ -30,7 +30,9 @@ public class FeedbackController {
         List<FeedbackResponseDomain> result = feedbacks.stream().map(t -> {
             FeedbackResponseDomain domain = new FeedbackResponseDomain();
             domain.setFeedbackContent(t.getMessage());
-            domain.setTaskId(t.getId());
+            domain.setTaskId(taskId);
+            domain.setFeedbackId(t.getId());
+            domain.setDate(t.getTime().toString());
             return domain;
         }).collect(Collectors.toList());
         if (feedbacks.size() == 0) {
