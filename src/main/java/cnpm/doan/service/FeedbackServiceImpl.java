@@ -14,6 +14,7 @@ import cnpm.doan.util.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.Date;
 import java.util.List;
 
@@ -49,6 +50,7 @@ public class FeedbackServiceImpl implements FeedbackService {
         feedbackRepository.save(feedback);
     }
 
+    @Transactional
     @Override
     public void delete(int feedbackId) throws CustormException {
         Feedback feedback = feedbackRepository.findById(feedbackId).orElse(null);

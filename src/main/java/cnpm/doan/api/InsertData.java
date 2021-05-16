@@ -186,4 +186,15 @@ public class InsertData {
         taskRepository.deleteAll();
         return ResponseEntity.ok(new ResponeDomain(Message.SUCCESSFUlLY.getDetail(), true));
     }
+
+    @PostMapping("/update/task-date")
+    public ResponseEntity<?> updateDateTask() {
+        List<Task> projects = taskRepository.
+                findAll().stream().filter(t -> t.getDueDate() == null).map(t -> {
+            t.setDueDate(new Date());
+            return t;
+        }).collect(Collectors.toList());
+        taskRepository.saveAll(projects);
+        return ResponseEntity.ok(new ResponeDomain(Message.SUCCESSFUlLY.getDetail(), true));
+    }
 }
