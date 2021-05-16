@@ -211,4 +211,11 @@ public class InsertData {
         scheduleRepository.saveAll(projects);
         return ResponseEntity.ok(new ResponeDomain(Message.SUCCESSFUlLY.getDetail(), true));
     }
+
+    @PostMapping("/delete/schedule")
+    public ResponseEntity<?> deleteSchedule() {
+        scheduleRepository.deleteAll();
+        return ResponseEntity.ok(new ResponeDomain(Message.SUCCESSFUlLY.getDetail(), true));
+    }
+
 }
