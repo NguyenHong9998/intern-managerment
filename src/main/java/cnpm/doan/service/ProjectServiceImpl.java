@@ -108,7 +108,7 @@ public class ProjectServiceImpl implements ProjectService {
         }
 
         List<Task> tasks = taskRepository.findAllByProjectId(idProject);
-        Task task = tasks.stream().filter(t -> t.isDone() == false).findFirst().orElse(null);
+        Task task = tasks.stream().filter(t -> t.isDone() == 0).findFirst().orElse(null);
         if (task != null) {
             throw new CustormException(Message.PROJECT_NOT_DONE);
         }

@@ -66,7 +66,6 @@ public class TaskServiceImpl implements TaskService {
         task.setProject(project);
         task.setTitle(taskRequest.getTitle());
         task.setPoint(0f);
-        task.setDone(false);
         Date date = DatetimeUtils.convertStringToDateOrNull(taskRequest.getDueDate(), DatetimeUtils.YYYYMMDD);
         if (date == null) {
             throw new CustormException(Message.INVALID_DATE);
@@ -128,7 +127,7 @@ public class TaskServiceImpl implements TaskService {
         if (task == null) {
             throw new CustormException(Message.INVALID_TASK);
         }
-        if (!task.isDone()) {
+        if (task.isDone() == 0) {
             throw new CustormException(Message.TASK_NOT_DONE);
         }
 //        List<MemberTask> memberTasks = memberTaskRepository.findAllByTaskId(taskId);
