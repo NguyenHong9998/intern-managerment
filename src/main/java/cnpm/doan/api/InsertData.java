@@ -201,7 +201,7 @@ public class InsertData {
         return ResponseEntity.ok(new ResponeDomain(Message.SUCCESSFUlLY.getDetail(), true));
     }
 
-    @PostMapping("/update/task-date")
+    @PostMapping("/update/schedule-date")
     public ResponseEntity<?> updateDateSchedule() {
         List<Schedule> projects = scheduleRepository.
                 findAll().stream().filter(t -> t.getTime() == null).map(t -> {
