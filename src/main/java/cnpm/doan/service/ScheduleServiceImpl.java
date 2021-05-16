@@ -53,14 +53,10 @@ public class ScheduleServiceImpl implements ScheduleService {
             throw new CustormException(Message.CANNOT_UPDATE_ANOTHER_SCHEDULE);
         }
         Date date = DatetimeUtils.convertStringToDateOrNull(leaveDomain.getLeaveDate(), DatetimeUtils.YYYYMMDD);
-        Schedule scheduleOld = scheduleRepository.findByUserIdAndTime(jwtUtil.getCurrentUser().getUserId(), date);
-        if (scheduleOld != null && leaveDomain.getShift() == schedule.getShift()) {
-            throw new CustormException(Message.CANNOT_ADD_LEAVE);
-        }
-        scheduleOld.setReasonLeave(leaveDomain.getReasonContent());
-        scheduleOld.setTime(date);
-        scheduleOld.setShift(leaveDomain.getShift());
-        scheduleRepository.save(scheduleOld);
+        schedule.setReasonLeave(leaveDomain.getReasonContent());
+        schedule.setTime(date);
+        schedule.setShift(leaveDomain.getShift());
+        scheduleRepository.save(schedule);
     }
 
     @Override
