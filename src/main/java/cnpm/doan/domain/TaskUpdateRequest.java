@@ -1,5 +1,6 @@
 package cnpm.doan.domain;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 
@@ -11,7 +12,7 @@ public class TaskUpdateRequest {
     private String description;
     private String title;
     private String difficulty;
-    private Boolean isDone;
+    private boolean isDone;
     private String point;
     private String projectName;
     private String createDate;

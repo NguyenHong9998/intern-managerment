@@ -147,15 +147,7 @@ public class TaskServiceImpl implements TaskService {
         task.setDueDate(DatetimeUtils.convertStringToDateOrNull(taskUpdateRequest.getDueDate(), DatetimeUtils.YYYYMMDD));
         task.setDescription(taskUpdateRequest.getDescription());
         task.setTitle(taskUpdateRequest.getTitle());
-//        task.setDone(taskUpdateRequest.isDone());
-//        taskRepository.updateStatus(taskId, taskUpdateRequest.isDone());
-        if (task.isDone() && taskUpdateRequest.isDone()) {
-            if (taskUpdateRequest.isDone()) {
-                taskRepository.updateStatusToTrue(taskId);
-            } else {
-                taskRepository.updateStatusToFalse(taskId);
-            }
-        }
+        task.setDone(taskUpdateRequest.isDone());
         task.setPoint(Float.valueOf(taskUpdateRequest.getPoint()));
         taskRepository.save(task);
         memberTaskRepository.deleteByTaskId(task.getId());

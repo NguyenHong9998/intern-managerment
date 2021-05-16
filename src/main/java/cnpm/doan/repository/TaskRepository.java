@@ -14,14 +14,5 @@ public interface TaskRepository extends JpaRepository<Task, Integer> {
     List<Task> findAllByProjectId(int projectId);
 
     void deleteById(int id);
-
-    @Transactional
-    @Modifying
-    @Query(value = "update Task t set t.isDone = true where t.id = ?1")
-    void updateStatusToTrue(int taskId);
-
-    @Transactional
-    @Modifying
-    @Query(value = "update Task t set t.isDone = false where t.id = ?1")
-    void updateStatusToFalse(int taskId);
+    
 }
