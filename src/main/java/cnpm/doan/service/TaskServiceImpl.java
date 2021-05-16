@@ -91,7 +91,6 @@ public class TaskServiceImpl implements TaskService {
         List<Task> findAllTask = findAllTaskByProjectId(projectId);
         List<TaskDomain> result = new ArrayList<>();
         for (Task task : findAllTask) {
-
             TaskDomain taskDomain = new TaskDomain();
             taskDomain.setTaskId(task.getId());
             taskDomain.setDescription(task.getDescription());
@@ -155,6 +154,9 @@ public class TaskServiceImpl implements TaskService {
 
         for (UserContributeToTask user : taskUpdateRequest.getUsersAssignee()) {
             User userInTask = userRepository.findById(user.getId()).orElse(null);
+            if (userInTask == null) {
+                throw new CustormException(Message.INVALID_USER);
+            }
             MemberTask memberTask = new MemberTask();
             memberTask.setTask(task);
             memberTask.setUser(userInTask);
