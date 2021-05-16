@@ -54,7 +54,6 @@ public class ScheduleServiceImpl implements ScheduleService {
         }
         Date date = DatetimeUtils.convertStringToDateOrNull(leaveDomain.getLeaveDate(), DatetimeUtils.YYYYMMDD);
         schedule.setReasonLeave(leaveDomain.getReasonContent());
-        schedule.setTime(date);
         schedule.setShift(leaveDomain.getShift());
         scheduleRepository.save(schedule);
     }
