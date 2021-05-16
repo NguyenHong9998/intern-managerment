@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>DATABASE</ID>
+  <OriginalElement>666b2c03-4866-4ce8-95f9-fa15926a74ca</OriginalElement>
+  <nodes>
+    <node x="220.0" y="870.5">666b2c03-4866-4ce8-95f9-fa15926a74ca.TABLE:dg09l2qnd4i1r.public.member_task</node>
+    <node x="205.5" y="8.5">666b2c03-4866-4ce8-95f9-fa15926a74ca.TABLE:dg09l2qnd4i1r.public.feedback</node>
+    <node x="807.5" y="233.5">666b2c03-4866-4ce8-95f9-fa15926a74ca.TABLE:dg09l2qnd4i1r.public.users</node>
+    <node x="854.0" y="-38.5">666b2c03-4866-4ce8-95f9-fa15926a74ca.TABLE:dg09l2qnd4i1r.public.department</node>
+    <node x="833.5" y="968.5">666b2c03-4866-4ce8-95f9-fa15926a74ca.TABLE:dg09l2qnd4i1r.public.schedule</node>
+    <node x="478.5" y="546.5">666b2c03-4866-4ce8-95f9-fa15926a74ca.TABLE:dg09l2qnd4i1r.public.project</node>
+    <node x="1124.0" y="539.5">666b2c03-4866-4ce8-95f9-fa15926a74ca.TABLE:dg09l2qnd4i1r.public.permission_user</node>
+    <node x="1080.5" y="321.5">666b2c03-4866-4ce8-95f9-fa15926a74ca.TABLE:dg09l2qnd4i1r.public.role</node>
+    <node x="1134.0" y="721.5">666b2c03-4866-4ce8-95f9-fa15926a74ca.TABLE:dg09l2qnd4i1r.public.permission</node>
+    <node x="488.0" y="310.5">666b2c03-4866-4ce8-95f9-fa15926a74ca.TABLE:dg09l2qnd4i1r.public.member_project</node>
+    <node x="198.5" y="513.5">666b2c03-4866-4ce8-95f9-fa15926a74ca.TABLE:dg09l2qnd4i1r.public.task</node>
+    <node x="-26.0" y="601.5">666b2c03-4866-4ce8-95f9-fa15926a74ca.TABLE:dg09l2qnd4i1r.public.difficulty</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="666b2c03-4866-4ce8-95f9-fa15926a74ca.TABLE:dg09l2qnd4i1r.public.member_task" target="666b2c03-4866-4ce8-95f9-fa15926a74ca.TABLE:dg09l2qnd4i1r.public.task">
+      <point x="0.0" y="-49.5" />
+      <point x="0.0" y="126.5" />
+    </edge>
+    <edge source="666b2c03-4866-4ce8-95f9-fa15926a74ca.TABLE:dg09l2qnd4i1r.public.feedback" target="666b2c03-4866-4ce8-95f9-fa15926a74ca.TABLE:dg09l2qnd4i1r.public.users">
+      <point x="74.5" y="0.0" />
+      <point x="880.0" y="80.0" />
+      <point x="-40.0" y="-126.5" />
+    </edge>
+    <edge source="666b2c03-4866-4ce8-95f9-fa15926a74ca.TABLE:dg09l2qnd4i1r.public.member_project" target="666b2c03-4866-4ce8-95f9-fa15926a74ca.TABLE:dg09l2qnd4i1r.public.users">
+      <point x="72.0" y="0.0" />
+      <point x="-112.5" y="0.0" />
+    </edge>
+    <edge source="666b2c03-4866-4ce8-95f9-fa15926a74ca.TABLE:dg09l2qnd4i1r.public.task" target="666b2c03-4866-4ce8-95f9-fa15926a74ca.TABLE:dg09l2qnd4i1r.public.difficulty">
+      <point x="-81.5" y="0.0" />
+      <point x="66.0" y="0.0" />
+    </edge>
+    <edge source="666b2c03-4866-4ce8-95f9-fa15926a74ca.TABLE:dg09l2qnd4i1r.public.schedule" target="666b2c03-4866-4ce8-95f9-fa15926a74ca.TABLE:dg09l2qnd4i1r.public.users">
+      <point x="0.0" y="-71.5" />
+      <point x="0.0" y="126.5" />
+    </edge>
+    <edge source="666b2c03-4866-4ce8-95f9-fa15926a74ca.TABLE:dg09l2qnd4i1r.public.member_project" target="666b2c03-4866-4ce8-95f9-fa15926a74ca.TABLE:dg09l2qnd4i1r.public.project">
+      <point x="0.0" y="49.5" />
+      <point x="0.0" y="-93.5" />
+    </edge>
+    <edge source="666b2c03-4866-4ce8-95f9-fa15926a74ca.TABLE:dg09l2qnd4i1r.public.users" target="666b2c03-4866-4ce8-95f9-fa15926a74ca.TABLE:dg09l2qnd4i1r.public.department">
+      <point x="0.0" y="-126.5" />
+      <point x="0.0" y="38.5" />
+    </edge>
+    <edge source="666b2c03-4866-4ce8-95f9-fa15926a74ca.TABLE:dg09l2qnd4i1r.public.permission_user" target="666b2c03-4866-4ce8-95f9-fa15926a74ca.TABLE:dg09l2qnd4i1r.public.permission">
+      <point x="0.0" y="60.5" />
+      <point x="0.0" y="-38.5" />
+    </edge>
+    <edge source="666b2c03-4866-4ce8-95f9-fa15926a74ca.TABLE:dg09l2qnd4i1r.public.users" target="666b2c03-4866-4ce8-95f9-fa15926a74ca.TABLE:dg09l2qnd4i1r.public.role">
+      <point x="112.5" y="0.0" />
+      <point x="-79.5" y="0.0" />
+    </edge>
+    <edge source="666b2c03-4866-4ce8-95f9-fa15926a74ca.TABLE:dg09l2qnd4i1r.public.permission_user" target="666b2c03-4866-4ce8-95f9-fa15926a74ca.TABLE:dg09l2qnd4i1r.public.users">
+      <point x="-76.0" y="0.0" />
+      <point x="960.0" y="600.0" />
+      <point x="40.0" y="126.5" />
+    </edge>
+    <edge source="666b2c03-4866-4ce8-95f9-fa15926a74ca.TABLE:dg09l2qnd4i1r.public.task" target="666b2c03-4866-4ce8-95f9-fa15926a74ca.TABLE:dg09l2qnd4i1r.public.project">
+      <point x="81.5" y="0.0" />
+      <point x="-81.5" y="0.0" />
+    </edge>
+    <edge source="666b2c03-4866-4ce8-95f9-fa15926a74ca.TABLE:dg09l2qnd4i1r.public.project" target="666b2c03-4866-4ce8-95f9-fa15926a74ca.TABLE:dg09l2qnd4i1r.public.users">
+      <point x="81.5" y="0.0" />
+      <point x="840.0" y="640.0" />
+      <point x="-80.0" y="126.5" />
+    </edge>
+    <edge source="666b2c03-4866-4ce8-95f9-fa15926a74ca.TABLE:dg09l2qnd4i1r.public.member_task" target="666b2c03-4866-4ce8-95f9-fa15926a74ca.TABLE:dg09l2qnd4i1r.public.users">
+      <point x="60.0" y="0.0" />
+      <point x="880.0" y="920.0" />
+      <point x="-40.0" y="126.5" />
+    </edge>
+    <edge source="666b2c03-4866-4ce8-95f9-fa15926a74ca.TABLE:dg09l2qnd4i1r.public.feedback" target="666b2c03-4866-4ce8-95f9-fa15926a74ca.TABLE:dg09l2qnd4i1r.public.task">
+      <point x="0.0" y="71.5" />
+      <point x="0.0" y="-126.5" />
+    </edge>
+  </edges>
+  <settings layout="Orthogonal" zoom="0.5759405074365704" x="709.5722315053927" y="484.77425029711117" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Key columns</Category>
+    <Category>Columns</Category>
+    <Category>Virtual foreign keys</Category>
+  </Categories>
+</Diagram>
+
