@@ -22,10 +22,8 @@ public class DatetimeUtils {
     }
 
     public static String convertDateToString(Date date) {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(DDMMYYYYHHmmss);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(YYYYMMDD);
         simpleDateFormat.setLenient(false);
-
-        System.out.println(date);
         return simpleDateFormat.format(date);
     }
     public static long getDayBetweenTwoDiffDate(Date date1, Date date2) {

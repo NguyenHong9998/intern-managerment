@@ -29,10 +29,10 @@ public class ScheduleServiceImpl implements ScheduleService {
     @Override
     public void add(LeaveDomain leaveDomain) throws CustormException {
         Date date = DatetimeUtils.convertStringToDateOrNull(leaveDomain.getLeaveDate(), DatetimeUtils.YYYYMMDD);
-        Schedule scheduleOld = scheduleRepository.findByUserIdAndTime(jwtUtil.getCurrentUser().getUserId(), date);
-        if (scheduleOld != null && leaveDomain.getShift() == scheduleOld.getShift()) {
-            throw new CustormException(Message.CANNOT_ADD_LEAVE);
-        }
+//        Schedule scheduleOld = scheduleRepository.findByUserIdAndTime(jwtUtil.getCurrentUser().getUserId(), date);
+//        if (scheduleOld != null && leaveDomain.getShift() == scheduleOld.getShift()) {
+//            throw new CustormException(Message.CANNOT_ADD_LEAVE);
+//        }
         User user = userRepository.findById(jwtUtil.getCurrentUser().getUserId()).orElse(null);
         Schedule schedule = new Schedule();
         schedule.setReasonLeave(leaveDomain.getReasonContent());
