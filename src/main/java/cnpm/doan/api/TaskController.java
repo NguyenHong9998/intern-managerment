@@ -87,7 +87,7 @@ public class TaskController {
         try {
             taskService.update(taskUpdateRequest.getTaskId(), taskUpdateRequest);
         } catch (CustormException e) {
-            e.printStackTrace();
+            return ResponseEntity.ok(new ResponeDomain(null, e.getErrorType().getDetail(), false));
         }
         return ResponseEntity.ok(new ResponeDomain(null, Message.SUCCESSFUlLY.getDetail(), true));
     }
