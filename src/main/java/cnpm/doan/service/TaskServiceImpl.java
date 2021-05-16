@@ -66,7 +66,7 @@ public class TaskServiceImpl implements TaskService {
         task.setProject(project);
         task.setTitle(taskRequest.getTitle());
         task.setPoint(0f);
-        task.setDone(false);
+        task.setDone(true);
         Date date = DatetimeUtils.convertStringToDateOrNull(taskRequest.getDueDate(), DatetimeUtils.YYYYMMDD);
         if (date == null) {
             throw new CustormException(Message.INVALID_DATE);
