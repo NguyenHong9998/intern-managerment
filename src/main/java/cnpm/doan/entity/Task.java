@@ -1,5 +1,7 @@
 package cnpm.doan.entity;
 
+import com.sun.istack.NotNull;
+import org.hibernate.annotations.Type;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
@@ -18,8 +20,9 @@ public class Task {
     private String title;
     @Column(name = "description")
     private String description;
-    @Column(name = "is_done")
-    private boolean isDone;
+    @NotNull
+    @Column(name = "is_done", nullable = false, columnDefinition = "boolean default false")
+    private Boolean isDone;
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "due_date")
     private Date dueDate;

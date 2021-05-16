@@ -11,7 +11,7 @@ public class TaskUpdateRequest {
     private String description;
     private String title;
     private String difficulty;
-    private boolean isDone;
+    private Boolean isDone;
     private String point;
     private String projectName;
     private String createDate;

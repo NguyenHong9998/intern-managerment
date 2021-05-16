@@ -120,6 +120,7 @@ public class TaskServiceImpl implements TaskService {
         return result;
     }
 
+    @Transactional
     @Override
     public void deleteTask(int taskId) throws CustormException {
         feedbackRepository.deleteByTaskId(taskId);
@@ -147,7 +148,14 @@ public class TaskServiceImpl implements TaskService {
         task.setDescription(taskUpdateRequest.getDescription());
         task.setTitle(taskUpdateRequest.getTitle());
 //        task.setDone(taskUpdateRequest.isDone());
-        taskRepository.updateStatus(taskId, taskUpdateRequest.isDone());
+//        taskRepository.updateStatus(taskId, taskUpdateRequest.isDone());
+        if (task.isDone() && taskUpdateRequest.isDone()) {
+            if (taskUpdateRequest.isDone()) {
+                taskRepository.updateStatusToTrue(taskId);
+            } else {
+                taskRepository.updateStatusToFalse(taskId);
+            }
+        }
         task.setPoint(Float.valueOf(taskUpdateRequest.getPoint()));
         taskRepository.save(task);
         memberTaskRepository.deleteByTaskId(task.getId());
