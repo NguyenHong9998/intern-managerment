@@ -51,6 +51,9 @@ public class InsertData {
     @Autowired
     FeedbackRepository feedbackRepository;
 
+    @Autowired
+    ScheduleRepository scheduleRepository;
+
     @PostMapping("/insert-data-user")
     public ResponseEntity<?> insertData() {
         userRepository.deleteAll();
@@ -195,6 +198,17 @@ public class InsertData {
             return t;
         }).collect(Collectors.toList());
         taskRepository.saveAll(projects);
+        return ResponseEntity.ok(new ResponeDomain(Message.SUCCESSFUlLY.getDetail(), true));
+    }
+
+    @PostMapping("/update/task-date")
+    public ResponseEntity<?> updateDateSchedule() {
+        List<Schedule> projects = scheduleRepository.
+                findAll().stream().filter(t -> t.getTime() == null).map(t -> {
+            t.setTime(new Date());
+            return t;
+        }).collect(Collectors.toList());
+        scheduleRepository.saveAll(projects);
         return ResponseEntity.ok(new ResponeDomain(Message.SUCCESSFUlLY.getDetail(), true));
     }
 }
