@@ -48,6 +48,9 @@ public class InsertData {
     @Autowired
     MemberTaskRepository memberTaskRepository;
 
+    @Autowired
+    FeedbackRepository feedbackRepository;
+
     @PostMapping("/insert-data-user")
     public ResponseEntity<?> insertData() {
         userRepository.deleteAll();
@@ -178,6 +181,7 @@ public class InsertData {
 
     @PostMapping("/update/task")
     public ResponseEntity<?> updateStatusTask() {
+        feedbackRepository.deleteAll();
         memberTaskRepository.deleteAll();
         taskRepository.deleteAll();
         return ResponseEntity.ok(new ResponeDomain(Message.SUCCESSFUlLY.getDetail(), true));
