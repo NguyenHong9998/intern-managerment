@@ -16,6 +16,7 @@ public interface TaskRepository extends JpaRepository<Task, Integer> {
     void deleteById(int id);
 
     @Transactional
+    @Modifying
     @Query(value = "update task set is_done = ?2 where id = ?1", nativeQuery = true)
     void updateStatus(int taskId, boolean status);
 }
