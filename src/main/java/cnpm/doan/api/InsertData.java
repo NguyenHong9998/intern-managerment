@@ -144,6 +144,7 @@ public class InsertData {
 
     @PostMapping("/permission")
     public ResponseEntity<?> insertPermission() {
+        leaderPermissionRepository.deleteAll();
         permissionRepository.deleteAll();
         List<String> permission = Arrays.asList(
                 "Leader.GetAllUsers",
