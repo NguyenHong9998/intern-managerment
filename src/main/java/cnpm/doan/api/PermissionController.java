@@ -26,6 +26,7 @@ public class PermissionController {
     @Autowired
     PermissionService permissionService;
 
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
     @GetMapping("/permissions")
     public ResponseEntity<?> getAllPermission() {
         List<PermissionEntity> permissions = permissionService.getAllPermission();

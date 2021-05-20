@@ -86,6 +86,9 @@ public class PermissionServiceImpl implements PermissionService {
 
     @Override
     public List<PermissionEntity> getAllPermission() {
-        return permissionRepository.findAll();
+        return permissionRepository.findAll().stream().map(t -> {
+            t.setName(t.getName().substring(0, t.getName().lastIndexOf(".")));
+            return t;
+        }).collect(Collectors.toList());
     }
 }
