@@ -69,11 +69,8 @@ public class PermissionServiceImpl implements PermissionService {
         if (manager == null || !manager.getRoles().getRoleName().equals("ROLE_MANAGER")) {
             throw new CustormException(Message.INVALID_MANGER);
         }
-        List<LeadPermission> permissionEntities = leaderPermissionRepository.findAllByUserId(permissionManagerDomain.getManagerId()).stream().map(t -> {
-            t.setIsDeleted(1);
-            return t;
-        }).collect(Collectors.toList());
-        leaderPermissionRepository.saveAll(permissionEntities);
+        List<LeadPermission> permissionEntities = leaderPermissionRepository.findAllByUserId(permissionManagerDomain.getManagerId());
+        leaderPermissionRepository.deleteAll(permissionEntities);
         List<PermissionEntity> savePermission = permissionRepository.findAllById(permissionManagerDomain.getPermissionId());
         List<LeadPermission> leadPermissions = savePermission.stream().map(t -> {
             LeadPermission leadPermission = new LeadPermission();
