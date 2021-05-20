@@ -148,7 +148,8 @@ public class TaskServiceImpl implements TaskService {
         task.setDescription(taskUpdateRequest.getDescription());
         task.setTitle(taskUpdateRequest.getTitle());
         task.setDone(taskUpdateRequest.isDone());
-        task.setPoint(Float.valueOf(taskUpdateRequest.getPoint()));
+        task.setPoint(Float.parseFloat(taskUpdateRequest.getPoint()));
+        task.setDifficulty(difficultyRepository.findById(Integer.valueOf(taskUpdateRequest.getDifficulty())).orElse(null));
         taskRepository.save(task);
         memberTaskRepository.deleteByTaskId(task.getId());
 

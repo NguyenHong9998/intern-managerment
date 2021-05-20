@@ -52,7 +52,6 @@ public class ScheduleServiceImpl implements ScheduleService {
         if (schedule.getUser().getId() != jwtUtil.getCurrentUser().getUserId() && user.getRoles().getRoleName().equals("ROLE_USER")) {
             throw new CustormException(Message.CANNOT_UPDATE_ANOTHER_SCHEDULE);
         }
-        Date date = DatetimeUtils.convertStringToDateOrNull(leaveDomain.getLeaveDate(), DatetimeUtils.YYYYMMDD);
         schedule.setReasonLeave(leaveDomain.getReasonContent());
         schedule.setShift(leaveDomain.getShift());
         scheduleRepository.save(schedule);
