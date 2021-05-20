@@ -1,8 +1,10 @@
 package cnpm.doan.api;
 
 import cnpm.doan.domain.*;
+import cnpm.doan.entity.LeadPermission;
 import cnpm.doan.entity.Role;
 import cnpm.doan.entity.User;
+import cnpm.doan.repository.LeaderPermissionRepository;
 import cnpm.doan.service.LeaderPermissionService;
 import cnpm.doan.service.RoleService;
 import cnpm.doan.service.UserService;
@@ -23,6 +25,8 @@ public class ManagerController {
     private UserService userService;
     @Autowired
     private RoleService roleService;
+    @Autowired
+    private LeaderPermissionRepository leaderPermissionRepository;
 
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN','ROLE_MANAGER', 'ROLE_USER')")
     @GetMapping("/managers")
@@ -31,7 +35,7 @@ public class ManagerController {
         if (managers.size() == 0) {
             return ResponseEntity.ok(new ResponeDomain(Message.EMPTY_RESULT.getDetail(), Message.SUCCESSFUlLY.getDetail(), true));
         }
-        List<UserDomain> managerInforDomains = managers.stream().filter(t -> {
+        List<ManagerDomain> managerInforDomains = managers.stream().filter(t -> {
             if (t.getRoles() == null) {
                 return false;
             }
@@ -39,7 +43,17 @@ public class ManagerController {
                 return true;
             }
             return false;
-        }).map(t -> new UserDomain(t)).collect(Collectors.toList());
+        }).map(t -> {
+            List<PermissionDomain> leadPermissions = leaderPermissionRepository.findAllByUserId(t.getId())
+                    .stream().map(x -> {
+                        PermissionDomain permissionDomain = new PermissionDomain();
+                        permissionDomain.setId(x.getId());
+                        permissionDomain.setName(x.getPermission().getName());
+                        return permissionDomain;
+                    }).collect(Collectors.toList());
+            ManagerDomain managerDomain = new ManagerDomain(t, leadPermissions);
+            return managerDomain;
+        }).collect(Collectors.toList());
         return ResponseEntity.ok(new ResponeDomain(managerInforDomains, Message.SUCCESSFUlLY.getDetail(), true));
     }
 

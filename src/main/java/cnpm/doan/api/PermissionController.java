@@ -32,7 +32,7 @@ public class PermissionController {
 
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
     @PostMapping("/permission/add")
-    public ResponseEntity<?> addPermssion(@RequestBody PermissionManagerDomain permissionManagerDomain) {
+    public ResponseEntity<?> getPermssion(@RequestBody PermissionManagerDomain permissionManagerDomain) {
         try {
             permissionService.addPermissionOfManager(permissionManagerDomain);
         } catch (CustormException e) {
@@ -44,7 +44,7 @@ public class PermissionController {
 
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
     @GetMapping("/permission")
-    public ResponseEntity<?> addPermssion(@RequestParam("manager_id") int managerId) {
+    public ResponseEntity<?> getPermssion(@RequestParam("manager_id") int managerId) {
         List<PermissionDomain> permissionEntities = new ArrayList<>();
         try {
             permissionEntities = permissionService.getPermissionOfManager(managerId);
