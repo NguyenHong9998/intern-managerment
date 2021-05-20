@@ -71,6 +71,8 @@ public class PermissionServiceImpl implements PermissionService {
         }
         List<LeadPermission> permissionEntities = leaderPermissionRepository.findAllByUserId(permissionManagerDomain.getManagerId());
         leaderPermissionRepository.deleteAll(permissionEntities);
+        List<LeadPermission> tttt = leaderPermissionRepository.findAllByUserId(permissionManagerDomain.getManagerId());
+        System.out.println("sizeeeeeeeeeeeeeee: " + tttt.size());
         List<PermissionEntity> savePermission = permissionRepository.findAllById(permissionManagerDomain.getPermissionId());
         List<LeadPermission> leadPermissions = savePermission.stream().map(t -> {
             LeadPermission leadPermission = new LeadPermission();
