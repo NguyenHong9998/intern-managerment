@@ -35,7 +35,7 @@ public class Task {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "project_id")
     private Project project;
-    @Column(name = "point")
+    @Column(name = "point", columnDefinition = "DECIMAL(7,2)")
     private float point;
     @Column(name = "is_deleted", nullable = false, columnDefinition = "int default 0")
     private int isDeleted = 0;

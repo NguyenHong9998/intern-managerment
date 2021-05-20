@@ -98,4 +98,20 @@ public class TaskUpdateRequest {
     public void setUsersAssignee(List<UserContributeToTask> usersAssignee) {
         this.usersAssignee = usersAssignee;
     }
+
+    @Override
+    public String toString() {
+        return "TaskUpdateRequest{" +
+                "taskId=" + taskId +
+                ", description='" + description + '\'' +
+                ", title='" + title + '\'' +
+                ", difficulty='" + difficulty + '\'' +
+                ", isDone=" + isDone +
+                ", point='" + point + '\'' +
+                ", projectName='" + projectName + '\'' +
+                ", createDate='" + createDate + '\'' +
+                ", dueDate='" + dueDate + '\'' +
+                ", usersAssignee=" + usersAssignee +
+                '}';
+    }
 }
