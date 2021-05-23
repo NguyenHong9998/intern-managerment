@@ -58,7 +58,7 @@ public class FeedbackServiceImpl implements FeedbackService {
             throw new CustormException(Message.INVALID_FEEDBACK);
         }
         User user = userRepository.findById(jwtUtil.getCurrentUser().getUserId()).orElse(null);
-        if (user.getId() != feedback.getUser().getId() && !user.getRoles().getRoleName().equals("ROLE_USER")) {
+        if (user.getId() != feedback.getUser().getId() && user.getRoles().getRoleName().equals("ROLE_USER")) {
             throw new CustormException(Message.CANNOT_DELETE_ANOTHER_FEED);
         }
         feedbackRepository.deleteById(feedbackId);
