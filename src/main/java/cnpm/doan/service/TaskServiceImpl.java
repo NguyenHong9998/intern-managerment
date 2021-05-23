@@ -81,7 +81,8 @@ public class TaskServiceImpl implements TaskService {
         User user = userRepository.findById(jwtUtil.getCurrentUser().getUserId()).orElse(null);
         if (!user.getRoles().getRoleName().equals("ROLE_ADMIN")) {
             MemberProject memberProject = memberProjectRepository.findMemberProjectByUserIdAndProjectId(user.getId(), projectId);
-            if (memberProject == null) {
+            Project project = projectRepository.findById(projectId).orElse(null);
+            if (project.getManager().getId() != user.getId() || memberProject == null) {
                 throw new CustormException(Message.INVALID_USER_PROJECT);
             }
         }
@@ -93,7 +94,7 @@ public class TaskServiceImpl implements TaskService {
             taskDomain.setDescription(task.getDescription());
             taskDomain.setTitle(task.getTitle());
             taskDomain.setDifficulty(task.getDifficulty().getName());
-            taskDomain.setPoint(String.valueOf( task.getPoint()));
+            taskDomain.setPoint(String.valueOf(task.getPoint()));
             taskDomain.setProjectName(task.getProject().getTitle());
             taskDomain.setIsDone(task.isDone());
             taskDomain.setCreateDate(task.getCreateDate().toString());
