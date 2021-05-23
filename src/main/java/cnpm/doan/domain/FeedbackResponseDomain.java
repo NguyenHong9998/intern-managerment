@@ -7,6 +7,15 @@ public class FeedbackResponseDomain {
     private int feedbackId;
     private String feedbackContent;
     private String date;
+    private String user;
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
 
     public int getFeedbackId() {
         return feedbackId;
