@@ -31,7 +31,7 @@ public class FeedbackServiceImpl implements FeedbackService {
 
     @Override
     public List<Feedback> getAllFeedbackByTaskId(int taskId) {
-        List<Feedback> feedbacks= feedbackRepository.findFeedbackByTaskId(taskId);
+        List<Feedback> feedbacks = feedbackRepository.findFeedbackByTaskId(taskId);
         return feedbacks;
     }
 
@@ -57,7 +57,8 @@ public class FeedbackServiceImpl implements FeedbackService {
         if (feedback == null) {
             throw new CustormException(Message.INVALID_FEEDBACK);
         }
-        if (jwtUtil.getCurrentUser().getUserId() != feedback.getUser().getId()) {
+        User user = userRepository.findById(jwtUtil.getCurrentUser().getUserId()).orElse(null);
+        if (user.getId() != feedback.getUser().getId() && !user.getRoles().getRoleName().equals("ROLE_USER")) {
             throw new CustormException(Message.CANNOT_DELETE_ANOTHER_FEED);
         }
         feedbackRepository.deleteById(feedbackId);
