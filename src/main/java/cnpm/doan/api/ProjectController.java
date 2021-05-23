@@ -171,7 +171,7 @@ public class ProjectController {
     }
 
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN','ROLE_MANAGER', 'ROLE_USER')")
-    @GetMapping("/project")
+    @GetMapping("/project/manager")
     public ResponseEntity<?> getProjectByManagerId(@RequestParam("manager_id") int managerId) {
         List<GetAllProjectDomain> result = projectService.findProjectByManagerId(managerId);
         if (result.size() == 0) {
