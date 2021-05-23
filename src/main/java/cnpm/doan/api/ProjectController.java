@@ -119,6 +119,10 @@ public class ProjectController {
     public ResponseEntity<?> assignUserToProject(@RequestParam("id_project") int idProject, @RequestParam("id_user") String userIds) {
         List<User> users = Arrays.stream(userIds.split(",")).map(id -> userService.findById(Integer.valueOf(id))).collect(Collectors.toList());
         Project project = projectService.findProjectById(idProject);
+        User currentUser = userService.findById(jwtUtil.getCurrentUser().getUserId());
+        if (currentUser.getId() != project.getManager().getId()) {
+            return ResponseEntity.ok(new ResponeDomain(Message.HAVE_NOT_PERMISSION.getDetail(), HTTPStatus.fail));
+        }
         if (project == null) {
             return ResponseEntity.ok(new ResponeDomain(Message.INVALID_PROJECT_ID.getDetail(), HTTPStatus.fail));
         }
