@@ -73,10 +73,10 @@ public class ProjectController {
     @GetMapping("/project/users")
     public ResponseEntity<?> getUsersOfProject(@RequestParam("id_project") int idProject) {
         User user = userService.findById(jwtUtil.getCurrentUser().getUserId());
-        MemberProject memberProject = memberProjectRepository.findMemberProjectByUserIdAndProjectId(jwtUtil.getCurrentUser().getUserId(), idProject);
-        if (memberProject == null && !user.getRoles().getRoleName().equals("ROLE_ADMIN")) {
-            return ResponseEntity.ok(new ResponeDomain(Message.INVALID_USER.getDetail(), true));
-        }
+//        MemberProject memberProject = memberProjectRepository.findMemberProjectByUserIdAndProjectId(jwtUtil.getCurrentUser().getUserId(), idProject);
+//        if (memberProject == null && !user.getRoles().getRoleName().equals("ROLE_ADMIN")) {
+//            return ResponseEntity.ok(new ResponeDomain(Message.INVALID_USER.getDetail(), true));
+//        }
         List<User> users = memberProjectRepository
                 .findMemberProjectByProjectId(idProject).stream().map(t -> t.getUser()).collect(Collectors.toList());
         List<UserDomain> result = users.stream().map(
