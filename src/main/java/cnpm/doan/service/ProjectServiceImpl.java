@@ -119,4 +119,32 @@ public class ProjectServiceImpl implements ProjectService {
         project.setIsDeleted(1);
         projectRepository.save(project);
     }
+
+    @Override
+    public List<GetAllProjectDomain> findProjectByManagerId(int managerId) {
+        List<Project> projects = projectRepository.findAll().stream().filter(t -> t.getManager().getId() == managerId).collect(Collectors.toList());
+        List<GetAllProjectDomain> result = projects.stream().map(
+                t -> {
+                    List<MemberProject> memberProjects = memProRepository.findMemberProjectByProjectId(t.getId());
+                    List<UserProject> userProjects = memberProjects.stream().map(x -> {
+                        UserProject userProject = new UserProject();
+                        userProject.setId(x.getUser().getId());
+                        userProject.setName(x.getUser().getName());
+                        return userProject;
+                    }).collect(Collectors.toList());
+                    GetAllProjectDomain domain = new GetAllProjectDomain();
+                    domain.setProjectId(t.getId());
+                    domain.setDescription(t.getDescription());
+                    domain.setDueDate(t.getDueDate().toString());
+                    domain.setTitle(t.getTitle());
+                    ManagerInforDomain manager = new ManagerInforDomain(t.getManager().getId(), t.getManager().getName(), t.getManager().getEmail());
+                    domain.setManagerName(manager);
+                    domain.setStartDate(t.getStartDate().toString());
+                    domain.setUserAssignee(userProjects);
+                    return domain;
+                }
+        ).collect(Collectors.toList());
+        return result;
+    }
+
 }

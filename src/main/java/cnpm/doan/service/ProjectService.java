@@ -18,4 +18,6 @@ public interface ProjectService {
     Project findProjectById(int id);
 
     void deleteProject(int idProject) throws CustormException;
+
+    List<GetAllProjectDomain> findProjectByManagerId(int managerId);
 }
