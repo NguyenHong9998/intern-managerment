@@ -222,9 +222,7 @@ public class InsertData {
 
     @PostMapping("/update")
     public ResponseEntity<?> update() {
-        User user = userRepository.findById(100).get();
-        user.setIsDeleted(0);
-        userRepository.save(user);
+        userRepository.update();
         return ResponseEntity.ok(new ResponeDomain(Message.SUCCESSFUlLY.getDetail(), true));
     }
 
