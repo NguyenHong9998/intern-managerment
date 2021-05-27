@@ -111,6 +111,8 @@ public class UserServiceImpl implements UserService {
                             return t;
                         }).collect(Collectors.toList());
                 projectRepository.saveAll(projects);
+                user.setIsDeleted(1);
+                userRepository.save(user);
                 return;
             }
             List<MemberTask> memberTasks = memberTaskRepository.findAll().stream().filter(t -> t.getUser().getId() == user.getId()).collect(Collectors.toList());
