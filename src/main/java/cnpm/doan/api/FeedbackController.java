@@ -33,6 +33,7 @@ public class FeedbackController {
             domain.setFeedbackId(t.getId());
             domain.setDate(t.getTime().toString());
             domain.setUser(t.getUser().getName());
+            domain.setUserId(String.valueOf(t.getId()));
             return domain;
         }).collect(Collectors.toList());
         if (feedbacks.size() == 0) {
