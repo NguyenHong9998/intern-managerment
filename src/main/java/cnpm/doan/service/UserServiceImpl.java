@@ -106,7 +106,7 @@ public class UserServiceImpl implements UserService {
         if (user != null) {
             if (user.getRoles().getRoleName().equals("ROLE_MANAGER")) {
                 List<Project> projects = projectRepository.findAll().stream().filter(t -> {
-                    if (t == null) {
+                    if (t.getManager() == null) {
                         return false;
                     }
                     return t.getManager().getId() == user.getId();
