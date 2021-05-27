@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -187,7 +188,8 @@ public class UserServiceImpl implements UserService {
 
         List<UserDomain> domain = memberProjectRepository.findAll().stream().filter(t ->
                 projectIds.contains(t.getProject().getId())
-        ).map(t -> t.getUser()).map(x -> new UserDomain(x)).collect(Collectors.toList());
+        ).map(t -> t.getUser()).map(x -> new UserDomain(x)).collect(Collectors.toMap(t -> t.getId(), t -> t, (t1, t2) -> t1))
+                .entrySet().stream().map(Map.Entry::getValue).collect(Collectors.toList());
         return domain;
     }
 }
