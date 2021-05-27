@@ -105,7 +105,12 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.findById(idUser).orElse(null);
         if (user != null) {
             if (user.getRoles().getRoleName().equals("ROLE_MANAGER")) {
-                List<Project> projects = projectRepository.findAll().stream().filter(t -> t.getManager().getId() == user.getId())
+                List<Project> projects = projectRepository.findAll().stream().filter(t -> {
+                    if (t == null) {
+                        return false;
+                    }
+                    return t.getManager().getId() == user.getId();
+                })
                         .map(t -> {
                             t.setManager(null);
                             return t;
