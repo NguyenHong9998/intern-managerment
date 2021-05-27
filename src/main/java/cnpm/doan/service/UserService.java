@@ -35,4 +35,6 @@ public interface UserService {
     void denyUser(int[] userIds) throws CustormException;
 
     void acceptUsers(int[] userIds) throws CustormException;
+
+    List<UserDomain> getUserOfManager();
 }

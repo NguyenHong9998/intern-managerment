@@ -74,4 +74,12 @@ public class ManagerController {
         WaitingUser response = new WaitingUser(newUser.getName(), newUser.getEmail(), newUser.getId());
         return ResponseEntity.ok(new ResponeDomain(response, Message.SUCCESSFUlLY.getDetail(), true));
     }
+
+    @PreAuthorize("hasAnyAuthority('ROLE_MANAGER')")
+    @GetMapping("/manager/user")
+    public ResponseEntity<?> getUserOfManager() {
+        List<UserDomain> domains = userService.getUserOfManager();
+        return ResponseEntity.ok(new ResponeDomain(domains, Message.SUCCESSFUlLY.getDetail(), true));
+    }
+
 }

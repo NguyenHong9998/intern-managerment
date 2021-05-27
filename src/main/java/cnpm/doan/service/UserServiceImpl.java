@@ -1,8 +1,10 @@
 package cnpm.doan.service;
 
+import cnpm.doan.domain.UserDomain;
 import cnpm.doan.domain.WaitingUser;
 import cnpm.doan.entity.*;
 import cnpm.doan.repository.*;
+import cnpm.doan.security.JwtUtil;
 import cnpm.doan.security.UserPrincipal;
 import cnpm.doan.util.CustormException;
 import cnpm.doan.util.Message;
@@ -30,6 +32,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private ProjectRepository projectRepository;
+
+    @Autowired
+    private JwtUtil jwtUtil;
 
     @Override
     public User createUser(User user) {
@@ -169,5 +174,20 @@ public class UserServiceImpl implements UserService {
             user.setRoles(role);
             userRepository.save(user);
         }
+    }
+
+    @Override
+    public List<UserDomain> getUserOfManager() {
+        List<Integer> projectIds = projectRepository.findAll().stream().filter(t -> {
+            if (t.getManager() == null) {
+                return false;
+            }
+            return t.getManager().getId() == jwtUtil.getCurrentUser().getUserId();
+        }).map(t -> t.getId()).collect(Collectors.toList());
+
+        List<UserDomain> domain = memberProjectRepository.findAll().stream().filter(t ->
+                projectIds.contains(t.getProject().getId())
+        ).map(t -> t.getUser()).map(x -> new UserDomain(x)).collect(Collectors.toList());
+        return domain;
     }
 }
