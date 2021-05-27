@@ -51,8 +51,10 @@ public class ProjectServiceImpl implements ProjectService {
                     domain.setDescription(t.getDescription());
                     domain.setDueDate(t.getDueDate().toString());
                     domain.setTitle(t.getTitle());
-                    ManagerInforDomain manager = new ManagerInforDomain(t.getManager().getId(), t.getManager().getName(), t.getManager().getEmail());
-                    domain.setManagerName(manager);
+                    if (t.getManager() != null) {
+                        ManagerInforDomain manager = new ManagerInforDomain(t.getManager().getId(), t.getManager().getName(), t.getManager().getEmail());
+                        domain.setManagerName(manager);
+                    }
                     domain.setStartDate(t.getStartDate().toString());
                     domain.setUserAssignee(userProjects);
                     return domain;
@@ -72,8 +74,10 @@ public class ProjectServiceImpl implements ProjectService {
                     domain.setUserId(String.valueOf(userId));
                     domain.setDueDate(t.getProject().getDueDate().toString());
                     domain.setTitle(t.getProject().getTitle());
-                    ManagerInforDomain manager = new ManagerInforDomain(t.getProject().getManager().getId(), t.getProject().getManager().getName(), t.getProject().getManager().getEmail());
-                    domain.setManagerName(manager);
+                    if (t.getProject().getManager() != null) {
+                        ManagerInforDomain manager = new ManagerInforDomain(t.getProject().getManager().getId(), t.getProject().getManager().getName(), t.getProject().getManager().getEmail());
+                        domain.setManagerName(manager);
+                    }
                     return domain;
                 }).collect(Collectors.toList());
         return result;
@@ -137,8 +141,10 @@ public class ProjectServiceImpl implements ProjectService {
                     domain.setDescription(t.getDescription());
                     domain.setDueDate(t.getDueDate().toString());
                     domain.setTitle(t.getTitle());
-                    ManagerInforDomain manager = new ManagerInforDomain(t.getManager().getId(), t.getManager().getName(), t.getManager().getEmail());
-                    domain.setManagerName(manager);
+                    if (t.getManager() != null) {
+                        ManagerInforDomain manager = new ManagerInforDomain(t.getManager().getId(), t.getManager().getName(), t.getManager().getEmail());
+                        domain.setManagerName(manager);
+                    }
                     domain.setStartDate(t.getStartDate().toString());
                     domain.setUserAssignee(userProjects);
                     return domain;
