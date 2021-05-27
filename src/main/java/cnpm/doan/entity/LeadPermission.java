@@ -1,5 +1,7 @@
 package cnpm.doan.entity;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
@@ -15,6 +17,7 @@ public class LeadPermission {
     private int id;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
+    @OnDelete( action = OnDeleteAction.CASCADE )
     private User user;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "permission_id")

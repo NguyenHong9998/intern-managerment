@@ -1,5 +1,8 @@
 package cnpm.doan.entity;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -20,6 +23,7 @@ public class Schedule {
     private String reasonLeave;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
+    @OnDelete( action = OnDeleteAction.CASCADE )
     private User user;
 
     public User getUser() {
