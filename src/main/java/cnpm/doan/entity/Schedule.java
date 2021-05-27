@@ -23,7 +23,6 @@ public class Schedule {
     private String reasonLeave;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
-    @OnDelete( action = OnDeleteAction.CASCADE )
     private User user;
 
     public User getUser() {

@@ -35,6 +35,15 @@ public class UserServiceImpl implements UserService {
     private ProjectRepository projectRepository;
 
     @Autowired
+    private LeaderPermissionRepository leaderPermissionRepository;
+
+    @Autowired
+    private FeedbackRepository feedbackRepository;
+
+    @Autowired
+    private ScheduleRepository scheduleRepository;
+
+    @Autowired
     private JwtUtil jwtUtil;
 
     @Override
@@ -111,6 +120,7 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.findById(idUser).orElse(null);
         if (user != null) {
             if (user.getRoles().getRoleName().equals("ROLE_MANAGER")) {
+                // delete on project table
                 List<Project> projects = projectRepository.findAll().stream().filter(t -> {
                     if (t.getManager() == null) {
                         return false;
@@ -122,6 +132,20 @@ public class UserServiceImpl implements UserService {
                             return t;
                         }).collect(Collectors.toList());
                 projectRepository.saveAll(projects);
+                // delete on lead permission
+
+                List<LeadPermission> permissions = leaderPermissionRepository.findAllByUserId(user.getId())
+                        .stream().map(t -> {
+                            t.setIsDeleted(1);
+                            return t;
+                        }).collect(Collectors.toList());
+                leaderPermissionRepository.saveAll(permissions);
+
+                // delete on feedback table
+
+                feedbackRepository.deleteByUserId(user.getId());
+
+                // delete user
                 user.setIsDeleted(1);
                 userRepository.save(user);
                 return;
@@ -138,6 +162,13 @@ public class UserServiceImpl implements UserService {
                         t.setUser(null);
                         memberProjectRepository.save(t);
                     });
+            // delete on task
+            memberTaskRepository.deleteAll(memberTasks);
+            // delete on feedback
+            feedbackRepository.deleteByUserId(user.getId());
+            // delete on schedule
+            List<Schedule> schedules = scheduleRepository.findAllByUserId(user.getId());
+            scheduleRepository.deleteAll(schedules);
             user.setIsDeleted(1);
             userRepository.save(user);
         } else {

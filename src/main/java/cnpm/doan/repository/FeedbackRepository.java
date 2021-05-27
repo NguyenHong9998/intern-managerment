@@ -15,4 +15,6 @@ public interface FeedbackRepository extends JpaRepository<Feedback, Integer> {
     void deleteByTaskId(int taskId);
 
     void deleteById(int id);
+
+    void deleteByUserId(int userId);
 }
