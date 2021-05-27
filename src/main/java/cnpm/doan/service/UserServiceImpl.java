@@ -1,14 +1,8 @@
 package cnpm.doan.service;
 
 import cnpm.doan.domain.WaitingUser;
-import cnpm.doan.entity.MemberProject;
-import cnpm.doan.entity.MemberTask;
-import cnpm.doan.entity.Role;
-import cnpm.doan.entity.User;
-import cnpm.doan.repository.MemberProjectRepository;
-import cnpm.doan.repository.MemberTaskRepository;
-import cnpm.doan.repository.RoleRepository;
-import cnpm.doan.repository.UserRepository;
+import cnpm.doan.entity.*;
+import cnpm.doan.repository.*;
 import cnpm.doan.security.UserPrincipal;
 import cnpm.doan.util.CustormException;
 import cnpm.doan.util.Message;
@@ -33,6 +27,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private MemberTaskRepository memberTaskRepository;
+
+    @Autowired
+    private ProjectRepository projectRepository;
 
     @Override
     public User createUser(User user) {
@@ -107,9 +104,15 @@ public class UserServiceImpl implements UserService {
 
         User user = userRepository.findById(idUser).orElse(null);
         if (user != null) {
-//            if (user.getRoles().getRoleName().equals("ROLE_MANAGER") ) {
-//                throw new CustormException(Message.CANNOT_DELETE_MANAGER);
-//            }
+            if (user.getRoles().getRoleName().equals("ROLE_MANAGER")) {
+                List<Project> projects = projectRepository.findAll().stream().filter(t -> t.getManager().getId() == user.getId())
+                        .map(t -> {
+                            t.setManager(null);
+                            return t;
+                        }).collect(Collectors.toList());
+                projectRepository.saveAll(projects);
+                return;
+            }
             List<MemberTask> memberTasks = memberTaskRepository.findAll().stream().filter(t -> t.getUser().getId() == user.getId()).collect(Collectors.toList());
             for (MemberTask memberTask : memberTasks) {
                 if (!memberTask.getTask().isDone()) {

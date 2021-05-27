@@ -6,6 +6,8 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 
 @Repository
 public interface ProjectRepository extends JpaRepository<Project, Integer> {
@@ -13,4 +15,5 @@ public interface ProjectRepository extends JpaRepository<Project, Integer> {
     @Query(value = "delete from project p where p.id = ?1", nativeQuery = true)
     void deleteProject(int idProject);
 
+    List<Project> findByManagerId(Integer managerId);
 }
