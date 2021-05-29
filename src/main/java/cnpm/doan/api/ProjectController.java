@@ -5,6 +5,7 @@ import cnpm.doan.entity.MemberProject;
 import cnpm.doan.entity.Project;
 import cnpm.doan.entity.User;
 import cnpm.doan.repository.MemberProjectRepository;
+import cnpm.doan.repository.MemberTaskRepository;
 import cnpm.doan.repository.ProjectRepository;
 import cnpm.doan.security.JwtUtil;
 import cnpm.doan.service.ProjectService;
@@ -33,6 +34,8 @@ public class ProjectController {
     private MemberProjectRepository memberProjectRepository;
     @Autowired
     private JwtUtil jwtUtil;
+    @Autowired
+    private MemberTaskRepository memberTaskRepository;
 
     @Autowired
     private ProjectRepository projectRepository;
@@ -119,12 +122,12 @@ public class ProjectController {
     public ResponseEntity<?> assignUserToProject(@RequestParam("id_project") int idProject, @RequestParam("id_user") String userIds) {
         List<User> users = Arrays.stream(userIds.split(",")).map(id -> userService.findById(Integer.valueOf(id))).collect(Collectors.toList());
         Project project = projectService.findProjectById(idProject);
-        User currentUser = userService.findById(jwtUtil.getCurrentUser().getUserId());
         if (project == null) {
             return ResponseEntity.ok(new ResponeDomain(Message.INVALID_PROJECT_ID.getDetail(), HTTPStatus.fail));
         }
         List<MemberProject> memberProjects = memberProjectRepository.findMemberProjectByProjectId(idProject);
         memberProjectRepository.deleteAll(memberProjects);
+
         for (User user : users) {
             if (user == null) {
                 return ResponseEntity.ok(new ResponeDomain(Message.INVALID_USER.getDetail(), HTTPStatus.fail));

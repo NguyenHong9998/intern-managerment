@@ -11,4 +11,6 @@ public interface MemberTaskRepository extends JpaRepository<MemberTask, Integer>
     void deleteByTaskId(int taskId);
 
     List<MemberTask> findAllByTaskId(int taskId);
+
+    List<MemberTask> findAllByUserId(int userId);
 }
