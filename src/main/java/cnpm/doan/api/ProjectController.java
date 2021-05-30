@@ -1,12 +1,8 @@
 package cnpm.doan.api;
 
 import cnpm.doan.domain.*;
-import cnpm.doan.entity.MemberProject;
-import cnpm.doan.entity.Project;
-import cnpm.doan.entity.User;
-import cnpm.doan.repository.MemberProjectRepository;
-import cnpm.doan.repository.MemberTaskRepository;
-import cnpm.doan.repository.ProjectRepository;
+import cnpm.doan.entity.*;
+import cnpm.doan.repository.*;
 import cnpm.doan.security.JwtUtil;
 import cnpm.doan.service.ProjectService;
 import cnpm.doan.service.UserService;
@@ -20,7 +16,9 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @CrossOrigin
@@ -36,9 +34,14 @@ public class ProjectController {
     private JwtUtil jwtUtil;
     @Autowired
     private MemberTaskRepository memberTaskRepository;
+    @Autowired
+    private TaskRepository taskRepository;
 
     @Autowired
     private ProjectRepository projectRepository;
+
+    @Autowired
+    private FeedbackRepository feedbackRepository;
 
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN','ROLE_MANAGER', 'ROLE_USER')")
     @GetMapping("/projects")
@@ -120,15 +123,30 @@ public class ProjectController {
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN','ROLE_MANAGER', 'ROLE_USER')")
     @PutMapping("/project/assign_user")
     public ResponseEntity<?> assignUserToProject(@RequestParam("id_project") int idProject, @RequestParam("id_user") String userIds) {
-        List<User> users = Arrays.stream(userIds.split(",")).map(id -> userService.findById(Integer.valueOf(id))).collect(Collectors.toList());
+        List<User> newUsers = Arrays.stream(userIds.split(",")).map(id -> userService.findById(Integer.valueOf(id))).collect(Collectors.toList());
         Project project = projectService.findProjectById(idProject);
         if (project == null) {
             return ResponseEntity.ok(new ResponeDomain(Message.INVALID_PROJECT_ID.getDetail(), HTTPStatus.fail));
         }
         List<MemberProject> memberProjects = memberProjectRepository.findMemberProjectByProjectId(idProject);
-        memberProjectRepository.deleteAll(memberProjects);
+        List<Integer> memberIds = memberProjects.stream().map(t -> t.getUser().getId()).collect(Collectors.toList());
+        List<Integer> newUserId = newUsers.stream().map(t -> t.getId()).collect(Collectors.toList());
+        memberIds.addAll(newUserId);
+        List<Long> diffMem = memberIds.stream().collect(Collectors.groupingBy(Function.identity(), Collectors.counting())).entrySet().stream().filter(t -> t.getValue() == 1).map(t -> t.getValue()).collect(Collectors.toList());
+        // delete diff in memproject
+        List<MemberProject> memberProjects1 = memberProjects.stream().filter(t -> diffMem.contains(t.getUser().getId())).collect(Collectors.toList());
+        memberProjectRepository.deleteAll(memberProjects1);
 
-        for (User user : users) {
+        // delete diff in task
+        List<Integer> tasks = taskRepository.findAll().stream().filter(t -> t.getProject().getId() == idProject).map(t -> t.getId()).collect(Collectors.toList());
+        List<MemberTask> memberTasks = memberTaskRepository.findAll().stream().filter(t -> tasks.contains(t.getTask().getId()) && diffMem.contains(t.getUser().getId())).collect(Collectors.toList());
+        // delete diff feedback in task
+
+        List<Feedback> feedbacks = feedbackRepository.findAll().stream().filter(t -> tasks.contains(t.getTask().getId()) && diffMem.contains(t.getUser().getId())).collect(Collectors.toList());
+        feedbackRepository.deleteAll(feedbacks);
+        memberTaskRepository.deleteAll(memberTasks);
+
+        for (User user : newUsers) {
             if (user == null) {
                 return ResponseEntity.ok(new ResponeDomain(Message.INVALID_USER.getDetail(), HTTPStatus.fail));
             }
