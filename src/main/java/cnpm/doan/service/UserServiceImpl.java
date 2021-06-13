@@ -157,11 +157,8 @@ public class UserServiceImpl implements UserService {
                 }
             }
             List<MemberProject> projects = memberProjectRepository.findAll();
-            projects.stream().filter(t -> t.getUser().getId() == idUser)
-                    .forEach(t -> {
-                        t.setUser(null);
-                        memberProjectRepository.save(t);
-                    });
+            projects= projects.stream().filter(t -> t.getUser().getId() == idUser).collect(Collectors.toList());
+            memberProjectRepository.deleteAll(projects);
             // delete on task
             memberTaskRepository.deleteAll(memberTasks);
             // delete on feedback
