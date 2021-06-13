@@ -18,7 +18,4 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
     @Query(value = "select * from users u where u.role_id is null", nativeQuery = true)
     List<User> findWaitingUser();
-
-    @Query(value = "update users u set is_deleted =0 where id = 100", nativeQuery = true)
-    void update();
 }

@@ -222,7 +222,8 @@ public class InsertData {
 
     @PostMapping("/update")
     public ResponseEntity<?> update() {
-        userRepository.update();
+        List<MemberProject> memberProjects = memberProjectRepository.findAll().stream().filter(t->t.getUser()==null).collect(Collectors.toList());
+        memberProjectRepository.deleteAll(memberProjects);
         return ResponseEntity.ok(new ResponeDomain(Message.SUCCESSFUlLY.getDetail(), true));
     }
 
