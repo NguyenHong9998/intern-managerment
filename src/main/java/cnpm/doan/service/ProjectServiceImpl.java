@@ -42,8 +42,10 @@ public class ProjectServiceImpl implements ProjectService {
                     List<MemberProject> memberProjects = memProRepository.findMemberProjectByProjectId(t.getId());
                     List<UserProject> userProjects = memberProjects.stream().map(x -> {
                         UserProject userProject = new UserProject();
-                        userProject.setId(x.getUser().getId());
-                        userProject.setName(x.getUser().getName());
+                        if(x.getUser() !=null) {
+                            userProject.setId(x.getUser().getId());
+                            userProject.setName(x.getUser().getName());
+                        }
                         return userProject;
                     }).collect(Collectors.toList());
                     GetAllProjectDomain domain = new GetAllProjectDomain();
