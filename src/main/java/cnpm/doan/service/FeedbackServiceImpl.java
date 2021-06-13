@@ -74,6 +74,7 @@ public class FeedbackServiceImpl implements FeedbackService {
             throw new CustormException(Message.CANNOT_UPDATE_ANOTHER_FEED);
         }
         feedback.setMessage(feedbackDomain.getFeedbackContent());
+        feedback.setTime(new Date());
         feedbackRepository.save(feedback);
     }
 }

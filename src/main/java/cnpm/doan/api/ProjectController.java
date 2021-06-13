@@ -15,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -123,7 +124,12 @@ public class ProjectController {
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN','ROLE_MANAGER', 'ROLE_USER')")
     @PutMapping("/project/assign_user")
     public ResponseEntity<?> assignUserToProject(@RequestParam("id_project") int idProject, @RequestParam("id_user") String userIds) {
-        List<User> newUsers = Arrays.stream(userIds.split(",")).map(id -> userService.findById(Integer.valueOf(id))).collect(Collectors.toList());
+        List<User> newUsers = new ArrayList<>();
+        if (userIds.equals("") || userIds == null) {
+            newUsers = new ArrayList<>();
+        } else {
+            newUsers = Arrays.stream(userIds.split(",")).map(id -> userService.findById(Integer.valueOf(id))).collect(Collectors.toList());
+        }
         Project project = projectService.findProjectById(idProject);
         if (project == null) {
             return ResponseEntity.ok(new ResponeDomain(Message.INVALID_PROJECT_ID.getDetail(), HTTPStatus.fail));
@@ -132,7 +138,7 @@ public class ProjectController {
         List<Integer> memberIds = memberProjects.stream().map(t -> t.getUser().getId()).collect(Collectors.toList());
         List<Integer> newUserId = newUsers.stream().map(t -> t.getId()).collect(Collectors.toList());
         memberIds.addAll(newUserId);
-        List<Integer> diffMem = memberIds.stream().filter(t->  !newUserId.contains(t)).collect(Collectors.toList());
+        List<Integer> diffMem = memberIds.stream().filter(t -> !newUserId.contains(t)).collect(Collectors.toList());
         // delete diff in memproject
         List<MemberProject> memberProjects1 = memberProjects.stream().filter(t -> diffMem.contains(t.getUser().getId())).collect(Collectors.toList());
         memberProjectRepository.deleteAll(memberProjects1);
