@@ -132,7 +132,7 @@ public class ProjectController {
         List<Integer> memberIds = memberProjects.stream().map(t -> t.getUser().getId()).collect(Collectors.toList());
         List<Integer> newUserId = newUsers.stream().map(t -> t.getId()).collect(Collectors.toList());
         memberIds.addAll(newUserId);
-        List<Long> diffMem = memberIds.stream().collect(Collectors.groupingBy(Function.identity(), Collectors.counting())).entrySet().stream().filter(t -> t.getValue() == 1).map(t -> t.getValue()).collect(Collectors.toList());
+        List<Integer> diffMem = memberIds.stream().filter(t->  !newUserId.contains(t)).collect(Collectors.toList());
         // delete diff in memproject
         List<MemberProject> memberProjects1 = memberProjects.stream().filter(t -> diffMem.contains(t.getUser().getId())).collect(Collectors.toList());
         memberProjectRepository.deleteAll(memberProjects1);
@@ -141,9 +141,6 @@ public class ProjectController {
         List<Integer> tasks = taskRepository.findAll().stream().filter(t -> t.getProject().getId() == idProject).map(t -> t.getId()).collect(Collectors.toList());
         List<MemberTask> memberTasks = memberTaskRepository.findAll().stream().filter(t -> tasks.contains(t.getTask().getId()) && diffMem.contains(t.getUser().getId())).collect(Collectors.toList());
         // delete diff feedback in task
-
-        List<Feedback> feedbacks = feedbackRepository.findAll().stream().filter(t -> tasks.contains(t.getTask().getId()) && diffMem.contains(t.getUser().getId())).collect(Collectors.toList());
-        feedbackRepository.deleteAll(feedbacks);
         memberTaskRepository.deleteAll(memberTasks);
 
         for (User user : newUsers) {
