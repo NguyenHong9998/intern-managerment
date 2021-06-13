@@ -137,7 +137,6 @@ public class ProjectController {
         List<MemberProject> memberProjects = memberProjectRepository.findMemberProjectByProjectId(idProject);
         List<Integer> memberIds = memberProjects.stream().map(t -> t.getUser().getId()).collect(Collectors.toList());
         List<Integer> newUserId = newUsers.stream().map(t -> t.getId()).collect(Collectors.toList());
-        memberIds.addAll(newUserId);
         List<Integer> diffMem = memberIds.stream().filter(t -> !newUserId.contains(t)).collect(Collectors.toList());
         // delete diff in memproject
         List<MemberProject> memberProjects1 = memberProjects.stream().filter(t -> diffMem.contains(t.getUser().getId())).collect(Collectors.toList());
