@@ -2,7 +2,9 @@ package cnpm.doan.api;
 
 import cnpm.doan.domain.*;
 import cnpm.doan.entity.Department;
+import cnpm.doan.entity.Task;
 import cnpm.doan.entity.User;
+import cnpm.doan.repository.MemberTaskRepository;
 import cnpm.doan.security.JwtUtil;
 import cnpm.doan.security.UserPrincipal;
 import cnpm.doan.service.DepartmentService;
@@ -29,6 +31,9 @@ public class UserController {
     private JwtUtil jwtUtil;
     @Autowired
     private DepartmentService departmentService;
+
+    @Autowired
+    private MemberTaskRepository memberTaskRepository;
 
     @GetMapping("/users")
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER')")
@@ -152,5 +157,17 @@ public class UserController {
             return ResponseEntity.ok(new ResponeDomain(Message.INVALID_USER.getDetail(), false));
         }
         return ResponseEntity.ok(new ResponeDomain(Message.SUCCESSFUlLY.getDetail(), true));
+    }
+
+    @GetMapping("user/result")
+    public ResponseEntity<?> getResultOfUser(@RequestParam("user_id") int userId) {
+        User user = userService.findById(userId);
+        if (user == null) {
+            return ResponseEntity.ok(new ResponeDomain(Message.INVALID_USER.getDetail(), false));
+        }
+        List<Task> taskOfUser = memberTaskRepository.findByUserId(userId);
+        taskOfUser.stream().forEach(t -> System.out.println("xxxxxxxxxxxxxxx: " + t.getPoint()));
+        return ResponseEntity.ok(new ResponeDomain(taskOfUser, Message.SUCCESSFUlLY.getDetail(), true));
+
     }
 }
