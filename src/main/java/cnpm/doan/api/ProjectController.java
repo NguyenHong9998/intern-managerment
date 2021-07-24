@@ -11,10 +11,16 @@ import cnpm.doan.util.DatetimeUtils;
 import cnpm.doan.util.HTTPStatus;
 import cnpm.doan.util.Message;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -43,6 +49,11 @@ public class ProjectController {
 
     @Autowired
     private FeedbackRepository feedbackRepository;
+
+    @Autowired
+    private JavaMailSender mailSender;
+    @Value("${spring.mail.username}")
+    private String from;
 
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN','ROLE_MANAGER', 'ROLE_USER')")
     @GetMapping("/projects")
@@ -137,6 +148,18 @@ public class ProjectController {
         List<MemberProject> memberProjects = memberProjectRepository.findMemberProjectByProjectId(idProject);
         List<Integer> memberIds = memberProjects.stream().map(t -> t.getUser().getId()).collect(Collectors.toList());
         List<Integer> newUserId = newUsers.stream().map(t -> t.getId()).collect(Collectors.toList());
+        List<Integer> findNewMember = newUserId.stream().filter(t -> !memberIds.contains(t)).collect(Collectors.toList());
+        for (Integer integer : findNewMember) {
+            User user = userService.findById(integer);
+            if (user != null) {
+                String email = user.getEmail();
+                try {
+                    sendEmail(email, project.getId() + ": " + project.getTitle());
+                } catch (Exception e) {
+                    System.out.println("Error when send mail assign to project");
+                }
+            }
+        }
         List<Integer> diffMem = memberIds.stream().filter(t -> !newUserId.contains(t)).collect(Collectors.toList());
         // delete diff in memproject
         List<MemberProject> memberProjects1 = memberProjects.stream().filter(t -> diffMem.contains(t.getUser().getId())).collect(Collectors.toList());
@@ -198,5 +221,23 @@ public class ProjectController {
             return ResponseEntity.ok(new ResponeDomain(Message.EMPTY_RESULT.getDetail(), HTTPStatus.success));
         }
         return ResponseEntity.ok(new ResponeDomain(result, Message.SUCCESSFUlLY.getDetail(), HTTPStatus.success));
+    }
+
+    public void sendEmail(String recipientEmail, String project)
+            throws javax.mail.MessagingException, UnsupportedEncodingException {
+        MimeMessage message = mailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message);
+        helper.setFrom(from);
+        helper.setTo(recipientEmail);
+        helper.setSubject(project);
+        String content = "<img src='https://res-1.cloudinary.com/crunchbase-production/image/upload/c_lpad,f_auto,q_auto:eco/yrunsh3clxeoqgfblejv'> "
+                + "<br>"
+                + "<br>"
+                + "<p>You had assigned on this project</p>"
+                + "<br>"
+                + "Have a nice day.</p>";
+        ;
+        helper.setText(content, true);
+        mailSender.send(message);
     }
 }

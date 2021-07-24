@@ -2,9 +2,11 @@ package cnpm.doan.api;
 
 import cnpm.doan.domain.*;
 import cnpm.doan.entity.Department;
+import cnpm.doan.entity.Schedule;
 import cnpm.doan.entity.Task;
 import cnpm.doan.entity.User;
 import cnpm.doan.repository.MemberTaskRepository;
+import cnpm.doan.repository.ScheduleRepository;
 import cnpm.doan.security.JwtUtil;
 import cnpm.doan.security.UserPrincipal;
 import cnpm.doan.service.DepartmentService;
@@ -31,6 +33,8 @@ public class UserController {
     private JwtUtil jwtUtil;
     @Autowired
     private DepartmentService departmentService;
+    @Autowired
+    private ScheduleRepository scheduleRepository;
 
     @Autowired
     private MemberTaskRepository memberTaskRepository;
@@ -166,8 +170,9 @@ public class UserController {
             return ResponseEntity.ok(new ResponeDomain(Message.INVALID_USER.getDetail(), false));
         }
         List<Task> taskOfUser = memberTaskRepository.findByUserId(userId);
-        taskOfUser.stream().forEach(t -> System.out.println("xxxxxxxxxxxxxxx: " + t.getPoint()));
-        return ResponseEntity.ok(new ResponeDomain(taskOfUser, Message.SUCCESSFUlLY.getDetail(), true));
+        List<Schedule> schedules = scheduleRepository.findAllByUserId(userId);
+        List<Float> point = taskOfUser.stream().map(t->t.getPoint()).collect(Collectors.toList());
+        return ResponseEntity.ok(new ResponeDomain(point, Message.SUCCESSFUlLY.getDetail(), true));
 
     }
 }

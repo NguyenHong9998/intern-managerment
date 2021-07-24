@@ -2,7 +2,8 @@ package cnpm.doan.util;
 
 public enum Message {
     EMAIL_EXISTED("Existed email"),
-    SUBJECT_EMAIL_FORGOT_PASS("Thay đổi mật khẩu tài khoản Shapee Cloud"),
+    SUBJECT_EMAIL_FORGOT_PASS("Change password for Shapee Cloud's account"),
+    SUBJECT_EMAIL_ADD_FEEDBACK("%s"),
     INVALID_TOKEN("This token was accessed or expired "),
     EMAIL_NOT_FOUND("Email is not found"), ERROR_SENDING_EMAIL("Error while sending email"),
     CONTENT_EMAIL("Please check in your email"),

@@ -16,6 +16,6 @@ public interface MemberTaskRepository extends JpaRepository<MemberTask, Integer>
 
     List<MemberTask> findAllByUserId(int userId);
 
-    @Query("select t from MemberTask mt inner join Task t on mt.task.id = t.id where mt.user.id = ?1")
+    @Query("select t from MemberTask mt inner join Task t on mt.task.id = t.id where mt.user.id = ?1 and t.isDone = 1")
     List<Task> findByUserId(int userId);
 }
